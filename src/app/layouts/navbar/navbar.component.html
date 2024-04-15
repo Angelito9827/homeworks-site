@@ -1,1 +1,47 @@
-<p>navbar works!</p>
+<header>
+    <mat-toolbar class="navbar">
+        <a
+          mat-flat-button
+          [routerLink]="['profile']"
+          color="primary"
+        >
+          <mat-icon>person</mat-icon>
+          Perfil
+        </a>
+  
+        <a
+          mat-flat-button
+          [routerLink]="['houses']"
+          color="accent"
+        >
+          <mat-icon>home</mat-icon>
+          Casas
+        </a>
+  
+        <a
+          mat-button
+          [routerLink]="['home']"
+        >
+          <mat-icon>home</mat-icon>
+          HomeWorks
+        </a>
+  
+        <a
+          mat-flat-button
+          [routerLink]="['tasks']"
+          color="warn"
+        >
+          <mat-icon>list_alt</mat-icon>
+          Tareas
+        </a>
+  
+        <a
+          mat-flat-button
+          href="https://github.com/Angelito9827/HomeWorks-front"
+        >
+          <mat-icon>github</mat-icon>
+          Github
+        </a>
+    </mat-toolbar>
+  </header>
+  

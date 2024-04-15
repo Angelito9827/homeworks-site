@@ -1,0 +1,13 @@
+.navbar{
+    display: flex;
+     background-color: #6499E9;
+     height: 120px;
+     width: 100%;
+     justify-content: center;
+  
+  }
+  
+  a {
+    margin-right: 16px;
+  }
+  
