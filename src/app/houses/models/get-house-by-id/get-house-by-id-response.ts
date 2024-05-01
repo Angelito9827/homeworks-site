@@ -1,11 +1,4 @@
-export interface GetHouseListResponse {
-    houses: GetHouseListItemResponse[];
-    totalElements: number;
-    page: number;
-    pageSize: number;
-}
-
-export interface GetHouseListItemResponse {
+export interface GetHouseByIdResponse {
     id:number;
     name: string;
     description: string;

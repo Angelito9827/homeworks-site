@@ -1,45 +1,51 @@
 <div *ngIf="response">
   <div class="container-fluid">
-      <table class="table table-striped table-hover">
-          <thead>
-              <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">ASIGNADO A</th>
-                  <th scope="col">CATEGORÍA</th>
-                  <th scope="col">TAREA</th>
-                  <th scope="col">FECHA</th>
-                  <th scope="col">ESTADO</th>
-                  <th scope="col">DETALLE</th>
-              </tr>
-          </thead>
-          <tbody>
-              <ng-container *ngFor="let task of response.tasks">
-                  <tr>
-                      <th scope="row">{{task.id}}</th>
-                      <td>{{task.assignedTo}}</td>
-                      <td>{{task.category}}</td>
-                      <td>{{task.name}}</td>
-                      <td>{{task.finishDate | date}}</td>
-                      <td>{{task.state}}</td>
-                      <td>
-                          <button class="btn btn-default btn-xs" type="button" data-bs-toggle="collapse" 
-                              [attr.data-bs-target]="'#collapse_' + task.id" aria-expanded="false" aria-controls="collapseOne">
-                              <i class="bi bi-chevron-down"></i>
-                          </button>
-                      </td>
-                  </tr>
-                  <tr>
-                      <td></td>
-                      <td colspan="6">
-                          <div class="collapse" [id]="'collapse_' + task.id">
-                              <div class="accordion-body">
-                                  <strong>Detalle:</strong> Aquí va el detalle de la tarea.
-                              </div>
-                          </div>
-                      </td>
-                  </tr>
-              </ng-container>
-          </tbody>
-      </table>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">ASIGNADO A</th>
+          <th scope="col">CATEGORÍA</th>
+          <th scope="col">TAREA</th>
+          <th scope="col">FECHA</th>
+          <th scope="col">ESTADO</th>
+          <th scope="col">DETALLE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let task of response.tasks">
+          <tr>
+            <th scope="row">{{ task.id }}</th>
+            <td>{{ task.assignedTo }}</td>
+            <td>{{ task.category }}</td>
+            <td>{{ task.name }}</td>
+            <td>{{ task.finishDate | date }}</td>
+            <td>{{ task.state }}</td>
+            <td>
+              <button
+                class="btn btn-default btn-xs"
+                type="button"
+                data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapse_' + task.id"
+                aria-expanded="false"
+                aria-controls="collapseOne"
+              >
+                <i class="bi bi-chevron-down"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="6">
+              <div class="collapse" [id]="'collapse_' + task.id">
+                <div class="accordion-body">
+                  <strong>Detalle:</strong> Aquí va el detalle de la tarea.
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
   </div>
 </div>

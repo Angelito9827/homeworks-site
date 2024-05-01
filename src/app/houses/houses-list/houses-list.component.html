@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div><button type="button" class="btn btn-primary">Añadir casas +</button><h1 class="title">mis casas</h1></div>
+  <div><button type="button" class="btn btn-primary" [routerLink]="['./','new']">Añadir casas +</button><h1 class="title">mis casas</h1></div>
     <div *ngIf="response">
       <div class="card" *ngFor="let house of response.houses" [ngClass]="{'card-admin': house.isHouseAdmin}"> 
         <div>
