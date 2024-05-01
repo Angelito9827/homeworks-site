@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GetHouseListResponse } from '../models/get-house-list/get-house-list.response';
 import { GetHouseListRequest } from '../models/get-house-list/get-house-list.request';
-import { HouseService } from '../house-service/house.service';
+import { HouseService } from '../services/house-service/house.service';
 
 @Component({
   selector: 'app-houses-list',

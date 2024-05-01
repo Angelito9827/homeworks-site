@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../../environments/environment";
+import { environment } from "../../../../environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { GetHouseListRequest } from "../models/get-house-list/get-house-list.request";
+import { GetHouseListRequest } from "../../models/get-house-list/get-house-list.request";
 import { Observable } from "rxjs";
-import { GetHouseListResponse } from "../models/get-house-list/get-house-list.response";
-import { CreateHouseRequest } from "../models/create-house/create-house.request";
+import { GetHouseListResponse } from "../../models/get-house-list/get-house-list.response";
+import { CreateHouseRequest } from "../../models/create-house/create-house.request";
 
 @Injectable({
     providedIn: 'root'
