@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  background-color: #6499E9;
+  width: 100%;
+}
+
+.container-fluid {
+  margin-top: 20px;
+}
+
+.container-fluid img {
+  display: block;
+  margin: auto; 
+}
+
+.col {
+  flex-grow: 1;
+  margin: 0 10em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  transition: transform ease 0.6s;
+}
+
+.col:hover {
+  color: #6499E9;
+  background-color: #213555;
+  border-radius: 100px;
+  transform: scale(1.1);
+  transition: transform ease 0.6s;
+}
