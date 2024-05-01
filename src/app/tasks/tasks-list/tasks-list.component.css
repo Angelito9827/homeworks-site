@@ -1,11 +1,12 @@
-mat-card-title{
-    padding: 8px;
-    text-align: center;
-    font-size: 1.8rem;
-}
-mat-card {
-    padding: 8px;
+.container-fluid {
+  margin-top: 108px;
+  margin-bottom: 108px;
+  padding: 90px;
+  border-radius: 22px;
+  background: #d9d9d9;
   display: flex;
-  justify-content: center;
-  
+  flex-direction: column;
+  width: 80%;
+  height: auto;
 }
+
