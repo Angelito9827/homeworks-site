@@ -1,3 +1,50 @@
 <div class="container-fluid">
-    <div><button type="button" class="btn btn-primary" [routerLink]="[]"></button></div>
+  <div class="component1-container">
+    <div class="upload-container">
+      <label class="hoverable" for="fileInput">
+        <div class="image-container">
+          <img [src]="url ? url : 'assets/img/photo_camera.png'" />
+        </div>
+        <div class="background"></div>
+      </label>
+      <input
+      id="fileInput"
+      type="file"
+      [(ngModel)]="url"
+      class="select-profile-picture"
+      (change)="onSelectFile($event)"
+      accept="image/*"
+      />
+      <span class="message">Haz click aquí para seleccionar una imagen</span>
+    </div>
+    <button id="delete" class="btn btn-primary" *ngIf="url" (click)="delete()">eliminar</button>
+  </div>
+
+
+  <div id="members-add" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Invitar participantes</h1>
+          <button id="x" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input class="email" type="text">
+          <select id="select" class="form-select" aria-label="Default select example">
+            <option selected value="1">Participante</option>
+            <option value="2">Administrador</option>
+          </select>
+          <button id="add" type="button" class="btn btn-primary">invitar</button>
+        </div>
+        <div class="modal-body">
+          <h1>Participantes</h1>
+          <div class="members-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
