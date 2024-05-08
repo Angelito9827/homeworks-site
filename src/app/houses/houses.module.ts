@@ -5,7 +5,7 @@ import { HousesRoutingModule } from './houses-routing.module';
 import { HousesComponent } from './houses.component';
 import { HousesListComponent } from './houses-list/houses-list.component';
 import { HousesAddComponent } from './houses-add/houses-add.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     HousesRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class HousesModule { }
