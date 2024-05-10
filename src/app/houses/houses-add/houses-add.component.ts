@@ -1,10 +1,9 @@
 import { Component, VERSION } from '@angular/core';
 import { HouseService } from '../services/house-service/house.service';
 import { HouseMemberService } from '../services/house-member-service/house-member.service';
-import { SendInvitationEmailRequest } from '../models/send-invitation-email/send-invitation-email.request';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { CreateHouseRequest } from '../models/create-house/create-house.request';
 
 @Component({
   selector: 'app-houses-add',
@@ -12,13 +11,10 @@ import { Router } from '@angular/router';
   styleUrl: './houses-add.component.css',
 })
 export class HousesAddComponent {
-  form!:FormGroup;
+  form!: FormGroup;
   url: any = '';
-  fieldErrors={emailError:false};
-  request:SendInvitationEmailRequest={
-    email: '',
-    houseId: 0,
-  };
+  fieldErrors: { [key: string]: boolean } = {};
+  request: CreateHouseRequest = {} as CreateHouseRequest;
 
   attemptedSubmit: boolean = false;
 
@@ -26,53 +22,60 @@ export class HousesAddComponent {
     private formBuilder: FormBuilder,
     private houseService: HouseService,
     private houseMembersService: HouseMemberService,
-    private router:Router,) 
-  {}
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    
+
     this.createForm();
   }
 
   createForm() {
-    this.form=this.formBuilder.group({
-      email:['', [Validators.required, Validators.email]]
-    })
-    this.fieldErrors.emailError = false;
+    this.form = this.formBuilder.group({
+      houseName: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      profileImage: ['', [Validators.required]],
+    });
   }
-  
-  checkEmailError() {
-    return this.fieldErrors.emailError;
+
+  checkErrors() {
+    return Object.values(this.fieldErrors).some(error => error);
   }
-  
-  
-    setEmailError(hasError:boolean) {
-      this.fieldErrors.emailError=hasError;
+
+  setFieldError(fieldName: string, hasError: boolean) {
+    this.fieldErrors[fieldName] = hasError;
+  }
+
+  validateFields() {
+    Object.keys(this.form.controls).forEach(controlName => {
+      const control = this.form.get(controlName);
+      this.setFieldError(controlName, control?.invalid || false);
+    });
+    if (!this.checkErrors()) {
+      this.submitForm();
     }
+  }
 
-    validateFields() {
-      const emailControl = this.form.get('email');
-  
-      if (emailControl) {
-        this.setEmailError(emailControl?.invalid||false);
-
-        emailControl.markAsTouched();
-      }
-  
-      this.onSendInvitationButton();
+  stablishRequest() {
+    this.request.houseName = this.form.get('houseName')?.value;
+    this.request.description= this.form.get('description')?.value;
+    this.request.address = this.form.get('address')?.value;
+    const file = this.form.get('profileImage')?.value;
+    if (file) {
+      const formData = new FormData();
+      formData.append('profileImage', file);
+      this.request.profileImage = formData;
     }
+  }
 
-    stablishRequest() {
-      this.request.email = this.form.get('email')?.value;
-    }
+  areAllStepsValid(): boolean {
+    return this.form.valid;
+  }
 
-    areAllStepsValid(): boolean {
-      return !this.checkEmailError() && this.form.valid;
-    }
-
-    onSelectFile(event: any) {
+  onSelectFile(event: any) {
     if (event && event.target && event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
@@ -91,21 +94,21 @@ export class HousesAddComponent {
     this.url = null;
   }
 
-  onSendInvitationButton() {
-    this.attemptedSubmit = true;
-  
+  submitForm() {
+    
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
     }
-  
+
     this.stablishRequest();
     console.log('Request stablished');
-    this.houseMembersService.sendInvitationEmail(this.request).pipe().subscribe();
-  }  
+    console.log('Request object:', this.request);
+    this.houseService
+      .createHouse(this.request);
 
-  shouldShowError(): boolean {
-    return this.attemptedSubmit && this.form.get('email')?.errors?.['required'] && this.form.get('email')?.touched;
-  }
+      this.router.navigate(['/houses'])
+
+    }
 
 }

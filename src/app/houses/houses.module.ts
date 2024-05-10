@@ -6,13 +6,15 @@ import { HousesComponent } from './houses.component';
 import { HousesListComponent } from './houses-list/houses-list.component';
 import { HousesAddComponent } from './houses-add/houses-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HouseEditDeleteComponent } from './house-edit-delete/house-edit-delete.component';
 
 
 @NgModule({
   declarations: [
     HousesComponent,
     HousesListComponent,
-    HousesAddComponent
+    HousesAddComponent,
+    HouseEditDeleteComponent,
   ],
   imports: [
     CommonModule,

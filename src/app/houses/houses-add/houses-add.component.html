@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" [formGroup]="form">
   <div class="container-left">
     <div class="component1-container">
       <div class="upload-container">
@@ -9,67 +9,69 @@
           <div class="background"></div>
         </label>
         <input
-        id="fileInput"
-        type="file"
-        [(ngModel)]="url"
-        class="select-profile-picture"
-        (change)="onSelectFile($event)"
-        accept="image/*"
+          id="fileInput"
+          type="file"
+          class="select-profile-image"
+          (change)="onSelectFile($event)"
+          accept="image/*"
+          formControlName="profileImage"
         />
         <span class="message">Haz click aquí para seleccionar una imagen</span>
       </div>
-      <button id="delete" class="btn btn-primary" *ngIf="url" (click)="delete()">eliminar</button>
+      <button
+        id="delete-img"
+        class="btn btn-primary"
+        *ngIf="url"
+        (click)="delete()"
+      >
+        eliminar
+      </button>
     </div>
-    
-    <div class="component2-container">
-      <div class="upload-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <div class="image-container">
-          <img src="assets/img/person.png"/>
-        </div>
-        <span class="message">Haz click aquí para añadir un Participante</span>
-      </div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="truepuedes ">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1>Invitar participantes</h1>
-              <button id="x" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" [formGroup]="form">
-              <div class="validator">
-                <input class="add-email" type="email" placeholder="Introduce un email válido" formControlName="email" required>
-                <div *ngIf="shouldShowError()" class="text-danger">Este es un campo obligatorio</div>
-                <div *ngIf="this.form.get('email')?.errors?.['email']" class="text-danger">El email introducido no es válido</div>
-              </div>
-              <select id="select" class="form-select" aria-label="Default select example">
-                <option selected value="1">Participante</option>
-                <option value="2">Administrador</option>
-              </select>
-              <button id="add" type="button" class="btn btn-primary" (click)="validateFields()">invitar</button>
-            </div>
-            <div class="modal-footer">
-              <h1>Participantes</h1>
-              <div class="members-list"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div *ngIf="fieldErrors['profileImage']" class="text-danger">Este es un campo obligatorio</div>
   </div>
 
   <div class="container-right">
     <div class="form-floating">
-      <input type="text" class="form-control" placeholder="House Name" id="house-name">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="House Name"
+        id="house-name"
+        formControlName="houseName"
+      />
       <label class="letras" for="floatingInput">Nombre de la casa</label>
+      <div *ngIf="fieldErrors['houseName']" class="text-danger">Este es un campo obligatorio</div>
     </div>
     <div class="form-floating">
-      <textarea class="form-control" placeholder="Leave a comment here" id="description"></textarea>
+      <textarea
+        class="form-control"
+        placeholder="Leave a comment here"
+        id="description"
+        formControlName="description"
+      ></textarea>
       <label class="letras" for="floatingTextarea">Descripción</label>
+      <div *ngIf="fieldErrors['description']" class="text-danger">Este es un campo obligatorio</div>
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control" placeholder="Address" id="direction">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Address"
+        id="address"
+        formControlName="address"
+      />
       <label class="letras" for="floatingInput">Dirección</label>
+      <div *ngIf="fieldErrors['address']" class="text-danger">Este es un campo obligatorio</div>
+    </div>
+    <div class="botones">
+      <button
+        id="create"
+        type="button"
+        class="btn btn-primary"
+        (click)="validateFields()"
+      >
+        Crear
+      </button>
     </div>
   </div>
-  </div>
-  
+</div>

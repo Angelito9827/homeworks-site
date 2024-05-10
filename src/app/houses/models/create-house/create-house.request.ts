@@ -1,7 +1,6 @@
 export interface CreateHouseRequest {
-    name: string;
+    houseName: string;
     description: string;
     address: string;
-    houseMembers: number;
-    profilePicture: string;
+    profileImage: FormData;
 }
