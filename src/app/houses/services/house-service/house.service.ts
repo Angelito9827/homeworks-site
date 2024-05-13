@@ -28,11 +28,12 @@ export class HouseService {
 
   // este metodo hace una petición http POST y envia los parametros en el body
   public createHouse(request: CreateHouseRequest) {
-    this.httpClient.post(`${this.baseUrl}houses`, request);
+    return this.httpClient.post(`${this.baseUrl}houses`, request);
   }
 
   // este metodo hace una petición http GET y envia los parametros como route params
   public getHouseById(request:GetHouseByIdRequest): Observable<GetHouseByIdResponse> {
     return this.httpClient.get<GetHouseByIdResponse>(`${this.baseUrl}houses/${request.id}`)
   }
+
  }

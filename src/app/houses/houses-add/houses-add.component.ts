@@ -105,7 +105,16 @@ export class HousesAddComponent {
     console.log('Request stablished');
     console.log('Request object:', this.request);
     this.houseService
-      .createHouse(this.request);
+      .createHouse(this.request).
+      pipe()
+      .subscribe({
+        next :(response) => {
+          //Saco un modal diciend
+        },
+        error: (err) => {
+
+        }
+      });
 
       this.router.navigate(['/houses'])
 

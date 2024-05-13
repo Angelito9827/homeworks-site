@@ -5,6 +5,8 @@ import { GetTaskListRequest } from '../models/get-task-list/get-task-list.reques
 import { Observable } from 'rxjs';
 import { GetTaskListResponse } from '../models/get-task-list/get-task-list.response';
 import { CreateTaskRequest } from '../models/create-task/create-task.request';
+import { GetActiveTasksListByHouseIdRequest } from '../models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.request';
+import { GetActiveTasksListByHouseIdResponse } from '../models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.response';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,10 @@ export class TaskService {
 
   public createTask(request:CreateTaskRequest) {
     this.httpClient.post(`${this.baseUrl}tasks`, request)
+  }
+
+  public getActiveTasksListByHouseId(request:GetActiveTasksListByHouseIdRequest): Observable<GetActiveTasksListByHouseIdResponse> {
+    return this.httpClient.get<GetActiveTasksListByHouseIdResponse>(`${this.baseUrl}tasks/active/${request.houseId}`)
   }
 
 }

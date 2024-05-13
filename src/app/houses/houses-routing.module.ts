@@ -3,11 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HousesListComponent } from './houses-list/houses-list.component';
 import { HousesAddComponent } from './houses-add/houses-add.component';
 import { HouseEditDeleteComponent } from './house-edit-delete/house-edit-delete.component';
+import { HouseDetailComponent } from './house-detail/house-detail.component';
+
 
 const routes: Routes = [
   { path: '', component: HousesListComponent },
   { path: 'new', component: HousesAddComponent },
   { path: 'edit-delete', component: HouseEditDeleteComponent },
+  { path: 'detail', component: HouseDetailComponent },
 ];
 
 @NgModule({
