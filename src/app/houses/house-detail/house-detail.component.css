@@ -1,132 +1,178 @@
 .container-fluid {
-    margin-top: 108px;
-    margin-bottom: 108px;
-    padding: 90px;
-    border-radius: 22px;
-    background: #d9d9d9;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    height: auto;
-  }
-  
-  .title {
-    padding-bottom: 40px;
-    color: #213555;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    text-align: center;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    gap: 20px;
-  }
+  margin-top: 108px;
+  margin-bottom: 108px;
+  padding: 90px;
+  border-radius: 22px;
+  background: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: auto;
+}
 
-  .container-left {
-    width: 50%;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .container-right {
-    width: 50%;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
+.title {
+  padding-bottom: 40px;
+  color: #213555;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: center;
+}
 
-  .card {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    gap: 20px;
-  }
-  
-  #category, #edit, #members {
-    transition: transform ease 0.6s;
-    width: 100%;
-    height: auto;
-    box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    background: #F6F7FA;
-    margin-top: 10px;
-    padding-bottom: 10px;
-  }
-  
-  #category:hover, #edit:hover, #members:hover {
-    transition: transform ease 0.6s;
-    background-color: #E0E9FC;
-    cursor: pointer;
-  }
-  
-  img {
-    width: 100px;
-    height: 100px;
-    border-radius: 30px;
-    position: absolute;
-    top: 15px;
-    left: 23px;
-  }
-  
-  .house-name {
-    font-size: 3vw;
-    margin-left: 140px;
-    margin-top: 28px;
-    color: #213555;
-    font-weight: 500;
-  }
-  
-  .house-member {
-    font-size: 1.3vw;
-    margin-left: 140px;
-    margin-top: 30px;
-    color: rgba(0, 0, 0, 0.54);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-  }
+button {
+  background-color: #213555;
+  transition: transform ease 0.6s;
+  float: right;
+}
 
-  .house-description {
-    font-size: 1.3vw;
-    margin-left: 140px;
-    margin-top: 30px;
-    color: rgba(0, 0, 0, 0.54);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
-  }
+button:hover {
+  background-color: #6499e9;
+  transform: scale(1.1);
+  transition: transform ease 0.6s;
+  color: black;
+}
 
-  .card-elements {
-    border: 3px solid red;
-  }
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+  border: 3px solid black;
+}
 
-  .card-description, .card-tasks {
-    width: 50%;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #FFFFFF;
-  }
-  
-  button {
-      background-color: #213555;
-      transition: transform ease 0.6s;
-      float: right;
-  }
-  
-  button:hover {
-      background-color: #6499E9;
-      transform: scale(1.1);
-      transition: transform ease 0.6s;
-      color: black
-  }
-  
+.container-left {
+  width: 50%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 3px solid yellow;
+}
+
+.container-right {
+  width: 50%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 3px solid orange;
+}
+
+#edit, #members {
+  transition: transform ease 0.6s;
+  width: 80%;
+  height: auto;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background: #f6f7fa;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 10px;
+}
+
+#category:hover,
+#edit:hover,
+#members:hover {
+  transition: transform ease 0.6s;
+  background-color: #e0e9fc;
+  cursor: pointer;
+}
+
+.image-picture {
+  border: 3px solid blue;
+  width: 50%;
+  height: auto;
+}
+
+.img-fluid {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-elements {
+  border: 3px solid red;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.house-member,
+.house-description, 
+.house-address {
+  width: 100%;
+  height: 100%;
+  font-size: 1.2vw;
+  color: rgba(0, 0, 0, 0.54);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  margin-top: 10px;
+  border: 3px solid rgb(49, 156, 46);
+}
+
+.card-members {
+  border: 3px solid red;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#category {
+  transition: transform ease 0.6s;
+  width: 100%;
+  height: 50%;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background: #f6f7fa;
+  margin-top: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  border: 3px solid rgb(21, 185, 43);
+}
+
+.card-category {
+  width: 100%;
+  height: auto;
+  border: 3px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+.house-category {
+  width: 100%;
+  height: 100%;
+  font-size: 2vw;
+  color: #213555;
+  font-weight: 500;
+  text-transform: uppercase;
+  border: 3px solid rgb(27, 151, 223);
+  padding-top: 10px;
+}
+
+.house-active-tasks {
+  width: 100%;
+  height: 100%;
+  font-size: 1vw;
+  color: rgba(0, 0, 0, 0.54);
+  font-style: normal;
+  font-weight: 400;
+  border: 3px solid rgb(49, 156, 46);
+  padding-top: 20px;
+}

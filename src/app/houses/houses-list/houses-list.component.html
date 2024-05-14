@@ -2,7 +2,7 @@
   <h1 class="title">mis casas</h1>
   <div><button type="button" class="btn btn-primary" [routerLink]="['./','new']">Añadir casas +</button></div>
     <div *ngIf="response">
-      <div class="card" [routerLink]="['detail']" *ngFor="let house of response.houses" [ngClass]="{'card-admin': house.isHouseAdmin}"> 
+      <div class="card" [routerLink]="[house.id]" *ngFor="let house of response.houses" [ngClass]="{'card-admin': house.isHouseAdmin}"> 
         <div>
           <img [src]="house.profilePicture" class="img-fluid" alt="Imagen">
         </div>
