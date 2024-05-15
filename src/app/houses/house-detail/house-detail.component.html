@@ -3,44 +3,39 @@
     <div><button type="button" class="btn btn-primary" [routerLink]="['add-task']">Añadir tarea +</button></div>
     <div class="container">
         <div class="container-left">
-            <div class="card" id="edit"> 
+            <div class="card" id="edit" *ngIf="houseResponse"> 
                 <div class="image-picture">
-                    <img src="/assets/img/prueba.jpeg" class="img-fluid" alt="Imagen">
+                    <img [src]="houseResponse.profilePicture" class="img-fluid" alt="Imagen">
                 </div>
                 <div class="card-elements">
                     <div class="house-description">
-                        <p>descripción</p>
+                        <p>{{houseResponse.description}}</p>
                     </div>
                     <div class="house-address">
-                        <p>dirección</p>  
+                        <p>{{houseResponse.address}}</p>  
                     </div>
                 </div>
             </div>
-            <div class="card" id="members"> 
-                <div>
-                    <img src="/assets/img/kitchen.png" class="img-fluid" alt="Imagen">
-                </div>
-                <div class="card-members">
+            <div class="card" id="members" *ngIf="houseMembersResponse"> 
+                <div class="card-members" *ngFor="let houseMember of houseMembersResponse.houseMembers">
+                    <img [src]="houseMember.profileImage" class="img-perfil" alt="Imagen">
                     <div class="house-member">
-                        <p>miembro 1</p>
+                        <p>{{houseMember.name}}</p>
                     </div>
-                    <div class="house-member">
-                        <p>miembro 2</p>  
-                    </div> 
                 </div>
             </div>
         </div>
-        <div class="container-right">
-            <div class="card" id="category"> 
+        <div class="container-right" *ngIf="activeTasksResponse">
+            <div class="card" id="category" *ngFor="let activeTasks of activeTasksResponse.tasks"> 
                 <div>
-                    <img src="/assets/img/kitchen.png" class="icon" alt="Imagen">
+                    <img [src]="activeTasks.icon" class="icon" alt="Imagen">
                 </div>
                 <div class="card-category">
                     <div class="house-category">
-                        <p>cocina</p>
+                        <p>{{activeTasks.category}}</p>
                     </div>
                     <div class="house-active-tasks">
-                        <span> tareas activas</span>  
+                        <span>{{activeTasks.totalActiveTasks}} tareas activas</span>  
                     </div>
                 </div>
             </div>

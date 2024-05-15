@@ -83,8 +83,7 @@ button:hover {
 }
 
 .image-picture {
-  border: 3px solid blue;
-  width: 50%;
+  width: auto;
   height: auto;
 }
 
@@ -96,7 +95,6 @@ button:hover {
 }
 
 .card-elements {
-  border: 3px solid red;
   width: 100%;
   height: auto;
   display: flex;
@@ -104,9 +102,34 @@ button:hover {
   align-items: center;
 }
 
-.house-member,
 .house-description, 
 .house-address {
+  width: 80%;
+  height: 100%;
+  font-size: 0.8vw;
+  color: rgba(0, 0, 0, 0.54);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 14px;
+  margin-top: 10px;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background-color: #ffff;
+  padding: 10px;
+}
+
+.card-members {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  background-color: #ffff;
+}
+
+.house-member {
   width: 100%;
   height: 100%;
   font-size: 1.2vw;
@@ -115,16 +138,14 @@ button:hover {
   font-weight: 400;
   line-height: 14px;
   margin-top: 10px;
-  border: 3px solid rgb(49, 156, 46);
+  padding-top: 3px;
 }
 
-.card-members {
-  border: 3px solid red;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.img-perfil {
+  width: 20%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 #category {
@@ -139,13 +160,11 @@ button:hover {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  border: 3px solid rgb(21, 185, 43);
 }
 
 .card-category {
   width: 100%;
   height: auto;
-  border: 3px solid red;
   display: flex;
   flex-direction: column;
 }
@@ -162,17 +181,14 @@ button:hover {
   color: #213555;
   font-weight: 500;
   text-transform: uppercase;
-  border: 3px solid rgb(27, 151, 223);
-  padding-top: 10px;
+  padding-top: 50px;
 }
 
 .house-active-tasks {
   width: 100%;
-  height: 100%;
+  height: 50%;
   font-size: 1vw;
   color: rgba(0, 0, 0, 0.54);
   font-style: normal;
   font-weight: 400;
-  border: 3px solid rgb(49, 156, 46);
-  padding-top: 20px;
 }

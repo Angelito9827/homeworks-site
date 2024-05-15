@@ -15,7 +15,7 @@ export class HouseMemberService {
   
   constructor(private http:HttpClient){}
 
-  public  getHouseMembersById(request:GetHouseMemberListByHouseIdRequest):Observable<GetHouseMemberListByHouseIdResponse> {
+  public  getHouseMembersByHouseId(request:GetHouseMemberListByHouseIdRequest):Observable<GetHouseMemberListByHouseIdResponse> {
     return this.http.get<GetHouseMemberListByHouseIdResponse>(`${this.baseUrl}/house-members/house/${request.houseId}`)
   }
 
