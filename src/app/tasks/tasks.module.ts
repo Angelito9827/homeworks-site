@@ -7,6 +7,7 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { ActiveTasksComponent } from './active-tasks/active-tasks.component';
 
 
 
@@ -14,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
   declarations: [
     TasksComponent,
     TasksListComponent,
+    ActiveTasksComponent,
 
   ],
   imports: [

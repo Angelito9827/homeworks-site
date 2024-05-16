@@ -1,6 +1,7 @@
 export enum TaskState{
     DRAFT = 1,
-    IN_PROGRESS = 2,
-    OK = 3,
-    KO = 4
+    NEW = 2,
+    IN_PROGRESS = 3,
+    FINISHED = 4,
+    EXPIRED = 5
 }

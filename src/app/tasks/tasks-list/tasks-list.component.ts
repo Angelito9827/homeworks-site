@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { TaskService } from '../task-service/task.service';
+import { TaskService } from '../services/tasks-service/task.service';
 import { GetTaskListRequest } from '../models/get-task-list/get-task-list.request';
 import {
   GetTaskListResponse,
@@ -57,10 +57,10 @@ export class TasksListComponent {
       case TaskState.IN_PROGRESS:
         return 'En progreso';
 
-      case TaskState.KO:
+      case TaskState.EXPIRED:
         return 'KO';
 
-      case TaskState.OK:
+      case TaskState.FINISHED:
         return 'OK';
 
       default:

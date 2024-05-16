@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { TaskService } from '../../tasks/task-service/task.service';
-import { GetActiveTasksListResponse } from '../../tasks/models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.response';
-import { GetActiveTasksListByHouseIdRequest } from '../../tasks/models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.request';
+import { TaskService } from '../../tasks/services/tasks-service/task.service';
+import { GetAllTasksResponse } from '../../tasks/models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.response';
+import { GetAllTasksRequest } from '../../tasks/models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.request';
 import { ActivatedRoute } from '@angular/router';
 import { HouseService } from '../services/house-service/house.service';
 import { GetHouseByIdResponse } from '../models/get-house-by-id/get-house-by-id-response';
 import { GetHouseMemberListByHouseIdResponse } from '../models/get-house-member-list-by-house-id/get-house-member-list-by-house-id.response';
 import { HouseMemberService } from '../services/house-member-service/house-member.service';
+import { TaskState } from '../../tasks/models/task-status.enum';
 
 @Component({
   selector: 'app-house-detail',
@@ -15,7 +16,7 @@ import { HouseMemberService } from '../services/house-member-service/house-membe
 })
 export class HouseDetailComponent {
 
-  activeTasksResponse?: GetActiveTasksListResponse;
+  activeTasksResponse?: GetAllTasksResponse;
   houseResponse?: GetHouseByIdResponse;
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
 
@@ -33,11 +34,11 @@ export class HouseDetailComponent {
   }
 
    private getActiveTasksByHouseId(id:number) {
-    let request: GetActiveTasksListByHouseIdRequest = {houseId:id}
-       this.taskService.getActiveTasksListByHouseId(request)
+    let request: GetAllTasksRequest = {houseId:id, taskState:TaskState.IN_PROGRESS}
+       this.taskService.getAllTasks(request)
        .pipe()
        .subscribe({
-         next: (response: GetActiveTasksListResponse) => {
+         next: (response: GetAllTasksResponse) => {
            console.log(response);
              this.activeTasksResponse = response;
          }
