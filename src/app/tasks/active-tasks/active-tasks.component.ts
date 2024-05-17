@@ -11,7 +11,8 @@ import { TaskState } from '../models/task-status.enum';
   styleUrl: './active-tasks.component.css'
 })
 export class ActiveTasksComponent {
-
+  
+  state = TaskState;
   activeTasksResponse?: GetAllTasksResponse;
 
   constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService) {

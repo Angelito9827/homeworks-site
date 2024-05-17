@@ -14,6 +14,9 @@ export interface GetAllTasksListItemResponse {
     categoryId: number;
     totalActiveTasks: number;
     state: TaskState;
+    assignedTo: string;
+    assignedToImage: string;
+    assignedBy: string;
     createdAt: Date;
     finishDate: Date;
     icon: FormData;
