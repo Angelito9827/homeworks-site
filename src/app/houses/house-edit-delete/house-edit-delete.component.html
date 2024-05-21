@@ -20,43 +20,7 @@
         </div>
         <button id="delete-img" class="btn btn-primary" *ngIf="url" (click)="delete()">eliminar</button>
       </div>
-      
-      <div class="component2-container">
-        <div class="upload-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <div class="image-container">
-            <img src="assets/img/person.png"/>
-          </div>
-          <span class="message">Haz click aquí para añadir un Participante</span>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="truepuedes ">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1>Invitar participantes</h1>
-                <button id="x" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body" [formGroup]="form">
-                <div class="validator">
-                  <input class="add-email" type="email" placeholder="Introduce un email válido" formControlName="email" required>
-                  <div *ngIf="shouldShowError()" class="text-danger">Este es un campo obligatorio</div>
-                  <div *ngIf="this.form.get('email')?.errors?.['email']" class="text-danger">El email introducido no es válido</div>
-                </div>
-                <select id="select" class="form-select" aria-label="Default select example">
-                  <option selected value="1">Participante</option>
-                  <option value="2">Administrador</option>
-                </select>
-                <button id="add" type="button" class="btn btn-primary" (click)="validateEmail()">invitar</button>
-              </div>
-              <div class="modal-footer">
-                <h1>Participantes</h1>
-                <div class="members-list"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  
     <div class="container-right">
       <div class="form-floating">
         <input type="text" class="form-control" placeholder="House Name" id="house-name">
@@ -74,6 +38,6 @@
         <button id="save" type="button" class="btn btn-primary" (click)="validateFields()">Guardar</button>
         <button id="delete-house" type="button" class="btn btn-primary" (click)="validateFields()">Eliminar</button>
       </div>
-    </div>
-    </div>
+  </div>
+</div>
     

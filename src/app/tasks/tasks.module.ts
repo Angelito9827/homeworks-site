@@ -8,6 +8,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { ActiveTasksComponent } from './active-tasks/active-tasks.component';
+import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,6 +18,7 @@ import { ActiveTasksComponent } from './active-tasks/active-tasks.component';
     TasksComponent,
     TasksListComponent,
     ActiveTasksComponent,
+    AddTasksComponent,
 
   ],
   imports: [
@@ -23,7 +26,9 @@ import { ActiveTasksComponent } from './active-tasks/active-tasks.component';
     TasksRoutingModule,
     MatPaginatorModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class TasksModule { }

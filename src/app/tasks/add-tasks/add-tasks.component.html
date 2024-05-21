@@ -1,0 +1,85 @@
+<div class="container-fluid" [formGroup]="form">
+  <h1 class="title">Crear tarea</h1>
+  <div class="container" *ngIf="houseResponse">
+    <div class="container-left">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Task Name"
+          id="task-name"
+          formControlName="taskName"
+        />
+        <label class="letras" for="floatingInput">Nombre de la tarea</label>
+        <div *ngIf="fieldErrors['taskName']" class="text-danger">
+          Este es un campo obligatorio
+        </div>
+      </div>
+      <div class="form-floating">
+        <select class="form-select" formControlName="assignedMember">
+          <option value="" selected></option>
+          <option
+            *ngFor="let houseMember of houseMembersResponse?.houseMembers"
+            [value]="houseMember.name"
+          >
+            {{ houseMember.lastName }}>
+          </option>
+        </select>
+        <label class="letras" for="assignedMember">Asignar a</label>
+        <div *ngIf="fieldErrors['assignedMember']" class="text-danger">
+          Este es un campo obligatorio
+        </div>
+      </div>
+      <div class="form-floating">
+        <select class="form-select" formControlName="category">
+          <option value="" selected></option>
+          <option *ngFor="let category of categories" [value]="category.value">
+            {{ category.label }}
+          </option>
+        </select>
+        <label class="letras" for="category">Categoría</label>
+        <div *ngIf="fieldErrors['category']" class="text-danger">
+          Este es un campo obligatorio
+        </div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="date"
+          class="form-control"
+          id="finishDate"
+          placeholder="05/06/2023"
+          formControlName="finishDate"
+          min="{{ getMinDate() }}"
+        />
+        <label for="finishDate">Fecha de realización</label>
+        <div *ngIf="fieldErrors['finishDate']" class="text-danger">
+          Este es un campo obligatorio
+        </div>
+      </div>
+    </div>
+    <div class="container-right">
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          id="description"
+          formControlName="description"
+        ></textarea>
+        <label class="letras" for="floatingTextarea">Descripción</label>
+        <div *ngIf="fieldErrors['description']" class="text-danger">
+          Este es un campo obligatorio
+        </div>
+      </div>
+      <div class="botones">
+        <button
+          id="create"
+          type="button"
+          class="btn btn-primary"
+          (click)="validateFields()"
+        >
+          Crear
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

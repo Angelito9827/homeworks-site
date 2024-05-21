@@ -27,7 +27,7 @@ export class TaskService {
   }
 
   public createTask(request:CreateTaskRequest) {
-    this.httpClient.post(`${this.baseUrl}tasks`, request)
+    return this.httpClient.post(`${this.baseUrl}tasks`, request)
   }
 
   public getAllTasks(request:GetAllTasksRequest): Observable<GetAllTasksResponse> {

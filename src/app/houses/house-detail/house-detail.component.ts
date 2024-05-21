@@ -8,6 +8,8 @@ import { GetHouseByIdResponse } from '../models/get-house-by-id/get-house-by-id-
 import { GetHouseMemberListByHouseIdResponse } from '../models/get-house-member-list-by-house-id/get-house-member-list-by-house-id.response';
 import { HouseMemberService } from '../services/house-member-service/house-member.service';
 import { TaskState } from '../../tasks/models/task-status.enum';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SendInvitationEmailRequest } from '../models/send-invitation-email/send-invitation-email.request';
 
 @Component({
   selector: 'app-house-detail',
@@ -19,8 +21,13 @@ export class HouseDetailComponent {
   activeTasksResponse?: GetAllTasksResponse;
   houseResponse?: GetHouseByIdResponse;
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
+  form!: FormGroup;
+  request: SendInvitationEmailRequest = {
+    email: '',
+    houseId: 0,
+  };
 
-  constructor(private taskService: TaskService, private houseService:HouseService, private activatedRoute: ActivatedRoute, private houseMemberService: HouseMemberService) {
+  constructor(private taskService: TaskService, private houseService:HouseService, private activatedRoute: ActivatedRoute, private houseMemberService: HouseMemberService, private formBuilder: FormBuilder,) {
 
   }
 
@@ -31,6 +38,8 @@ export class HouseDetailComponent {
       this.getHouseById(params['id']);
       this.getHouseMembersByHouseId(params['id']);
     })
+
+    this.createForm();
   }
 
    private getActiveTasksByHouseId(id:number) {
@@ -65,4 +74,51 @@ export class HouseDetailComponent {
       }
     })
    }
+
+   createForm() {
+    this.form = this.formBuilder.group({
+      email: ['', [Validators.required,Validators.email]],
+    });
+  }
+
+   stablishRequest() {
+    this.request.email = this.form.get('email')?.value;
+  }
+
+  areAllStepsValid(): boolean {
+    return this.form.valid;
+  }
+
+  onSendInvitationButton() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    if (!this.areAllStepsValid()) {
+      console.log('Not all steps are valid');
+      return;
+    }
+
+    this.stablishRequest();
+    console.log('Request stablished');
+    this.houseMemberService
+      .sendInvitationEmail(this.request)
+      .pipe()
+      .subscribe({
+        next: () => {
+          console.log('Miembro añadido exitosamente');
+          const closeButton = document.getElementById('x');
+          closeButton?.click();
+          this.resetForm();
+        }
+      });
+  }
+
+  resetForm() {
+    this.form.reset();
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
+  }
+
 }

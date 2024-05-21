@@ -42,7 +42,7 @@ export class HousesAddComponent {
   }
 
   checkErrors() {
-    return Object.values(this.fieldErrors).some(error => error);
+    return Object.values(this.fieldErrors).some((error) => error);
   }
 
   setFieldError(fieldName: string, hasError: boolean) {
@@ -50,7 +50,7 @@ export class HousesAddComponent {
   }
 
   validateFields() {
-    Object.keys(this.form.controls).forEach(controlName => {
+    Object.keys(this.form.controls).forEach((controlName) => {
       const control = this.form.get(controlName);
       this.setFieldError(controlName, control?.invalid || false);
     });
@@ -61,7 +61,7 @@ export class HousesAddComponent {
 
   stablishRequest() {
     this.request.houseName = this.form.get('houseName')?.value;
-    this.request.description= this.form.get('description')?.value;
+    this.request.description = this.form.get('description')?.value;
     this.request.address = this.form.get('address')?.value;
     const file = this.form.get('profileImage')?.value;
     if (file) {
@@ -95,7 +95,6 @@ export class HousesAddComponent {
   }
 
   submitForm() {
-    
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
@@ -105,19 +104,15 @@ export class HousesAddComponent {
     console.log('Request stablished');
     console.log('Request object:', this.request);
     this.houseService
-      .createHouse(this.request).
-      pipe()
+      .createHouse(this.request)
+      .pipe()
       .subscribe({
-        next :(response) => {
+        next: (response) => {
           //Saco un modal diciend
         },
-        error: (err) => {
-
-        }
+        error: (err) => {},
       });
 
-      this.router.navigate(['/houses'])
-
-    }
-
+    this.router.navigate(['/houses']);
+  }
 }

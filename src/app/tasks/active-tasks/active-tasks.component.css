@@ -10,6 +10,16 @@
     height: auto;
   }
 
+  .title {
+    padding-bottom: 40px;
+    color: #213555;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
 .accordion {
     width: 100%;
     overflow: hidden;

@@ -141,7 +141,7 @@ img {
   height: 100px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .message {
     font-size: 0.7em;
     line-height: 1em;
@@ -149,6 +149,16 @@ img {
 
   .letras {
     font-size: 0.9em;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 100PX;
+  }
+
+  .container-left, .container-right {
+    width: 100%;
   }
 }
 
