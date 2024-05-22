@@ -1,10 +1,10 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="houseResponse">
     <div class="container-left">
       <div class="component1-container">
         <div class="upload-container">
           <label class="hoverable" for="fileInput">
             <div class="image-container">
-              <img [src]="url ? url : 'assets/img/photo_camera.png'" />
+              <img [src]="houseResponse.profilePicture" />
             </div>
             <div class="background"></div>
           </label>
@@ -16,27 +16,27 @@
           (change)="onSelectFile($event)"
           accept="image/*"
           />
-          <span class="message">Haz click aquí para seleccionar una imagen</span>
+          <span class="message">Haz click aquí para cambiar la imagen de perfil</span>
         </div>
         <button id="delete-img" class="btn btn-primary" *ngIf="url" (click)="delete()">eliminar</button>
       </div>
     </div>
     <div class="container-right">
       <div class="form-floating">
-        <input type="text" class="form-control" placeholder="House Name" id="house-name">
+        <input type="text" class="form-control" placeholder="House Name" [(ngModel)]="houseResponse.name" id="house-name">
         <label class="letras" for="floatingInput">Nombre de la casa</label>
       </div>
       <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="description"></textarea>
+        <textarea class="form-control" placeholder=".form-control-lg" aria-label=".form-control-lg example" [(ngModel)]="houseResponse.description" id="description"></textarea>
         <label class="letras" for="floatingTextarea">Descripción</label>
       </div>
       <div class="form-floating">
-        <input type="text" class="form-control" placeholder="Address" id="direction">
+        <input type="text" class="form-control form-control-lg" placeholder="Address" [(ngModel)]="houseResponse.address" id="direction">
         <label class="letras" for="floatingInput">Dirección</label>
       </div>
       <div class="botones">
         <button id="save" type="button" class="btn btn-primary" (click)="validateFields()">Guardar</button>
-        <button id="delete-house" type="button" class="btn btn-primary" (click)="validateFields()">Eliminar</button>
+        <button id="delete-house" type="button" class="btn btn-primary"(click)="deleteHouse()">Eliminar</button>
       </div>
   </div>
 </div>

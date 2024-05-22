@@ -1,75 +1,159 @@
 <div class="container-fluid" *ngIf="houseResponse">
-    <h1 class="title">piso de madrid</h1>
-    <div><button type="button" class="btn btn-primary" [routerLink]="['/tasks','house',houseResponse.id,'newTask']">Añadir tarea +</button></div>
-    <div class="container">
-        <div class="container-left">
-            <div class="card" id="edit" [routerLink]="['edit-delete']"> 
-                <div class="image-picture">
-                    <img [src]="houseResponse.profilePicture" class="img-fluid" alt="Imagen">
-                </div>
-                <div class="card-elements">
-                    <div class="house-description">
-                        <p>{{houseResponse.description}}</p>
-                    </div>
-                    <div class="house-address">
-                        <p>{{houseResponse.address}}</p>  
-                    </div>
-                </div>
+  <h1 class="title">piso de madrid</h1>
+  <div>
+    <button
+      id="add-task"
+      type="button"
+      class="btn btn-primary"
+      [routerLink]="['/tasks', 'house', houseResponse.id, 'newTask']"
+    >
+      Añadir tarea +
+    </button>
+  </div>
+  <div class="container">
+    <div class="container-left">
+      <div class="card" id="edit" [routerLink]="['edit-delete']">
+        <div class="image-picture">
+          <img
+            [src]="houseResponse.profilePicture"
+            class="img-fluid"
+            alt="Imagen"
+          />
+        </div>
+        <div class="card-elements">
+          <div class="house-description">
+            <p>{{ houseResponse.description }}</p>
+          </div>
+          <div class="house-address">
+            <p>{{ houseResponse.address }}</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card"
+        id="members"
+        *ngIf="houseMembersResponse"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        <div
+          class="card-members"
+          *ngFor="let houseMember of houseMembersResponse.houseMembers"
+        >
+          <div class="img-perfil">
+            <img [src]="houseMember.profileImage" class="image" alt="Imagen" />
+          </div>
+          <div class="house-member">
+            <p>{{ houseMember.name }}</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1>Invitar participantes</h1>
+              <button
+                id="x"
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                (click)="resetForm()"
+              ></button>
             </div>
-            <div class="card" id="members" *ngIf="houseMembersResponse" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
-                <div class="card-members" *ngFor="let houseMember of houseMembersResponse.houseMembers">
-                    <div class="img-perfil">
-                        <img [src]="houseMember.profileImage" class="image" alt="Imagen">
-                    </div>
-                    <div class="house-member">
-                        <p>{{houseMember.name}}</p>
-                    </div>
+            <div class="modal-body">
+              <h1>Participantes</h1>
+              <div class="members-list" *ngIf="houseMembersResponse">
+                <div
+                class="modal-members"
+                *ngFor="let houseMember of houseMembersResponse.houseMembers"
+                >
+                <div class="img-perfil">
+                  <img
+                  [src]="houseMember.profileImage"
+                  class="image"
+                  alt="Imagen"
+                  />
                 </div>
-            </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1>Invitar participantes</h1>
-                      <button id="x" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetForm()" ></button>
-                    </div>
-                    <div class="modal-body" [formGroup]="form">
-                      <div class="validator">
-                        <input class="add-email" type="email" placeholder="Introduce un email válido" formControlName="email" required>
-                        <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-danger">
-                            <div *ngIf="form.get('email')?.errors?.['required']">El email es obligatorio.</div>
-                            <div *ngIf="form.get('email')?.errors?.['email']">El email no es válido.</div>
-                        </div>
-                      </div>
-                      <select id="select" class="form-select" aria-label="Default select example">
-                        <option selected value="1">Participante</option>
-                        <option value="2">Administrador</option>
-                      </select>
-                      <button id="add" type="button" class="btn btn-primary" (click)="onSendInvitationButton()">invitar</button>
-                    </div>
-                    <div class="modal-footer">
-                      <h1>Participantes</h1>
-                      <div class="members-list"></div>
-                    </div>
+                <div class="house-member">
+                  <p>{{ houseMember.name }}</p>
+                </div>
+                    <button id="delete-member-house" type="button" class="btn btn-primary">Eliminar</button>
                   </div>
                 </div>
               </div>
-        </div>
-        <div class="container-right" *ngIf="activeTasksResponse && houseResponse">
-            <div class="card" id="category" *ngFor="let activeTask of activeTasksResponse.tasks" [routerLink]="['/tasks', 'house',houseResponse.id , 'category',activeTask.categoryId]"> 
-                <div class="image-icon">
-                    <img [src]="activeTask.icon" class="icon" alt="Imagen">
+              <div class="modal-footer" [formGroup]="form">
+              <div class="validator">
+                <input
+                class="add-email"
+                type="email"
+                placeholder="Introduce un email válido"
+                formControlName="email"
+                required
+                />
+                <div
+                *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="text-danger">
+                <div *ngIf="form.get('email')?.errors?.['required']">
+                  El email es obligatorio.
                 </div>
-                <div class="card-category">
-                    <div class="house-category">
-                        <p>{{activeTask.categoryId}}</p>
-                    </div>
-                    <div class="house-active-tasks">
-                        <span>{{activeTask.totalActiveTasks}} tareas activas</span>  
-                    </div>
+                <div *ngIf="form.get('email')?.errors?.['email']">
+                  El email no es válido.
                 </div>
+              </div>
             </div>
+            <select
+            id="select"
+                    class="form-select"
+                    aria-label="Default select example"
+                    >
+                    <option selected value="1">Participante</option>
+                    <option value="2">Administrador</option>
+                  </select>
+                  <button
+                  id="add"
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="onSendInvitationButton()"
+                  >
+                  invitar
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="container-right" *ngIf="activeTasksResponse && houseResponse">
+      <div
+      class="card"
+      id="category"
+      *ngFor="let activeTask of activeTasksResponse.tasks"
+      [routerLink]="[
+          '/tasks',
+          'house',
+          houseResponse.id,
+          'category',
+          activeTask.categoryId
+        ]"
+      >
+        <div class="image-icon">
+          <img [src]="activeTask.icon" class="icon" alt="Imagen" />
+        </div>
+        <div class="card-category">
+          <div class="house-category">
+            <p>{{categories[activeTask.categoryId] }}</p>
+          </div>
+          <div class="house-active-tasks">
+            <span>{{ activeTask.totalActiveTasks }} tareas activas</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  
+</div>

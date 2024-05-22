@@ -110,87 +110,6 @@
     color: #213555;
   }
   
-  #members-add:hover .message {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-  
-  #members-add:hover {
-    opacity: 0.5;
-  }
-  
-  #add {
-    margin-left: 15px;
-    width: 100px;
-    height: 35px;
-    background-color: #213555;
-    transition: transform ease 0.6s;
-    float: right;
-    text-transform: uppercase;
-    font-size: 14px;
-  }
-  
-  #add:hover {
-    background-color: #6499e9;
-    transform: scale(1.1);
-    transition: transform ease 0.6s;
-    color: black;
-  }
-  
-  #x:hover {
-    background-color: #6499e9;
-    transform: scale(1.1);
-    transition: transform ease 0.6s;
-    color: black;
-  }
-  
-  #select {
-    margin-left: 15px;
-    width: 150px;
-    height: 35px;
-    text-transform: uppercase;
-    font-size: 14px;
-    cursor: pointer;
-    background-color: #ebf2fd;
-  }
-  
-  .add-email {
-    margin-left: 10px;
-    height: 35px;
-    background-color: #ebf2fd;
-    border-radius: 7px;
-    border: 1px solid #b9b9b9;
-  }
-  
-  .modal-body {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .modal-header {
-    position: relative;
-    text-align: center;
-  }
-  
-  .modal-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .members-list {
-    width: 94.5%;
-    height: 35px;
-    background-color: #ebf2fd;
-    border-radius: 7px;
-    border: 1px solid #b9b9b9;
-  }
-  
-  .text-danger {
-    margin-top: 5px;
-    margin-left: 12px;
-  }
-  
   .form-floating {
     width: 95%;
     min-width: 20%;
@@ -253,4 +172,5 @@
     align-items: center;
     display: contents;
   }
+
   

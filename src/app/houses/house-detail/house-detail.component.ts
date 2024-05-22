@@ -10,6 +10,7 @@ import { HouseMemberService } from '../services/house-member-service/house-membe
 import { TaskState } from '../../tasks/models/task-status.enum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SendInvitationEmailRequest } from '../models/send-invitation-email/send-invitation-email.request';
+import { CategoryState } from '../../tasks/models/category-status.enum';
 
 @Component({
   selector: 'app-house-detail',
@@ -26,10 +27,13 @@ export class HouseDetailComponent {
     email: '',
     houseId: 0,
   };
+  categories=CategoryState;
 
-  constructor(private taskService: TaskService, private houseService:HouseService, private activatedRoute: ActivatedRoute, private houseMemberService: HouseMemberService, private formBuilder: FormBuilder,) {
-
-  }
+  constructor(private taskService: TaskService, 
+    private houseService:HouseService, 
+    private activatedRoute: ActivatedRoute, 
+    private houseMemberService: HouseMemberService, 
+    private formBuilder: FormBuilder,) {}
 
   ngOnInit(): void {
     this.activatedRoute.params
