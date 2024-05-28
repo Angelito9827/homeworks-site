@@ -1,47 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { HouseMemberService } from '../../houses/services/house-member-service/house-member.service';
+import { GetHouseMemberListByHouseIdResponse } from '../../houses/models/get-house-member-list-by-house-id/get-house-member-list-by-house-id.response';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateTaskRequest } from '../models/create-task/create-task.request';
+import { GetHouseByIdResponse } from '../../houses/models/get-house-by-id/get-house-by-id-response';
 import { TaskService } from '../services/tasks-service/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GetHouseMemberListByHouseIdResponse } from '../../houses/models/get-house-member-list-by-house-id/get-house-member-list-by-house-id.response';
-import { HouseMemberService } from '../../houses/services/house-member-service/house-member.service';
 import { HouseService } from '../../houses/services/house-service/house.service';
-import { GetHouseByIdResponse } from '../../houses/models/get-house-by-id/get-house-by-id-response';
 import { CategoryState } from '../models/category-status.enum';
+import { EditTaskRequest } from '../models/edit-task/edit-task.request';
+import { GetTaskByIdResponse } from '../models/get-active-task-by-id/get-active-task-by-id.response';
 
 @Component({
-  selector: 'app-add-tasks',
-  templateUrl: './add-tasks.component.html',
-  styleUrls: ['./add-tasks.component.css']
+  selector: 'app-edit-delete-tasks',
+  templateUrl: './edit-delete-tasks.component.html',
+  styleUrl: './edit-delete-tasks.component.css'
 })
-export class AddTasksComponent implements OnInit {
-
-
+export class EditDeleteTasksComponent {
 
   form!: FormGroup;
   url: any = '';
   fieldErrors: { [key: string]: boolean } = {};
-  request: CreateTaskRequest = {} as CreateTaskRequest;
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
-  houseResponse?: GetHouseByIdResponse;
   attemptedSubmit: boolean = false;
   categories: { label: string, value: number }[] = [];
+  request: EditTaskRequest = {} as EditTaskRequest;
+  taskResponse?: GetTaskByIdResponse;
+  selectedAssignedTo: string = '';
 
-  constructor(
-    private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private taskService: TaskService,
     private router: Router,
     private houseMemberService: HouseMemberService,
-    private activatedRoute: ActivatedRoute,
-    private houseService: HouseService
-  ) {}
+    private activatedRoute: ActivatedRoute)
+  {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.createForm();
       this.getHouseMembersByHouseId(params['id']);
-      this.getHouseById(params['id']);
       this.getCategories();
+      this.getTaskById(params['id']);
     });
   }
 
@@ -49,28 +48,10 @@ export class AddTasksComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      assignedMember: ['', [Validators.required]],
+      assignedTo: ['', [Validators.required]],
       category: ['', [Validators.required]],
       finishDate: ['', [Validators.required]]
     });
-  }
-
-  checkErrors() {
-    return Object.values(this.fieldErrors).some(error => error);
-  }
-
-  setFieldError(fieldName: string, hasError: boolean) {
-    this.fieldErrors[fieldName] = hasError;
-  }
-
-  validateFields() {
-    Object.keys(this.form.controls).forEach(controlName => {
-      const control = this.form.get(controlName);
-      this.setFieldError(controlName, control?.invalid || false);
-    });
-    if (!this.checkErrors()) {
-      this.submitForm();
-    }
   }
 
   stablishRequest() {
@@ -85,7 +66,11 @@ export class AddTasksComponent implements OnInit {
     return this.form.valid;
   }
 
-  submitForm() {
+  saveForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
@@ -95,8 +80,10 @@ export class AddTasksComponent implements OnInit {
     console.log('Request stablished');
     console.log('Request object:', this.request);
 
-    this.taskService.createTask(this.request).subscribe({
-      next: (response) => {
+    this.taskService.editTask(this.request)
+    .pipe()
+    .subscribe({
+      next: (taskResponse) => {
         // Manejar la respuesta exitosa
       },
       error: (err) => {
@@ -116,14 +103,17 @@ export class AddTasksComponent implements OnInit {
       });
   }
 
-  private getHouseById(id: number) {
-    this.houseService.getHouseById({ id: id })
-      .subscribe({
-        next: (response: GetHouseByIdResponse) => {
-          this.houseResponse = response;
-        },
-      });
-  }
+
+  private getTaskById(id:number) {
+    this.taskService.getTaskById({id:id})
+    .pipe()
+    .subscribe({
+      next: (response: GetTaskByIdResponse) => {
+        this.taskResponse = response;
+        this.selectedAssignedTo = this.taskResponse.assignedTo;
+      }
+    })
+   }
 
   private getCategories() {
     this.categories = Object.keys(CategoryState)
@@ -131,15 +121,24 @@ export class AddTasksComponent implements OnInit {
       .map(key => ({ label: key, value: (CategoryState as any)[key] }));
   }
 
-  getMinDate(): string {
-    const today = new Date();
-    const year = today.getFullYear();
-    let month: string | number = today.getMonth() + 1;
-    let day: string | number = today.getDate();
+    getMinDate(): string {
+      const today = new Date();
+      const year = today.getFullYear();
+      let month: string | number = today.getMonth() + 1; // Enero es 0
+      let day: string | number = today.getDate();
+  
+      if (month < 10) {
+        month = '0' + month;
+      }
+      if (day < 10) {
+        day = '0' + day;
+      }
+  
+      return `${year}-${month}-${day}`;
+    }
 
-    month = month < 10 ? '0' + month : month;
-    day = day < 10 ? '0' + day : day;
-
-    return `${year}-${month}-${day}`;
+  deleteTask() {
+    console.log('Casa eliminada');
   }
+
 }

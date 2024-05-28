@@ -1,1 +1,148 @@
-<p>profile works!</p>
+<div class="container-fluid" *ngIf="perfilResponse" [formGroup]="form">
+  <h1 class="title">perfil</h1>
+  <div class="container">
+    <div class="container-left">
+      <div class="component1-container">
+        <div class="upload-container">
+          <label class="hoverable" for="fileInput">
+            <div class="image-container">
+              <img [src]="url ? url : perfilResponse.profilePicture" />
+            </div>
+            <div class="background"></div>
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            class="select-profile-picture"
+            (change)="onSelectFile($event)"
+            accept="image/*"
+            formControlName="profilePicture"
+          />
+          <span class="message"
+            >Haz click aquí para cambiar la imagen de perfil</span
+          >
+        </div>
+        <button id="delete-img" class="btn btn-primary" (click)="delete()">
+          eliminar
+        </button>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="User Name"
+          [(ngModel)]="perfilResponse.nickName"
+          id="user-name"
+          formControlName="nickName"
+        />
+        <label class="letras" for="floatingInput">Nombre de usuario</label>
+        <div
+          *ngIf="form.get('nickName')?.touched && form.get('nickName')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('nickName')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-right">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          [(ngModel)]="perfilResponse.name"
+          id="name"
+          formControlName="name"
+        />
+        <label class="letras" for="floatingInput">Nombre</label>
+        <div
+          *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('name')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Last Name"
+            [(ngModel)]="perfilResponse.lastName"
+            id="last-name"
+            formControlName="lastName"
+          />
+          <label class="letras" for="floatingInput">Apellidos</label>
+          <div
+            *ngIf="
+              form.get('lastName')?.touched && form.get('lastName')?.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="form.get('lastName')?.errors?.['required']">
+              Este es un campo obligatorio.
+            </div>
+          </div>
+        </div>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="email"
+            [(ngModel)]="perfilResponse.email"
+            id="email"
+            formControlName="email"
+          />
+          <label class="letras" for="floatingInput">Email</label>
+          <div
+            *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+            class="text-danger"
+          >
+            <div *ngIf="form.get('email')?.errors?.['required']">
+              Este es un campo obligatorio.
+            </div>
+          </div>
+        </div>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="tlf"
+            [(ngModel)]="perfilResponse.tlf"
+            id="tlf"
+            formControlName="tlf"
+          />
+          <label class="letras" for="floatingInput">Numero de tlf.</label>
+          <div
+            *ngIf="form.get('tlf')?.touched && form.get('tlf')?.invalid"
+            class="text-danger"
+          >
+            <div *ngIf="form.get('tlf')?.errors?.['required']">
+              Este es un campo obligatorio.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="botones">
+    <button
+      id="save"
+      type="button"
+      class="btn btn-primary"
+      (click)="saveForm()"
+    >
+      Guardar
+    </button>
+    <button
+      id="delete-pefil"
+      type="button"
+      class="btn btn-primary"
+      (click)="deletePerfil()"
+    >
+      Eliminar
+    </button>
+  </div>
+</div>

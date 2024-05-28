@@ -1,6 +1,6 @@
 <div class="container-fluid" [formGroup]="form">
   <h1 class="title">crear casa</h1>
-  <div class="container">
+  <div class="container-top">
     <div class="container-left">
       <div class="component1-container">
         <div class="upload-container">
@@ -11,70 +11,97 @@
             <div class="background"></div>
           </label>
           <input
-          id="fileInput"
-          type="file"
-          class="select-profile-image"
-          (change)="onSelectFile($event)"
-          accept="image/*"
-          formControlName="profileImage"
+            id="fileInput"
+            type="file"
+            class="select-profile-image"
+            (change)="onSelectFile($event)"
+            accept="image/*"
+            formControlName="profileImage"
           />
-          <span class="message">Haz click aquí para seleccionar una imagen</span>
+          <span class="message"
+            >Haz click aquí para seleccionar una imagen</span
+          >
         </div>
         <button
-        id="delete-img"
-        class="btn btn-primary"
-        *ngIf="url"
-        (click)="delete()"
+          id="delete-img"
+          class="btn btn-primary"
+          *ngIf="url"
+          (click)="delete()"
         >
-        eliminar
-      </button>
+          eliminar
+        </button>
+      </div>
     </div>
-    <div *ngIf="fieldErrors['profileImage']" class="text-danger">Este es un campo obligatorio</div>
+    <div class="container-right">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="House Name"
+          id="house-name"
+          formControlName="name"
+        />
+        <label class="letras" for="floatingInput">Nombre de la casa</label>
+        <div
+          *ngIf="
+            form.get('name')?.touched && form.get('name')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="form.get('name')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Address"
+          id="address"
+          formControlName="address"
+        />
+        <label class="letras" for="floatingInput">Dirección</label>
+        <div
+          *ngIf="form.get('address')?.touched && form.get('address')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('address')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <div class="container-right">
-    <div class="form-floating">
-      <input
-      type="text"
-      class="form-control"
-      placeholder="House Name"
-      id="house-name"
-      formControlName="houseName"
-      />
-      <label class="letras" for="floatingInput">Nombre de la casa</label>
-      <div *ngIf="fieldErrors['houseName']" class="text-danger">Este es un campo obligatorio</div>
-    </div>
+  <div class="container-bottom">
     <div class="form-floating">
       <textarea
-      class="form-control"
-      placeholder="Leave a comment here"
-      id="description"
-      formControlName="description"
+        class="form-control"
+        placeholder="Leave a comment here"
+        id="description"
+        formControlName="description"
       ></textarea>
       <label class="letras" for="floatingTextarea">Descripción</label>
-      <div *ngIf="fieldErrors['description']" class="text-danger">Este es un campo obligatorio</div>
-    </div>
-    <div class="form-floating">
-      <input
-      type="text"
-      class="form-control"
-      placeholder="Address"
-      id="address"
-      formControlName="address"
-      />
-      <label class="letras" for="floatingInput">Dirección</label>
-      <div *ngIf="fieldErrors['address']" class="text-danger">Este es un campo obligatorio</div>
+      <div
+        *ngIf="
+          form.get('description')?.touched && form.get('description')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="form.get('description')?.errors?.['required']">
+          Este es un campo obligatorio.
+        </div>
+      </div>
     </div>
     <div class="botones">
       <button
-      id="create"
-      type="button"
-      class="btn btn-primary"
-      (click)="validateFields()"
+        id="create"
+        type="button"
+        class="btn btn-primary"
+        (click)="submitForm()"
       >
-      Crear
-    </button>
+        Crear
+      </button>
+    </div>
   </div>
-</div>
-</div>
 </div>

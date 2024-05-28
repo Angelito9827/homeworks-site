@@ -1,21 +1,14 @@
 import { TaskState } from "../task-status.enum";
 
-export interface GetAllTasksResponse {
-    tasks: GetAllTasksListItemResponse[];
-}
-
-export interface GetAllTasksListItemResponse {
+export interface GetTaskByIdResponse {
     id:number;
     house: string;
     name: string;
     description: string;
-    categoryId: number;
-    totalActiveTasks: number;
+    category: number;
     state: TaskState;
     assignedTo: string;
-    assignedToImage: string;
     assignedBy: string;
     createdAt: Date;
     finishDate: Date;
-    icon: FormData;
 }

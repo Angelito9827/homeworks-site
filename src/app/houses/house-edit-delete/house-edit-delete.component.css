@@ -1,176 +1,220 @@
 .container-fluid {
-    margin-top: 108px;
-    margin-bottom: 108px;
-    border-radius: 22px;
-    background: #d9d9d9;
-    display: flex;
-    flex-direction: row;
-    width: 80%;
-    height: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
-  
-  .container-left {
-    width: 50%;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .container-right {
-    width: 50%;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .component1-container,
-  .component2-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .component2-container {
-    margin-top: 100px;
-  }
-  
-  .upload-container {
-    height: auto;
-    width: 70%;
-    position: relative;
-    text-align: center;
-    background-color: white;
-    border-radius: 27px;
-  }
-  
-  .image-container {
-    height: auto;
-    width: 100%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 27px;
-  }
-  
-  .upload-container:hover .image-container {
-    opacity: 0.5;
-    background-color: #f6f7fa;
-  }
-  
-  img {
-    height: 100%;
-    width: 100%;
-    border-radius: 27px;
-    object-fit: contain;
-  }
-  
-  .select-profile-picture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-  
+  margin-top: 108px;
+  margin-bottom: 108px;
+  padding: 50px;
+  border-radius: 22px;
+  background: #d9d9d9;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: auto;
+}
+
+.title {
+  padding-bottom: 30px;
+  color: #213555;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.container-top {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.container-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.container-left {
+  width: 50%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.container-right {
+  width: 50%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.component1-container,
+.component2-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.component2-container {
+  margin-top: 100px;
+}
+
+.upload-container {
+  height: auto;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  background-color: white;
+  border-radius: 27px;
+}
+
+.image-container {
+  height: 200px;
+  width: 200px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 27px;
+}
+
+.upload-container:hover {
+  opacity: 0.5;
+  background-color: #f6f7fa;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 27px;
+  object-fit: cover;
+}
+
+.select-profile-picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.message {
+  position: absolute;
+  width: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  transition: all 1s;
+  opacity: 0;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.upload-container:hover .message {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+#delete-img {
+  margin-top: 10px;
+  width: 100px;
+  background-color: #213555;
+  transition: transform ease 0.6s;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+#delete-img:hover {
+  background-color: #6499e9;
+  transform: scale(1.1);
+  transition: transform ease 0.6s;
+  color: #213555;
+}
+
+.text-danger {
+  margin-top: 5px;
+  margin-left: 12px;
+}
+
+.form-floating {
+  width: 95%;
+  min-width: 20%;
+  margin-bottom: 80px;
+}
+
+#description {
+  height: 100px;
+}
+
+@media (max-width: 1000px) {
   .message {
-    position: absolute;
-    width: auto;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 100%);
-    transition: all 1s;
-    opacity: 0;
-    font-weight: bold;
-    font-size: 1em;
-  }
-  
-  .upload-container:hover .message {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-  
-  #delete-img {
-    margin-top: 10px;
-    width: 100px;
-    background-color: #213555;
-    transition: transform ease 0.6s;
-    text-transform: uppercase;
-    font-size: 14px;
-  }
-  
-  #delete-img:hover {
-    background-color: #6499e9;
-    transform: scale(1.1);
-    transition: transform ease 0.6s;
-    color: #213555;
-  }
-  
-  .form-floating {
-    width: 95%;
-    min-width: 20%;
-    margin-bottom: 100px;
-  }
-  
-  #description {
-    height: 100px;
-  }
-  
-  @media (max-width: 600px) {
-    .message {
-      font-size: 0.7em;
-      line-height: 1em;
-    }
-  
-    .letras {
-      font-size: 0.9em;
-    }
-  }
-  
-  #save {
-    width: 100px;
-    background-color: #213555;
-    transition: transform ease 0.6s;
-    text-transform: uppercase;
-    font-size: 14px;
-    border-color: #6499e9;
-  }
-  
-  #save:hover {
-    background-color: #6499e9;
-    transform: scale(1.1);
-    transition: transform ease 0.6s;
-    color: #213555;
-    border-color: #213555;
-  }
-  
-  #delete-house {
-    margin-top: 10px;
-    width: 100px;
-    background-color: rgb(241, 56, 56);
-    transition: transform ease 0.6s;
-    text-transform: uppercase;
-    font-size: 14px;
-    border-color: white;
-  }
-  
-  #delete-house:hover {
-    background-color: white;
-    transform: scale(1.1);
-    transition: transform ease 0.6s;
-    color: rgb(241, 56, 56);
-    border-color: rgb(241, 56, 56);
-  }
-  
-  .botones {
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    display: contents;
+    font-size: 0.7em;
+    line-height: 1em;
   }
 
-  
+  .letras {
+    font-size: 0.9em;
+  }
+
+  .container-top {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+  }
+
+  .container-left,
+  .container-right {
+    width: 100%;
+  }
+
+  .image-container {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+#save {
+  width: 100px;
+  background-color: #213555;
+  transition: transform ease 0.6s;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-color: #6499e9;
+}
+
+#save:hover {
+  background-color: #6499e9;
+  transform: scale(1.1);
+  transition: transform ease 0.6s;
+  color: #213555;
+  border-color: #213555;
+}
+
+#delete-house {
+  width: 100px;
+  background-color: rgb(241, 56, 56);
+  transition: transform ease 0.6s;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-color: white;
+}
+
+#delete-house:hover {
+  background-color: white;
+  transform: scale(1.1);
+  transition: transform ease 0.6s;
+  color: rgb(241, 56, 56);
+  border-color: rgb(241, 56, 56);
+}
+
+.botones {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}

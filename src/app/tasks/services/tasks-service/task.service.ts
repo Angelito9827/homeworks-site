@@ -7,6 +7,9 @@ import { GetTaskListResponse } from '../../models/get-task-list/get-task-list.re
 import { CreateTaskRequest } from '../../models/create-task/create-task.request';
 import { GetAllTasksRequest} from '../../models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.request';
 import { GetAllTasksResponse } from '../../models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.response';
+import { EditTaskRequest } from '../../models/edit-task/edit-task.request';
+import { GetTaskByIdRequest } from '../../models/get-active-task-by-id/get-active-task-by-id.request';
+import { GetTaskByIdResponse } from '../../models/get-active-task-by-id/get-active-task-by-id.response';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +43,14 @@ export class TaskService {
       queryParams.set("taskState", request.taskState)
 
     return this.httpClient.get<GetAllTasksResponse>(`${this.baseUrl}tasks/house/${request.houseId}`,{params: queryParams})
+  }
+
+  public getTaskById(request:GetTaskByIdRequest): Observable<GetTaskByIdResponse> {
+    return this.httpClient.get<GetTaskByIdResponse>(`${this.baseUrl}tasks/${request.id}`)
+  }
+
+  public editTask(request: EditTaskRequest): Observable<GetAllTasksResponse> {
+    return this.httpClient.put<GetAllTasksResponse>(`${this.baseUrl}tasks`, request); 
   }
 
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HouseService } from '../services/house-service/house.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetHouseByIdResponse } from '../models/get-house-by-id/get-house-by-id-response';
+import { EditHouseRequest } from '../models/edit-house/edit-house.request';
 
 @Component({
   selector: 'app-house-edit-delete',
@@ -12,9 +13,9 @@ import { GetHouseByIdResponse } from '../models/get-house-by-id/get-house-by-id-
 export class HouseEditDeleteComponent {
   form!: FormGroup;
   url: any = '';
-  fieldErrors = { emailError: false };
   houseResponse?: GetHouseByIdResponse;
   attemptedSubmit: boolean = false;
+  request: EditHouseRequest = {} as EditHouseRequest;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,6 +31,15 @@ export class HouseEditDeleteComponent {
       this.getHouseById(params['id']);
     })
     this.createForm();
+  }
+
+  createForm() {
+    this.form = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      profileImage: [''],
+    });
   }
 
   onSelectFile(event: any) {
@@ -48,12 +58,8 @@ export class HouseEditDeleteComponent {
   }
 
   public delete() {
-    this.url = null;
-  }
-  createForm() {
-    this.form = this.formBuilder.group({
-      email: ['', [Validators.required]],
-    });
+    this.url='assets/img/photo_camera.png';
+    this.form.get ('profilePicture')?.setValue(null);
   }
 
   private getHouseById(id:number) {
@@ -66,10 +72,51 @@ export class HouseEditDeleteComponent {
     })
    }
 
-  validateFields() {}
-
   deleteHouse() {
-    // Aquí puedes añadir la lógica para eliminar la casa
     console.log('Casa eliminada');
+  }
+
+  stablishRequest() {
+    this.request.name = this.form.get('name')?.value;
+    this.request.description = this.form.get('description')?.value;
+    this.request.address = this.form.get('address')?.value;
+    const file = this.form.get('profileImage')?.value;
+    if (file) {
+      const formData = new FormData();
+      formData.append('profileImage', file);
+      this.request.profileImage = formData;
+    }
+  }
+
+  areAllStepsValid(): boolean {
+    return this.form.valid;
+  }
+
+  saveForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    if (!this.areAllStepsValid()) {
+      console.log('Not all steps are valid');
+      return;
+    }
+
+    this.stablishRequest();
+    console.log('Request stablished');
+    console.log('Request object:', this.request);
+    this.houseService
+      .editHouse(this.request)
+      .pipe()
+      .subscribe({
+        next: (houseResponse) => {
+        },
+        error: (err) => {},
+      });
+
+      const houseId = this.houseResponse?.id;
+      this.router.navigate(['/houses', houseId]);
+
   }
 }

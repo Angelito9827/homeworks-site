@@ -1,6 +1,5 @@
-import { Component, VERSION } from '@angular/core';
+import { Component} from '@angular/core';
 import { HouseService } from '../services/house-service/house.service';
-import { HouseMemberService } from '../services/house-member-service/house-member.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateHouseRequest } from '../models/create-house/create-house.request';
@@ -13,15 +12,12 @@ import { CreateHouseRequest } from '../models/create-house/create-house.request'
 export class HousesAddComponent {
   form!: FormGroup;
   url: any = '';
-  fieldErrors: { [key: string]: boolean } = {};
   request: CreateHouseRequest = {} as CreateHouseRequest;
-
   attemptedSubmit: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private houseService: HouseService,
-    private houseMembersService: HouseMemberService,
     private router: Router
   ) {}
 
@@ -34,33 +30,15 @@ export class HousesAddComponent {
 
   createForm() {
     this.form = this.formBuilder.group({
-      houseName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      profileImage: ['', [Validators.required]],
+      profileImage: [''],
     });
-  }
-
-  checkErrors() {
-    return Object.values(this.fieldErrors).some((error) => error);
-  }
-
-  setFieldError(fieldName: string, hasError: boolean) {
-    this.fieldErrors[fieldName] = hasError;
-  }
-
-  validateFields() {
-    Object.keys(this.form.controls).forEach((controlName) => {
-      const control = this.form.get(controlName);
-      this.setFieldError(controlName, control?.invalid || false);
-    });
-    if (!this.checkErrors()) {
-      this.submitForm();
-    }
   }
 
   stablishRequest() {
-    this.request.houseName = this.form.get('houseName')?.value;
+    this.request.name = this.form.get('name')?.value;
     this.request.description = this.form.get('description')?.value;
     this.request.address = this.form.get('address')?.value;
     const file = this.form.get('profileImage')?.value;
@@ -95,6 +73,11 @@ export class HousesAddComponent {
   }
 
   submitForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;

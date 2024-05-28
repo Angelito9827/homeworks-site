@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ActiveTasksComponent } from './active-tasks/active-tasks.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditDeleteTasksComponent } from './edit-delete-tasks/edit-delete-tasks.component';
 
 
 
@@ -19,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TasksListComponent,
     ActiveTasksComponent,
     AddTasksComponent,
+    EditDeleteTasksComponent,
 
   ],
   imports: [

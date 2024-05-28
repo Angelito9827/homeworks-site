@@ -1,6 +1,6 @@
 export interface CreateTaskRequest {
     house: string;
-    taskName: string;
+    name: string;
     description?: string;
     finishDate: Date;
     assignedTo: string;

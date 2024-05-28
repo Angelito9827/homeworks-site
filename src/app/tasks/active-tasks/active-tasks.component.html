@@ -41,7 +41,7 @@
                 <div class="state">
                     {{state[activeTask.state]}}
                 </div>
-                <div><button type="button" class="btn btn-primary" [routerLink]="['edit-delet-task']">Editar</button></div>
+                <div><button type="button" class="btn btn-primary" [routerLink]="['/tasks','house',houseResponse?.id,'category',activeTask.categoryId,'edit-delete-tasks']">Editar</button></div>
             </div>
         </div>
     </div>

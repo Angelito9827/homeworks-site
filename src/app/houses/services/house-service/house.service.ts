@@ -7,6 +7,7 @@ import { GetHouseListResponse } from '../../models/get-house-list/get-house-list
 import { CreateHouseRequest } from '../../models/create-house/create-house.request';
 import { GetHouseByIdRequest } from '../../models/get-house-by-id/get-house-by-id.request';
 import { GetHouseByIdResponse } from '../../models/get-house-by-id/get-house-by-id-response';
+import { EditHouseRequest } from '../../models/edit-house/edit-house.request';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,10 @@ export class HouseService {
   // este metodo hace una petición http GET y envia los parametros como route params
   public getHouseById(request:GetHouseByIdRequest): Observable<GetHouseByIdResponse> {
     return this.httpClient.get<GetHouseByIdResponse>(`${this.baseUrl}houses/${request.id}`)
+  }
+
+  public editHouse(request: EditHouseRequest): Observable<GetHouseByIdResponse> {
+    return this.httpClient.put<GetHouseByIdResponse>(`${this.baseUrl}houses`, request); 
   }
 
  }

@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../services/tasks-service/task.service';
 import { GetAllTasksRequest } from '../models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.request';
 import { TaskState } from '../models/task-status.enum';
+import { GetHouseByIdResponse } from '../../houses/models/get-house-by-id/get-house-by-id-response';
+import { HouseService } from '../../houses/services/house-service/house.service';
 
 @Component({
   selector: 'app-active-tasks',
@@ -14,10 +16,10 @@ export class ActiveTasksComponent {
   
   state = TaskState;
   activeTasksResponse?: GetAllTasksResponse;
+  houseResponse?: GetHouseByIdResponse;
 
-  constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService) {
-    
-  }
+  constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService, private houseService:HouseService) 
+  {}
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -37,5 +39,15 @@ export class ActiveTasksComponent {
     })
 
   }
+
+  private getHouseById(id:number) {
+    this.houseService.getHouseById({id:id})
+    .pipe()
+    .subscribe({
+      next: (response: GetHouseByIdResponse) => {
+        this.houseResponse = response;
+      }
+    })
+   }
 
 }
