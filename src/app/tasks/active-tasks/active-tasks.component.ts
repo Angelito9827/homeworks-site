@@ -22,9 +22,11 @@ export class ActiveTasksComponent {
   {}
 
   ngOnInit(): void {
-    this.activatedRoute.params
-    .subscribe(params=>{
-      this.getTasks(params['houseId'], params['categoryId']);
+    this.activatedRoute.params.subscribe(params => {
+      const houseId = params['houseId'];
+      const categoryId = params['categoryId'];
+      this.getHouseById(houseId);
+      this.getTasks(houseId, categoryId);
     })
   }
 
@@ -37,17 +39,14 @@ export class ActiveTasksComponent {
         this.activeTasksResponse = response;
       }
     })
-
   }
 
-  private getHouseById(id:number) {
-    this.houseService.getHouseById({id:id})
-    .pipe()
-    .subscribe({
+  private getHouseById(houseId: number) {
+    this.houseService.getHouseById({ id: houseId }).subscribe({
       next: (response: GetHouseByIdResponse) => {
         this.houseResponse = response;
       }
-    })
-   }
+    });
+  }
 
 }

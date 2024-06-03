@@ -41,4 +41,8 @@ export class HouseService {
     return this.httpClient.put<GetHouseByIdResponse>(`${this.baseUrl}houses`, request); 
   }
 
+  public deleteHouseById(request:GetHouseByIdRequest): Observable<GetHouseByIdResponse> {
+    return this.httpClient.delete<GetHouseByIdResponse>(`${this.baseUrl}houses/${request.id}`)
+  }
+
  }

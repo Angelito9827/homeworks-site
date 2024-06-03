@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <h1 class="title">lista de tareas</h1>
-  <table class="table table-bordered">
+  <table class="table">
     <thead>
       <tr>
         <th>CASAS</th>
@@ -25,7 +25,7 @@
           <td>{{ task.category }}</td>
           <td>{{ task.name }}</td>
           <td>{{ task.finishDate | date }}</td>
-          <td>{{ getTaskString(task.state) }}</td>
+          <td>{{state[task.state]}}</td>
           <td>
             <button class="btn btn-link" (click)="toggleDetails(i)">
               <span *ngIf="!isExpanded(i)" class="fa fa-chevron-down"></span>
@@ -36,10 +36,23 @@
         <tr *ngIf="isExpanded(i)">
           <td colspan="7">
             <div class="details">
-              <p>Fecha de creación: {{ task.createdAt | date }}</p>
-              <p>Descripción: {{ task.description }}</p>
-              <p class="state-chip">Estado: {{ getTaskString(task.state) }}</p>
-              <p>Fecha de finalización: {{ task.finishDate | date }}</p>
+              <div class="container-right">
+                <div class="createdAt">
+                  <p>Creado por: <strong>{{task.assignedBy}}</strong></p>
+                </div>
+                <div class="description">
+                  <p>Descripción: {{ task.description }}</p>
+                </div>
+              </div>
+              <div class="container-left">
+                <div class="state">
+                  <button *ngIf="task.state!==4" id="change" type="button" class="btn btn-primary" (click)="changeStateOnClick(task.state, task.id)">{{state[task.state]}}</button>
+                </div>
+                <div class="finishDate">
+                  <p>Fecha de finalización:</p>
+                  <p>{{task.finishDate | date }}</p>
+                </div>
+              </div>
             </div>
           </td>
         </tr>

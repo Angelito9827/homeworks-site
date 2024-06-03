@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HouseMemberService } from '../../houses/services/house-member-service/house-member.service';
 import { GetHouseMemberListByHouseIdResponse } from '../../houses/models/get-house-member-list-by-house-id/get-house-member-list-by-house-id.response';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CreateTaskRequest } from '../models/create-task/create-task.request';
 import { GetHouseByIdResponse } from '../../houses/models/get-house-by-id/get-house-by-id-response';
 import { TaskService } from '../services/tasks-service/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +9,7 @@ import { HouseService } from '../../houses/services/house-service/house.service'
 import { CategoryState } from '../models/category-status.enum';
 import { EditTaskRequest } from '../models/edit-task/edit-task.request';
 import { GetTaskByIdResponse } from '../models/get-active-task-by-id/get-active-task-by-id.response';
+import { GetAllTasksListItemResponse} from '../models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.response';
 
 @Component({
   selector: 'app-edit-delete-tasks',
@@ -22,11 +22,13 @@ export class EditDeleteTasksComponent {
   url: any = '';
   fieldErrors: { [key: string]: boolean } = {};
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
+  houseResponse?:GetHouseByIdResponse;
   attemptedSubmit: boolean = false;
   categories: { label: string, value: number }[] = [];
   request: EditTaskRequest = {} as EditTaskRequest;
   taskResponse?: GetTaskByIdResponse;
   selectedAssignedTo: string = '';
+  activeTasksResponse?: GetAllTasksListItemResponse;
 
   constructor(private formBuilder: FormBuilder,
     private taskService: TaskService,
@@ -57,7 +59,7 @@ export class EditDeleteTasksComponent {
   stablishRequest() {
     this.request.name = this.form.get('name')?.value;
     this.request.description = this.form.get('description')?.value;
-    this.request.assignedTo = this.form.get('assignedMember')?.value;
+    this.request.assignedTo = this.form.get('assignedTo')?.value;
     this.request.categoryId = this.form.get('category')?.value;
     this.request.finishDate = this.form.get('finishDate')?.value;
   }
@@ -137,8 +139,23 @@ export class EditDeleteTasksComponent {
       return `${year}-${month}-${day}`;
     }
 
-  deleteTask() {
+  deleteTaskById() {
     console.log('Casa eliminada');
+    this.taskService
+    .deleteTaskById(this.request)
+    .pipe()
+    .subscribe({
+      next: (taskResponse) => {
+      },
+      error: (err) => {},
+    });
+    
+    const closeButton = document.getElementById('x');
+    closeButton?.click();
+    
+    this.router.navigate(['/houses']);
+    alert("eliminado correctamente"); 
+  }
+  
   }
 
-}

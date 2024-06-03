@@ -104,6 +104,9 @@
             <div *ngIf="form.get('email')?.errors?.['required']">
               Este es un campo obligatorio.
             </div>
+            <div *ngIf="form.get('email')?.errors?.['email']">
+              Este email no es valido.
+            </div>
           </div>
         </div>
         <div class="form-floating">
@@ -140,9 +143,28 @@
       id="delete-pefil"
       type="button"
       class="btn btn-primary"
-      (click)="deletePerfil()"
+      data-bs-toggle="modal" 
+      data-bs-target="#staticBackdrop"
     >
       Eliminar
     </button>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Eliminar perfil</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="x"></button>
+          </div>
+          <div class="modal-body">
+              <p>¿Estás seguro que deseas eliminar tu perfil?</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" (click)="deletePerfil()">Eliminar</button>
+          </div>
+      </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ import {
   GetTaskListItemResponse,
 } from '../models/get-task-list/get-task-list.response';
 import { TaskState } from '../models/task-status.enum';
+import { TaskChangeStateRequest } from '../models/task-change-state/task-change-state.request';
 
 @Component({
   selector: 'app-tasks-list',
@@ -13,8 +14,11 @@ import { TaskState } from '../models/task-status.enum';
   styleUrl: './tasks-list.component.css',
 })
 export class TasksListComponent {
+
+  state = TaskState;
   response?: GetTaskListResponse;
   request: GetTaskListRequest = { page: 0, pageSize: 15 };
+
 
   constructor(private taskService: TaskService) {}
 
@@ -48,23 +52,30 @@ export class TasksListComponent {
   isExpanded(index: number): boolean {
     return this.expandedIndex === index;
   }
-
-  getTaskString(state: TaskState): string {
+  
+  changeStateOnClick(state: TaskState, id:number) {
     switch (state) {
       case TaskState.DRAFT:
-        return 'Borrador';
-
-      case TaskState.IN_PROGRESS:
-        return 'En progreso';
-
-      case TaskState.EXPIRED:
-        return 'KO';
-
-      case TaskState.FINISHED:
-        return 'OK';
-
-      default:
-        return 'Desconocido';
+        this.changeState(TaskState.NEW, id)
+        break;
+        case TaskState.NEW:
+          this.changeState(TaskState.IN_PROGRESS, id)
+        break;
+        case TaskState.IN_PROGRESS:
+          this.changeState(TaskState.FINISHED, id)
+        break;
     }
+
+    this.getTasksList()
   }
+
+  changeState(state: TaskState, id:number) {
+    const request: TaskChangeStateRequest = {state:state,id:id}
+
+    this.taskService
+    .changeTaskState(request)
+    .pipe()
+    .subscribe()
+  }
+
 }

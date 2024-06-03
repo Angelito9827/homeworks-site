@@ -32,7 +32,7 @@
           </option>
           <option
             *ngFor="let houseMember of houseMembersResponse?.houseMembers"
-            [value]="houseMember.name"
+            [value]="houseMember.id"
           >
             {{ houseMember.name }}
           </option>
@@ -126,11 +126,30 @@
           id="delete-house"
           type="button"
           class="btn btn-primary"
-          (click)="deleteTask()"
+          data-bs-toggle="modal" 
+          data-bs-target="#staticBackdrop"
         >
           Eliminar
         </button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Eliminar tarea</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="x"></button>
+          </div>
+          <div class="modal-body">
+              <p>¿Estás seguro que deseas esta tarea?{{taskResponse?.name}}</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" (click)="deleteTaskById()">Eliminar</button>
+          </div>
+      </div>
   </div>
 </div>

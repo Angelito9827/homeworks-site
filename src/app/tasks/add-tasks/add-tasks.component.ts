@@ -49,34 +49,16 @@ export class AddTasksComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      assignedMember: ['', [Validators.required]],
+      assignedTo: ['', [Validators.required]],
       category: ['', [Validators.required]],
       finishDate: ['', [Validators.required]]
     });
   }
 
-  checkErrors() {
-    return Object.values(this.fieldErrors).some(error => error);
-  }
-
-  setFieldError(fieldName: string, hasError: boolean) {
-    this.fieldErrors[fieldName] = hasError;
-  }
-
-  validateFields() {
-    Object.keys(this.form.controls).forEach(controlName => {
-      const control = this.form.get(controlName);
-      this.setFieldError(controlName, control?.invalid || false);
-    });
-    if (!this.checkErrors()) {
-      this.submitForm();
-    }
-  }
-
   stablishRequest() {
     this.request.name = this.form.get('name')?.value;
     this.request.description = this.form.get('description')?.value;
-    this.request.assignedTo = this.form.get('assignedMember')?.value;
+    this.request.assignedTo = this.form.get('assignedTo')?.value;
     this.request.categoryId = this.form.get('category')?.value;
     this.request.finishDate = this.form.get('finishDate')?.value;
   }

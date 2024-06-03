@@ -38,9 +38,8 @@ export class ProfileComponent {
       nickName: ['', [Validators.required]],
       name: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       tlf: ['', [Validators.required]],
-      password: ['', [Validators.required]],
       profilePicture: [''],
     });
   }
@@ -75,54 +74,71 @@ export class ProfileComponent {
     })
    }
 
-  deletePerfil() {
-    console.log('Casa eliminada');
-  }
-
-  stablishRequest() {
-    this.request.nickName = this.form.get('nickName')?.value;
-    this.request.name = this.form.get('name')?.value;
-    this.request.lastName = this.form.get('lastName')?.value;
-    this.request.email = this.form.get('email')?.value;
-    this.request.tlf = this.form.get('tlf')?.value;
-    this.request.password = this.form.get('password')?.value;
-    const file = this.form.get('profileImage')?.value;
-    if (file) {
-      const formData = new FormData();
-      formData.append('profileImage', file);
-      this.request.profilePicture = formData;
+   stablishRequest() {
+     this.request.nickName = this.form.get('nickName')?.value;
+     this.request.name = this.form.get('name')?.value;
+     this.request.lastName = this.form.get('lastName')?.value;
+     this.request.email = this.form.get('email')?.value;
+     this.request.tlf = this.form.get('tlf')?.value;
+     const file = this.form.get('profileImage')?.value;
+     if (file) {
+       const formData = new FormData();
+       formData.append('profileImage', file);
+       this.request.profilePicture = formData;
+      }
     }
-  }
 
-  areAllStepsValid(): boolean {
+    areAllStepsValid(): boolean {
     return this.form.valid;
   }
-
+  
   saveForm() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      console.log('tocado');
       return;
     }
-
+    
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
     }
-
+    
     this.stablishRequest();
     console.log('Request stablished');
     console.log('Request object:', this.request);
     this.perfilService
-      .editPerfil(this.request)
-      .pipe()
-      .subscribe({
-        next: (perfilResponse) => {
-        },
-        error: (err) => {},
-      });
-
-      const perfilId = this.perfilResponse?.id;
-      this.router.navigate(['/perfil', perfilId]);
-
+    .editPerfil(this.request)
+    .pipe()
+    .subscribe({
+      next: (perfilResponse) => {
+      },
+      error: (err) => {},
+    });
+    
+    alert("Guardado correctamente");
+    
+    const perfilId = this.perfilResponse?.id;
+    this.router.navigate(['/perfil']);
+    
   }
+
+  deletePerfil() {
+    console.log('Perfil eliminado');
+    this.perfilService
+    .deletePerfil(this.request)
+    .pipe()
+    .subscribe({
+      next: (perfilResponse) => {
+      },
+      error: (err) => {},
+    });
+    
+    const closeButton = document.getElementById('x');
+    closeButton?.click();
+    
+    this.router.navigate(['']);
+    alert("eliminado correctamente"); 
+  }
+
 }

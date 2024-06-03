@@ -10,6 +10,7 @@ import { GetAllTasksResponse } from '../../models/get-active-tasks-list-by-house
 import { EditTaskRequest } from '../../models/edit-task/edit-task.request';
 import { GetTaskByIdRequest } from '../../models/get-active-task-by-id/get-active-task-by-id.request';
 import { GetTaskByIdResponse } from '../../models/get-active-task-by-id/get-active-task-by-id.response';
+import { TaskChangeStateRequest } from '../../models/task-change-state/task-change-state.request';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,14 @@ export class TaskService {
 
   public editTask(request: EditTaskRequest): Observable<GetAllTasksResponse> {
     return this.httpClient.put<GetAllTasksResponse>(`${this.baseUrl}tasks`, request); 
+  }
+
+  public deleteTaskById(request:GetTaskByIdRequest): Observable<GetTaskByIdResponse> {
+    return this.httpClient.delete<GetTaskByIdResponse>(`${this.baseUrl}tasks/${request.id}`)
+  }
+
+  public changeTaskState(request: TaskChangeStateRequest) {
+    return this.httpClient.put<GetTaskByIdResponse>(`${this.baseUrl}tasks/change-state`,request)
   }
 
 }

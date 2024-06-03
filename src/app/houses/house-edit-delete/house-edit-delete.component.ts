@@ -72,41 +72,37 @@ export class HouseEditDeleteComponent {
     })
    }
 
-  deleteHouse() {
-    console.log('Casa eliminada');
-  }
-
-  stablishRequest() {
-    this.request.name = this.form.get('name')?.value;
-    this.request.description = this.form.get('description')?.value;
-    this.request.address = this.form.get('address')?.value;
-    const file = this.form.get('profileImage')?.value;
-    if (file) {
-      const formData = new FormData();
-      formData.append('profileImage', file);
-      this.request.profileImage = formData;
+   stablishRequest() {
+     this.request.name = this.form.get('name')?.value;
+     this.request.description = this.form.get('description')?.value;
+     this.request.address = this.form.get('address')?.value;
+     const file = this.form.get('profileImage')?.value;
+     if (file) {
+       const formData = new FormData();
+       formData.append('profileImage', file);
+       this.request.profileImage = formData;
+      }
     }
-  }
-
-  areAllStepsValid(): boolean {
-    return this.form.valid;
-  }
-
-  saveForm() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
+    
+    areAllStepsValid(): boolean {
+      return this.form.valid;
     }
-
-    if (!this.areAllStepsValid()) {
-      console.log('Not all steps are valid');
-      return;
-    }
-
-    this.stablishRequest();
-    console.log('Request stablished');
-    console.log('Request object:', this.request);
-    this.houseService
+    
+    saveForm() {
+      if (this.form.invalid) {
+        this.form.markAllAsTouched();
+        return;
+      }
+      
+      if (!this.areAllStepsValid()) {
+        console.log('Not all steps are valid');
+        return;
+      }
+      
+      this.stablishRequest();
+      console.log('Request stablished');
+      console.log('Request object:', this.request);
+      this.houseService
       .editHouse(this.request)
       .pipe()
       .subscribe({
@@ -114,9 +110,29 @@ export class HouseEditDeleteComponent {
         },
         error: (err) => {},
       });
-
+      
       const houseId = this.houseResponse?.id;
       this.router.navigate(['/houses', houseId]);
+      
+    }
+
+    deleteHouseById() {
+      console.log('Casa eliminada');
+      this.houseService
+      .deleteHouseById(this.request)
+      .pipe()
+      .subscribe({
+        next: (houseResponse) => {
+        },
+        error: (err) => {},
+      });
+
+      const closeButton = document.getElementById('x');
+      closeButton?.click();
+      
+      this.router.navigate(['/houses']);
+      alert("Casa eliminida correctamente");
+    }
 
   }
-}
+  

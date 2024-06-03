@@ -3,5 +3,4 @@ export enum TaskState{
     NEW = 2,
     IN_PROGRESS = 3,
     FINISHED = 4,
-    EXPIRED = 5
 }

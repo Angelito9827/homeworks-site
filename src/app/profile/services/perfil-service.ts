@@ -22,4 +22,8 @@ import { EditPerfilRequest } from "../models/edit-house/edit-perfil-request";
       return this.httpClient.put<GetPerfilByIdResposne>(`${this.baseUrl}perfil`, request); 
     }
 
+    public deletePerfil(request: GetPerfilByIdRequest): Observable<GetPerfilByIdResposne> {
+      return this.httpClient.delete<GetPerfilByIdResposne>(`${this.baseUrl}perfil`)
+    }
+
   }

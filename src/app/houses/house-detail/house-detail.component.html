@@ -2,34 +2,36 @@
   <h1 class="title">piso de madrid</h1>
   <div>
     <button
+      *ngIf="houseResponse.isHouseAdmin"
       id="add-task"
       type="button"
       class="btn btn-primary"
       [routerLink]="['/tasks', 'house', houseResponse.id, 'newTask']"
+      
     >
       Añadir tarea +
     </button>
   </div>
   <div class="container">
     <div class="container-left">
-      <div class="card" id="edit" [routerLink]="['edit-delete']">
-        <div class="image-picture">
-          <img
+        <div class="card" id="edit" [routerLink]="houseResponse.isHouseAdmin ? ['edit-delete'] : null">
+          <div class="image-picture">
+            <img
             [src]="houseResponse.profilePicture"
             class="img-fluid"
             alt="Imagen"
-          />
-        </div>
-        <div class="card-elements">
-          <div class="house-description">
-            <p>{{ houseResponse.description }}</p>
+            />
           </div>
-          <div class="house-address">
-            <p>{{ houseResponse.address }}</p>
+          <div class="card-elements">
+            <div class="house-description">
+              <p>{{ houseResponse.description }}</p>
+            </div>
+            <div class="house-address">
+              <p>{{ houseResponse.address }}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div
+        <div
         class="card"
         id="members"
         *ngIf="houseMembersResponse"
@@ -37,20 +39,20 @@
         data-bs-toggle="modal"
         data-bs-target="#exampleModal">
         <div
-          class="card-members"
-          *ngFor="let houseMember of houseMembersResponse.houseMembers"
+        class="card-members"
+        *ngFor="let houseMember of houseMembersResponse.houseMembers"
         >
-          <div class="img-perfil">
-            <img [src]="houseMember.profileImage" class="image" alt="Imagen" />
-          </div>
+        <div class="img-perfil">
+          <img [src]="houseMember.profileImage" class="image" alt="Imagen" />
+        </div>
           <div class="house-member">
             <p>{{ houseMember.name }}</p>
           </div>
         </div>
       </div>
       <div
-        class="modal fade"
-        id="exampleModal"
+      class="modal fade"
+      id="exampleModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -85,11 +87,11 @@
                 <div class="house-member">
                   <p>{{ houseMember.name }}</p>
                 </div>
-                    <button id="delete-member-house" type="button" class="btn btn-primary">Eliminar</button>
+                    <button *ngIf="houseResponse.isHouseAdmin" id="delete-member-house" type="button" class="btn btn-primary">Eliminar</button>
                   </div>
                 </div>
               </div>
-              <div class="modal-footer" [formGroup]="form">
+              <div *ngIf="houseResponse.isHouseAdmin" class="modal-footer" [formGroup]="form">
               <div class="validator">
                 <input
                 class="add-email"

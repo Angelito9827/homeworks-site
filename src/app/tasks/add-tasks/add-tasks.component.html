@@ -11,24 +11,35 @@
           formControlName="name"
         />
         <label class="letras" for="floatingInput">Nombre de la tarea</label>
-        <div *ngIf="fieldErrors['name']" class="text-danger">
-          Este es un campo obligatorio
+        <div
+          *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('name')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
         </div>
       </div>
       <div class="form-floating">
-        <select class="form-select" formControlName="assignedMember">
-          <option value="" selected></option>
+        <select class="form-select" formControlName="assignedTo">
           <option
             *ngFor="let houseMember of houseMembersResponse?.houseMembers"
-            [value]="houseMember.name"
+            [value]="houseMember.id"
           >
-            {{ houseMember.lastName }}>
+            {{ houseMember.lastName }}
           </option>
         </select>
-        <label class="letras" for="assignedMember">Asignar a</label>
-        <div *ngIf="fieldErrors['assignedMember']" class="text-danger">
-          Este es un campo obligatorio
+        <label class="letras" for="assignedTo">Asignar a</label>
+        <div
+        *ngIf="
+          form.get('assignedTo')?.touched && form.get('assignedTo')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="form.get('assignedTo')?.errors?.['required']">
+          Este es un campo obligatorio.
         </div>
+      </div>
       </div>
       <div class="form-floating">
         <select class="form-select" formControlName="category">
@@ -38,8 +49,13 @@
           </option>
         </select>
         <label class="letras" for="category">Categoría</label>
-        <div *ngIf="fieldErrors['category']" class="text-danger">
-          Este es un campo obligatorio
+        <div
+          *ngIf="form.get('category')?.touched && form.get('category')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('category')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
         </div>
       </div>
       <div class="form-floating mb-3">
@@ -52,8 +68,15 @@
           min="{{ getMinDate() }}"
         />
         <label for="finishDate">Fecha de realización</label>
-        <div *ngIf="fieldErrors['finishDate']" class="text-danger">
-          Este es un campo obligatorio
+        <div
+          *ngIf="
+            form.get('finishDate')?.touched && form.get('finishDate')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="form.get('finishDate')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
         </div>
       </div>
     </div>
@@ -66,16 +89,23 @@
           formControlName="description"
         ></textarea>
         <label class="letras" for="floatingTextarea">Descripción</label>
-        <div *ngIf="fieldErrors['description']" class="text-danger">
-          Este es un campo obligatorio
+        <div
+        *ngIf="
+          form.get('description')?.touched && form.get('description')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="form.get('description')?.errors?.['required']">
+          Este es un campo obligatorio.
         </div>
+      </div>
       </div>
       <div class="botones">
         <button
           id="create"
           type="button"
           class="btn btn-primary"
-          (click)="validateFields()"
+          (click)="submitForm()"
         >
           Crear
         </button>

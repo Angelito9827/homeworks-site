@@ -1,4 +1,5 @@
 export interface EditPerfilRequest {
+    id:number;
     nickName: string;
     profilePicture: FormData;
     name: string;

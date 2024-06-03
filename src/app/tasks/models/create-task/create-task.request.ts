@@ -3,7 +3,7 @@ export interface CreateTaskRequest {
     name: string;
     description?: string;
     finishDate: Date;
-    assignedTo: string;
+    assignedTo: number;
     //FKs
     categoryId: number;
     houseId: number;
