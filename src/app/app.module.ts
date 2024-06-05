@@ -12,12 +12,14 @@ import {MatIcon} from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { HelpComponent } from './layouts/footer/help/help.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,

@@ -39,9 +39,10 @@ export class ProfileComponent {
       name: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      tlf: ['', [Validators.required]],
+      tlf: ['', [Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$')]],
       profilePicture: [''],
-    });
+      password: ['', [Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$')]],
+      rePassword: ['', Validators.required]}, { validators: this.passwordMatchValidator });
   }
 
   onSelectFile(event: any) {
@@ -139,6 +140,18 @@ export class ProfileComponent {
     
     this.router.navigate(['']);
     alert("eliminado correctamente"); 
+  }
+
+  passwordMatchValidator(form:FormGroup) {
+    const password = form.get('password')?.value;
+    const rePassword = form.get('rePassword')?.value;
+
+    if (password !== rePassword) {
+      form.get('rePassword')?.setErrors({passwordsMismatch: true});
+    } else {
+      form.get('rePassword')?.setErrors(null);
+    }
+    return null;
   }
 
 }

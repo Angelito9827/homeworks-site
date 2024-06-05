@@ -126,6 +126,9 @@
             <div *ngIf="form.get('tlf')?.errors?.['required']">
               Este es un campo obligatorio.
             </div>
+            <div *ngIf="form.get('tlf')?.errors?.['pattern']">
+              Por favor ingresa un número de teléfono válido.
+            </div>
           </div>
         </div>
       </div>
