@@ -68,6 +68,11 @@ export class AddTasksComponent implements OnInit {
   }
 
   submitForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    
     if (!this.areAllStepsValid()) {
       console.log('Not all steps are valid');
       return;
@@ -77,7 +82,9 @@ export class AddTasksComponent implements OnInit {
     console.log('Request stablished');
     console.log('Request object:', this.request);
 
-    this.taskService.createTask(this.request).subscribe({
+    this.taskService.createTask(this.request)
+    .pipe()
+    .subscribe({
       next: (response) => {
         // Manejar la respuesta exitosa
       },

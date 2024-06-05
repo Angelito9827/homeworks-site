@@ -89,7 +89,7 @@ export class EditDeleteTasksComponent {
         // Manejar la respuesta exitosa
       },
       error: (err) => {
-        console.error('Error creating task', err);
+        console.error('Error editing task', err);
       }
     });
 

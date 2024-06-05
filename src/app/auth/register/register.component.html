@@ -1,1 +1,163 @@
-<p>register works!</p>
+<div class="container-fluid" [formGroup]="form">
+  <h1 class="title">Crear perfil</h1>
+  <div class="container">
+    <div class="container-left">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Perfil Name"
+          id="perfil-name"
+          formControlName="name"
+        />
+        <label class="letras" for="floatingInput">Nombre</label>
+        <div
+          *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('name')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Perfil LastName"
+          id="perfil-last-name"
+          formControlName="lastName"
+        />
+        <label class="letras" for="floatingInput">Apellidos</label>
+        <div
+          *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('lastName')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Perfil NickName"
+          id="perfil-nick-name"
+          formControlName="nickName"
+        />
+        <label class="letras" for="floatingInput">Nick Name</label>
+        <div
+          *ngIf="form.get('nickName')?.touched && form.get('nickName')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('nickName')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Email"
+          id="email"
+          formControlName="email"
+        />
+        <label class="letras" for="floatingInput">Email</label>
+        <div
+          *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('email')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+          <div *ngIf="form.get('email')?.errors?.['email']">
+            El email no es válido.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-right">
+        <div class="image">
+            <img src="assets/img/house-icon.png" class="rounded" >
+          </div>
+        <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tlf"
+              id="tlf"
+              formControlName="tlf"
+            />
+            <label class="letras" for="floatingInput">Teléfono</label>
+            <div
+              *ngIf="form.get('tlf')?.touched && form.get('tlf')?.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="form.get('tlf')?.errors?.['required']">
+                Este es un campo obligatorio.
+              </div>
+              <div *ngIf="form.get('tlf')?.errors?.['pattern']">
+                Por favor ingresa un número de teléfono válido.
+              </div>
+            </div>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              id="password"
+              formControlName="password"
+            />
+            <label class="letras" for="floatingInput">Contraseña</label>
+            <div
+              *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="form.get('password')?.errors?.['required']">
+                Este es un campo obligatorio.
+              </div>
+              <div *ngIf="form.get('password')?.errors?.['pattern']">
+                La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número.
+              </div>
+            </div>
+          </div>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Repeat Password"
+              id="rePassword"
+              formControlName="rePassword"
+            />
+            <label class="letras" for="floatingInput">Repetir Contraseña</label>
+            <div
+              *ngIf="form.get('rePassword')?.touched && form.get('rePassword')?.invalid"
+              class="text-danger"
+            >
+              <div *ngIf="form.get('rePassword')?.errors?.['required']">
+                Este es un campo obligatorio.
+              </div>
+              <div *ngIf="form.get('rePassword')?.errors?.['passwordsMismatch']">
+                Las contraseñas no coinciden.
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <p>
+        ¿Ya tienes cuenta?
+        <a class="fw-bold" href="auth/login">Inicia Sesión</a>
+    </p>
+    <div class="botones">
+      <button
+        id="create"
+        type="button"
+        class="btn btn-primary"
+        (click)="submitForm()"
+      >Registrarse
+      </button>
+    </div>
+</div>

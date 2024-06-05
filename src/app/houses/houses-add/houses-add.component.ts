@@ -93,7 +93,9 @@ export class HousesAddComponent {
         next: (response) => {
           //Saco un modal diciend
         },
-        error: (err) => {},
+        error: (err) => {
+          console.error('Error creating house', err);
+        },
       });
 
     this.router.navigate(['/houses']);
