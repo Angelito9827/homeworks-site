@@ -87,7 +87,7 @@
                 <div class="house-member">
                   <p>{{ houseMember.name }}</p>
                 </div>
-                    <button *ngIf="houseResponse.isHouseAdmin" id="delete-member-house" type="button" class="btn btn-primary">Eliminar</button>
+                    <button *ngIf="houseResponse.isHouseAdmin" id="delete-member-house" type="button" class="btn btn-primary" (click)="deleteMemberByHouseId()">Eliminar</button>
                   </div>
                 </div>
               </div>

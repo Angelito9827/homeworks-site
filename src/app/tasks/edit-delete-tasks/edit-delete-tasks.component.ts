@@ -34,6 +34,8 @@ export class EditDeleteTasksComponent {
     private taskService: TaskService,
     private router: Router,
     private houseMemberService: HouseMemberService,
+    private houseService:HouseService, 
+
     private activatedRoute: ActivatedRoute)
   {}
 
@@ -43,6 +45,7 @@ export class EditDeleteTasksComponent {
       this.getHouseMembersByHouseId(params['id']);
       this.getCategories();
       this.getTaskById(params['id']);
+      this.getHouseById(params['id'])
     });
   }
 
@@ -105,6 +108,15 @@ export class EditDeleteTasksComponent {
       });
   }
 
+  private getHouseById(id:number) {
+    this.houseService.getHouseById({id:id})
+    .pipe()
+    .subscribe({
+      next: (response: GetHouseByIdResponse) => {
+        this.houseResponse = response;
+      }
+    })
+   }
 
   private getTaskById(id:number) {
     this.taskService.getTaskById({id:id})
@@ -153,8 +165,8 @@ export class EditDeleteTasksComponent {
     const closeButton = document.getElementById('x');
     closeButton?.click();
     
-    this.router.navigate(['/houses']);
-    alert("eliminado correctamente"); 
+    this.router.navigate(['/houses/',this.houseResponse?.id]);
+    alert("Tarea eliminada correctamente"); 
   }
   
   }

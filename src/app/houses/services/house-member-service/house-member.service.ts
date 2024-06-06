@@ -13,13 +13,18 @@ export class HouseMemberService {
 
   baseUrl: string = environment.baseUrlApi;
   
-  constructor(private http:HttpClient){}
+  constructor(private httpClient:HttpClient){}
 
   public  getHouseMembersByHouseId(request:GetHouseMemberListByHouseIdRequest):Observable<GetHouseMemberListByHouseIdResponse> {
-    return this.http.get<GetHouseMemberListByHouseIdResponse>(`${this.baseUrl}/house-members/house/${request.houseId}`)
+    return this.httpClient.get<GetHouseMemberListByHouseIdResponse>(`${this.baseUrl}/house-members/house/${request.houseId}`)
   }
 
   public sendInvitationEmail(request:SendInvitationEmailRequest){
-    return this.http.post(`${this.baseUrl}/house-member/send-invitation`, request)
+    return this.httpClient.post(`${this.baseUrl}/house-member/send-invitation`, request)
   }
+
+  public deleteMemberByHouseId(request:GetHouseMemberListByHouseIdRequest): Observable<GetHouseMemberListByHouseIdResponse> {
+    return this.httpClient.delete<GetHouseMemberListByHouseIdResponse>(`${this.baseUrl}houses/${request.houseId}`)
+  }
+
 }

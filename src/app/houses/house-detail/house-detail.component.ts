@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TaskService } from '../../tasks/services/tasks-service/task.service';
 import { GetAllTasksResponse } from '../../tasks/models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.response';
 import { GetAllTasksRequest } from '../../tasks/models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.request';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HouseService } from '../services/house-service/house.service';
 import { GetHouseByIdResponse } from '../models/get-house-by-id/get-house-by-id-response';
 import { GetHouseMemberListByHouseIdResponse } from '../models/get-house-member-list-by-house-id/get-house-member-list-by-house-id.response';
@@ -33,7 +33,8 @@ export class HouseDetailComponent {
     private houseService:HouseService, 
     private activatedRoute: ActivatedRoute, 
     private houseMemberService: HouseMemberService, 
-    private formBuilder: FormBuilder,) {}
+    private formBuilder: FormBuilder,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -123,6 +124,25 @@ export class HouseDetailComponent {
     this.form.reset();
     this.form.markAsPristine();
     this.form.markAsUntouched();
+  }
+
+  deleteMemberByHouseId() {
+      console.log('Miembro eliminado');
+      this.houseMemberService
+      .deleteMemberByHouseId(this.request)
+      .pipe()
+      .subscribe({
+        next: (houseMembersResponse) => {
+        },
+        error: (err) => {},
+      });
+
+      const closeButton = document.getElementById('x');
+      closeButton?.click();
+      
+      this.router.navigate(['/houses/',this.houseResponse?.id]);
+      alert("Miembro eliminido correctamente");
+    
   }
 
 }
