@@ -6,6 +6,7 @@ import { GetAllTasksRequest } from '../models/get-active-tasks-list-by-house-id/
 import { TaskState } from '../models/task-status.enum';
 import { GetHouseByIdResponse } from '../../houses/models/get-house-by-id/get-house-by-id-response';
 import { HouseService } from '../../houses/services/house-service/house.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-active-tasks',
@@ -13,15 +14,16 @@ import { HouseService } from '../../houses/services/house-service/house.service'
   styleUrl: './active-tasks.component.css'
 })
 export class ActiveTasksComponent {
-  
+  user: string = '';
   state = TaskState;
   activeTasksResponse?: GetAllTasksResponse;
   houseResponse?: GetHouseByIdResponse;
 
-  constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService, private houseService:HouseService) 
+  constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService, private houseService:HouseService, private authService: AuthService) 
   {}
 
   ngOnInit(): void {
+    this.user = this.authService.getRole();
     this.activatedRoute.params.subscribe(params => {
       const houseId = params['houseId'];
       const categoryId = params['categoryId'];

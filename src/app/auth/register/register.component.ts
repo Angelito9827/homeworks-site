@@ -24,9 +24,14 @@ export class RegisterComponent {
   ) {}
 
   ngOnInit(): void {
+    this.authService.setIsLoginPage(true);
     this.activatedRoute.params.subscribe(params => {
       this.createForm();
     });
+  }
+
+  ngOnDestroy(): void { // Método que se ejecuta al destruir el componente
+    this.authService.setIsLoginPage(false); // Llama al método setIsLoginPage del servicio AuthService para indicar que la página actual ya no es la de inicio de sesión
   }
 
   createForm() {
@@ -35,7 +40,7 @@ export class RegisterComponent {
       lastName: ['', [Validators.required]],
       nickName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      tlf: ['', [Validators.required,Validators.pattern('^\\+34[0-9]{9}$')]],
+      tlf: ['', [Validators.required,Validators.pattern('^[9|6|7][0-9]{8}$')]],
       password: ['', [Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$')]],
       rePassword: ['', Validators.required]}, { validators: this.passwordMatchValidator });
   }

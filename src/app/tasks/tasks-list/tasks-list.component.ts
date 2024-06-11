@@ -7,6 +7,7 @@ import {
 } from '../models/get-task-list/get-task-list.response';
 import { TaskState } from '../models/task-status.enum';
 import { TaskChangeStateRequest } from '../models/task-change-state/task-change-state.request';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -14,15 +15,16 @@ import { TaskChangeStateRequest } from '../models/task-change-state/task-change-
   styleUrl: './tasks-list.component.css',
 })
 export class TasksListComponent {
-
+  user: string = '';
   state = TaskState;
   response?: GetTaskListResponse;
   request: GetTaskListRequest = { page: 0, pageSize: 15 };
 
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getRole();
     this.getTasksList();
   }
 

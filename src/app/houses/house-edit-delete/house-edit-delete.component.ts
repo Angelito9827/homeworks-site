@@ -4,6 +4,7 @@ import { HouseService } from '../services/house-service/house.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetHouseByIdResponse } from '../models/get-house-by-id/get-house-by-id-response';
 import { EditHouseRequest } from '../models/edit-house/edit-house.request';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-house-edit-delete',
@@ -11,6 +12,7 @@ import { EditHouseRequest } from '../models/edit-house/edit-house.request';
   styleUrl: './house-edit-delete.component.css'
 })
 export class HouseEditDeleteComponent {
+  user: string = '';
   form!: FormGroup;
   url: any = '';
   houseResponse?: GetHouseByIdResponse;
@@ -21,11 +23,12 @@ export class HouseEditDeleteComponent {
     private formBuilder: FormBuilder,
     private houseService: HouseService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router, 
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-
+    this.user = this.authService.getRole();
     this.activatedRoute.params
     .subscribe(params=>{
       this.getHouseById(params['id']);

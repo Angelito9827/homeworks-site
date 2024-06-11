@@ -184,7 +184,7 @@
   }
   
   #delete-pefil {
-    width: 130px;
+    width: 100px;
     background-color: rgb(241, 56, 56);
     transition: transform ease 0.6s;
     text-transform: uppercase;

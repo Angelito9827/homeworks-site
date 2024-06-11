@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditDeleteProfileComponent } from './edit-delete-profile/edit-delete-profile.component';
 
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
+    EditDeleteProfileComponent
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,7 @@ import { TaskState } from '../../tasks/models/task-status.enum';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SendInvitationEmailRequest } from '../models/send-invitation-email/send-invitation-email.request';
 import { CategoryState } from '../../tasks/models/category-status.enum';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-house-detail',
@@ -18,7 +19,7 @@ import { CategoryState } from '../../tasks/models/category-status.enum';
   styleUrl: './house-detail.component.css'
 })
 export class HouseDetailComponent {
-
+  user: string = '';
   activeTasksResponse?: GetAllTasksResponse;
   houseResponse?: GetHouseByIdResponse;
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
@@ -34,9 +35,11 @@ export class HouseDetailComponent {
     private activatedRoute: ActivatedRoute, 
     private houseMemberService: HouseMemberService, 
     private formBuilder: FormBuilder,
-    private router: Router) {}
+    private router: Router, 
+    private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getRole();
     this.activatedRoute.params
     .subscribe(params=>{
       this.getActiveTasksByHouseId(params['id']);

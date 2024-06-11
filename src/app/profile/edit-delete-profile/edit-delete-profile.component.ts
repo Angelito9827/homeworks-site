@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GetPerfilByIdResposne } from '../models/get-perfil-by-id.response';
+import { EditPerfilRequest } from '../models/edit-house/edit-perfil-request';
+import { PerfilService } from '../services/perfil-service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GetPerfilByIdResposne } from './models/get-perfil-by-id.response';
-import { PerfilService } from './services/perfil-service';
-import { EditPerfilRequest } from './models/edit-house/edit-perfil-request';
-import { AuthService } from '../auth/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
+
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  selector: 'app-edit-delete-profile',
+  templateUrl: './edit-delete-profile.component.html',
+  styleUrl: './edit-delete-profile.component.css'
 })
-export class ProfileComponent {
+export class EditDeleteProfileComponent {
   user: string = '';
   form!: FormGroup;
   url: any = '';
@@ -43,9 +44,7 @@ export class ProfileComponent {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       tlf: ['', [Validators.required,Validators.pattern('^[9|6|7][0-9]{8}$')]],
-      profilePicture: [''],
-      password: ['', [Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$')]],
-      rePassword: ['', Validators.required]}, { validators: this.passwordMatchValidator });
+      profilePicture: ['']});
   }
 
   onSelectFile(event: any) {
@@ -95,14 +94,54 @@ export class ProfileComponent {
     areAllStepsValid(): boolean {
     return this.form.valid;
   }
+  
+  saveForm() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      console.log('tocado');
+      return;
+    }
+    
+    if (!this.areAllStepsValid()) {
+      console.log('Not all steps are valid');
+      return;
+    }
+    
+    this.stablishRequest();
+    console.log('Request stablished');
+    console.log('Request object:', this.request);
+    this.perfilService
+    .editPerfil(this.request)
+    .pipe()
+    .subscribe({
+      next: (perfilResponse) => {
+      },
+      error: (err) => {},
+    });
+    
+    alert("Guardado correctamente");
+    
+    const perfilId = this.perfilResponse?.id;
+    this.router.navigate(['/profile']);
+    
+  }
 
-  logOut() {
-    this.authService.logOut(); // Llama al método de cierre de sesión del servicio de usuario
-
+  deletePerfil() {
+    console.log('Perfil eliminado');
+    this.perfilService
+    .deletePerfil(this.request)
+    .pipe()
+    .subscribe({
+      next: (perfilResponse) => {
+      },
+      error: (err) => {},
+    });
+    
     const closeButton = document.getElementById('x');
     closeButton?.click();
     
-    this.router.navigate(['']); // Navega a la página de inicio de sesión después de cerrar sesión
+    this.router.navigate(['/profile']);
+    alert("eliminado correctamente"); 
   }
 
   passwordMatchValidator(form:FormGroup) {

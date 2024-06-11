@@ -8,6 +8,7 @@ import { HouseMemberService } from '../../houses/services/house-member-service/h
 import { HouseService } from '../../houses/services/house-service/house.service';
 import { GetHouseByIdResponse } from '../../houses/models/get-house-by-id/get-house-by-id-response';
 import { CategoryState } from '../models/category-status.enum';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-add-tasks',
@@ -15,9 +16,7 @@ import { CategoryState } from '../models/category-status.enum';
   styleUrls: ['./add-tasks.component.css']
 })
 export class AddTasksComponent implements OnInit {
-
-
-
+  user: string = '';
   form!: FormGroup;
   url: any = '';
   fieldErrors: { [key: string]: boolean } = {};
@@ -33,10 +32,12 @@ export class AddTasksComponent implements OnInit {
     private router: Router,
     private houseMemberService: HouseMemberService,
     private activatedRoute: ActivatedRoute,
-    private houseService: HouseService
+    private houseService: HouseService, 
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.user = this.authService.getRole();
     this.activatedRoute.params.subscribe(params => {
       this.createForm();
       this.getHouseMembersByHouseId(params['id']);

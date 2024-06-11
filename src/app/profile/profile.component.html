@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="perfilResponse" [formGroup]="form">
+<div class="container-fluid" *ngIf="user === 'user' && perfilResponse" [formGroup]="form">
   <h1 class="title">perfil</h1>
   <div class="container">
     <div class="container-left">
@@ -138,9 +138,9 @@
       id="save"
       type="button"
       class="btn btn-primary"
-      (click)="saveForm()"
+      [routerLink]="['edit-delete-profile']"
     >
-      Guardar
+      Editar
     </button>
     <button
       id="delete-pefil"
@@ -149,7 +149,7 @@
       data-bs-toggle="modal" 
       data-bs-target="#staticBackdrop"
     >
-      Eliminar
+      Cerrar Sesión
     </button>
   </div>
 </div>
@@ -158,15 +158,15 @@
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Eliminar perfil</h5>
+              <h5 class="modal-title" id="staticBackdropLabel">Cerrar Sesión</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="x"></button>
           </div>
           <div class="modal-body">
-              <p>¿Estás seguro que deseas eliminar tu perfil?</p>
+              <p>¿Estás seguro que deseas cerrar sesión?</p>
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" (click)="deletePerfil()">Eliminar</button>
+              <button type="button" class="btn btn-danger" (click)="logOut()">Aceptar</button>
           </div>
       </div>
   </div>

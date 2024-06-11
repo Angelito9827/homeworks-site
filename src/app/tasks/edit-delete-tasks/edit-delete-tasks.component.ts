@@ -10,6 +10,7 @@ import { CategoryState } from '../models/category-status.enum';
 import { EditTaskRequest } from '../models/edit-task/edit-task.request';
 import { GetTaskByIdResponse } from '../models/get-active-task-by-id/get-active-task-by-id.response';
 import { GetAllTasksListItemResponse} from '../models/get-active-tasks-list-by-house-id/get-active-tasks-list-by-house-id.response';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-edit-delete-tasks',
@@ -17,7 +18,7 @@ import { GetAllTasksListItemResponse} from '../models/get-active-tasks-list-by-h
   styleUrl: './edit-delete-tasks.component.css'
 })
 export class EditDeleteTasksComponent {
-
+  user: string = '';
   form!: FormGroup;
   url: any = '';
   fieldErrors: { [key: string]: boolean } = {};
@@ -35,11 +36,12 @@ export class EditDeleteTasksComponent {
     private router: Router,
     private houseMemberService: HouseMemberService,
     private houseService:HouseService, 
-
-    private activatedRoute: ActivatedRoute)
+    private activatedRoute: ActivatedRoute, 
+    private authService: AuthService)
   {}
 
   ngOnInit(): void {
+    this.user = this.authService.getRole();
     this.activatedRoute.params.subscribe(params => {
       this.createForm();
       this.getHouseMembersByHouseId(params['id']);

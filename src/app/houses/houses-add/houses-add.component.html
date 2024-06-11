@@ -1,4 +1,4 @@
-<div class="container-fluid" [formGroup]="form">
+<div class="container-fluid" *ngIf="(user === 'user')" [formGroup]="form">
   <h1 class="title">crear casa</h1>
   <div class="container-top">
     <div class="container-left">

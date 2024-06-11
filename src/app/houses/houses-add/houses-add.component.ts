@@ -3,6 +3,7 @@ import { HouseService } from '../services/house-service/house.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateHouseRequest } from '../models/create-house/create-house.request';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-houses-add',
@@ -10,6 +11,7 @@ import { CreateHouseRequest } from '../models/create-house/create-house.request'
   styleUrl: './houses-add.component.css',
 })
 export class HousesAddComponent {
+  user: string = '';
   form!: FormGroup;
   url: any = '';
   request: CreateHouseRequest = {} as CreateHouseRequest;
@@ -18,13 +20,14 @@ export class HousesAddComponent {
   constructor(
     private formBuilder: FormBuilder,
     private houseService: HouseService,
-    private router: Router
+    private router: Router, 
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-
+    this.user = this.authService.getRole();
     this.createForm();
   }
 
