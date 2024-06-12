@@ -46,24 +46,16 @@
     gap: 50px;
   }
   
-  .component1-container,
-  .component2-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .component2-container {
-    margin-top: 100px;
-  }
-  
   .upload-container {
     height: auto;
-    width: 100%;
+    width: auto;
     position: relative;
     text-align: center;
     background-color: white;
     border-radius: 27px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .image-container {
@@ -73,11 +65,6 @@
     border-radius: 27px;
   }
   
-  .upload-container:hover {
-    opacity: 0.5;
-    background-color: #f6f7fa;
-  }
-  
   img {
     height: 100%;
     width: 100%;
@@ -85,74 +72,20 @@
     object-fit: cover;
   }
   
-  .select-profile-picture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-  
-  .message {
-    position: absolute;
-    width: auto;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    transition: all 1s;
-    opacity: 0;
-    font-weight: bold;
-    font-size: 1em;
-  }
-  
-  .upload-container:hover .message {
-    transform: translate(-50%, -50%);
-    opacity: 1;
-  }
-  
-  #delete-img {
-    margin-top: 10px;
-    width: 100px;
-    background-color: #213555;
-    transition: transform ease 0.6s;
-    text-transform: uppercase;
-    font-size: 14px;
-  }
-  
-  #delete-img:hover {
-    background-color: #6499e9;
-    transform: scale(1.1);
-    transition: transform ease 0.6s;
-    color: #213555;
-  }
-  
-  .text-danger {
-    margin-top: 5px;
-    margin-left: 12px;
-  }
-  
-  .form-floating {
+  .card {
     width: 70%;
     min-width: 20%;
+    font-weight: 400;
+    font-size: 20px;
+    padding: 5px;
   }
   
   @media (max-width: 1000px) {
-    .message {
-      font-size: 0.7em;
-      line-height: 1em;
-    }
-  
-    .letras {
-      font-size: 0.9em;
-    }
   
     .container {
       display: flex;
       flex-direction: column;
-      gap: 100px;
+      gap: 50px;
     }
   
     .container-left,
@@ -166,7 +99,7 @@
     }
   }
   
-  #save {
+  #editBt {
     width: 100px;
     background-color: #213555;
     transition: transform ease 0.6s;
@@ -175,7 +108,7 @@
     border-color: #6499e9;
   }
   
-  #save:hover {
+  #editBt:hover {
     background-color: #6499e9;
     transform: scale(1.1);
     transition: transform ease 0.6s;
@@ -183,7 +116,7 @@
     border-color: #213555;
   }
   
-  #delete-pefil {
+  #logOut {
     width: 130px;
     background-color: rgb(241, 56, 56);
     transition: transform ease 0.6s;
@@ -192,7 +125,7 @@
     border-color: white;
   }
   
-  #delete-pefil:hover {
+  #logOut:hover {
     background-color: white;
     transform: scale(1.1);
     transition: transform ease 0.6s;
