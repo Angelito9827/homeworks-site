@@ -7,6 +7,7 @@ import { TaskState } from '../models/task-status.enum';
 import { GetHouseByIdResponse } from '../../houses/models/get-house-by-id/get-house-by-id-response';
 import { HouseService } from '../../houses/services/house-service/house.service';
 import { AuthService } from '../../auth/services/auth.service';
+import { CategoryState } from '../models/category-status.enum';
 
 @Component({
   selector: 'app-active-tasks',
@@ -18,6 +19,7 @@ export class ActiveTasksComponent {
   state = TaskState;
   activeTasksResponse?: GetAllTasksResponse;
   houseResponse?: GetHouseByIdResponse;
+  categories=CategoryState;
 
   constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService, private houseService:HouseService, private authService: AuthService) 
   {}

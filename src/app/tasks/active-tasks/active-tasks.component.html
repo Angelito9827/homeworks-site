@@ -1,5 +1,5 @@
 <div class="container-fluid" *ngIf="(user === 'user')">
-    <h1 class="title">tareas</h1>
+    <h1 class="title" *ngFor="let activeTask of activeTasksResponse?.tasks">{{categories[this.activeTask.categoryId] }}</h1>
     <div class="accordion" id="accordionExample" *ngIf="activeTasksResponse">
         <div class="accordion-item" *ngFor="let activeTask of activeTasksResponse.tasks; let i = index">
             <h2 class="accordion-header">

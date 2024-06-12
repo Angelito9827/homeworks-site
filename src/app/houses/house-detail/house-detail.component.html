@@ -1,5 +1,5 @@
 <div class="container-fluid" *ngIf="user === 'user' && houseResponse">
-  <h1 class="title">piso de madrid</h1>
+  <h1 class="title">{{houseResponse.name}}</h1>
   <div>
     <button
       *ngIf="houseResponse.isHouseAdmin"

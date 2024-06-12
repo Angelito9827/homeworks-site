@@ -140,7 +140,7 @@ export class EditDeleteProfileComponent {
     const closeButton = document.getElementById('x');
     closeButton?.click();
     
-    this.router.navigate(['/profile']);
+    this.router.navigate(['']);
     alert("eliminado correctamente"); 
   }
 
