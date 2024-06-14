@@ -40,8 +40,8 @@ export class AddTasksComponent implements OnInit {
     this.user = this.authService.getRole();
     this.activatedRoute.params.subscribe(params => {
       this.createForm();
-      this.getHouseMembersByHouseId(params['id']);
-      this.getHouseById(params['id']);
+      this.getHouseMembersByHouseId(params['houseId']);
+      this.getHouseById(params['houseId']);
       this.getCategories();
     });
   }

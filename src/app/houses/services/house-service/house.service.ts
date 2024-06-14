@@ -46,7 +46,7 @@ export class HouseService {
   }
 
   public editHouse(
-    request: EditHouseRequest
+    request: FormData
   ): Observable<GetHouseByIdResponse> {
     return this.httpClient.put<GetHouseByIdResponse>(
       `${this.apiUrl}house`,
