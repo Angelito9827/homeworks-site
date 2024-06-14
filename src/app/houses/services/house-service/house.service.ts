@@ -19,30 +19,46 @@ export class HouseService {
   // este metodo hace una petición http GET y envia los parametros como query params
   public get(request: GetHouseListRequest): Observable<GetHouseListResponse> {
     let queryParams = new HttpParams();
-    queryParams = queryParams.set("page", request.page.toString())
-    .set("pageSize", request.pageSize.toString());
+    queryParams = queryParams
+      .set('page', request.page.toString())
+      .set('pageSize', request.pageSize.toString());
 
     return this.httpClient.get<GetHouseListResponse>(`${this.apiUrl}house`, {
       params: queryParams,
     });
-  } 
+  }
 
   // este metodo hace una petición http POST y envia los parametros en el body
   public createHouse(request: FormData): Observable<any> {
-    return this.httpClient.post(`${this.apiUrl}house`, request);
+    return this.httpClient.post(`${this.apiUrl}house`, request, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 
   // este metodo hace una petición http GET y envia los parametros como route params
-  public getHouseById(request:GetHouseByIdRequest): Observable<GetHouseByIdResponse> {
-    return this.httpClient.get<GetHouseByIdResponse>(`${this.apiUrl}house/${request.id}`)
+  public getHouseById(
+    request: GetHouseByIdRequest
+  ): Observable<GetHouseByIdResponse> {
+    return this.httpClient.get<GetHouseByIdResponse>(
+      `${this.apiUrl}house/${request.id}`
+    );
   }
 
-  public editHouse(request: EditHouseRequest): Observable<GetHouseByIdResponse> {
-    return this.httpClient.put<GetHouseByIdResponse>(`${this.apiUrl}house`, request); 
+  public editHouse(
+    request: EditHouseRequest
+  ): Observable<GetHouseByIdResponse> {
+    return this.httpClient.put<GetHouseByIdResponse>(
+      `${this.apiUrl}house`,
+      request
+    );
   }
 
-  public deleteHouseById(request:GetHouseByIdRequest): Observable<GetHouseByIdResponse> {
-    return this.httpClient.delete<GetHouseByIdResponse>(`${this.apiUrl}house/${request.id}`)
+  public deleteHouseById(
+    request: GetHouseByIdRequest
+  ): Observable<GetHouseByIdResponse> {
+    return this.httpClient.delete<GetHouseByIdResponse>(
+      `${this.apiUrl}house/${request.id}`
+    );
   }
-
- }
+}
