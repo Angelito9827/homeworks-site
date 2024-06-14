@@ -18,7 +18,7 @@ export class TasksListComponent {
   user: string = '';
   state = TaskState;
   response?: GetTaskListResponse;
-  request: GetTaskListRequest = { page: 0, pageSize: 15 };
+  request: GetTaskListRequest = { page: 0, pageSize: 12 };
 
 
   constructor(private taskService: TaskService, private authService: AuthService) {}
@@ -78,6 +78,11 @@ export class TasksListComponent {
     .changeTaskState(request)
     .pipe()
     .subscribe()
+  }
+
+  onPageChange(page: number) {
+    // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
+    this.request.page = page;
   }
 
 }

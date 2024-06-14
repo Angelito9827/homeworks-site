@@ -11,6 +11,7 @@ import { ActiveTasksComponent } from './active-tasks/active-tasks.component';
 import { AddTasksComponent } from './add-tasks/add-tasks.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditDeleteTasksComponent } from './edit-delete-tasks/edit-delete-tasks.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -30,6 +31,7 @@ import { EditDeleteTasksComponent } from './edit-delete-tasks/edit-delete-tasks.
     MatTableModule,
     MatCardModule,
     FormsModule,
+    NgxPaginationModule,
     ReactiveFormsModule
   ]
 })

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { HousesRoutingModule } from './houses-routing.module';
 import { HousesComponent } from './houses.component';
 import { HousesListComponent } from './houses-list/houses-list.component';
@@ -23,6 +23,7 @@ import { HouseDetailComponent } from './house-detail/house-detail.component';
     CommonModule,
     HousesRoutingModule,
     FormsModule,
+    NgxPaginationModule,
     ReactiveFormsModule
   ]
 })

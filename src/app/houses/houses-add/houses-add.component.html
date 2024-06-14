@@ -6,7 +6,7 @@
         <div class="upload-container">
           <label class="hoverable" for="fileInput">
             <div class="image-container">
-              <img [src]="url ? url : 'assets/img/photo_camera.png'" />
+              <img [src]="url ? url : '/assets/img/photo_camera.png'" />
             </div>
             <div class="background"></div>
           </label>
@@ -16,7 +16,7 @@
             class="select-profile-image"
             (change)="onSelectFile($event)"
             accept="image/*"
-            formControlName="profileImage"
+           
           />
           <span class="message"
             >Haz click aquí para seleccionar una imagen</span

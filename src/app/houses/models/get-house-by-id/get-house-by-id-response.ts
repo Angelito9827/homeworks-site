@@ -7,6 +7,6 @@ export interface GetHouseByIdResponse {
     createdAt: Date;
     houseMembers: number;
     activeTasks: number;
-    profilePicture: string;
+    profileImage: string;
     isHouseAdmin: boolean;
 }

@@ -14,8 +14,9 @@ export class HousesAddComponent {
   user: string = '';
   form!: FormGroup;
   url: any = '';
+  imageSelected = false;
   request: CreateHouseRequest = {} as CreateHouseRequest;
-  attemptedSubmit: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,20 +37,35 @@ export class HousesAddComponent {
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       address: ['', [Validators.required]],
-      profileImage: [''],
+      profileImage: [''] // Control para la imagen de perfil
+    }, {
+      validator: this.imageValidator('profileImage') // Validador personalizado para la imagen
     });
   }
 
-  stablishRequest() {
-    this.request.name = this.form.get('name')?.value;
-    this.request.description = this.form.get('description')?.value;
-    this.request.address = this.form.get('address')?.value;
+  imageValidator(controlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      if (control.value instanceof FileList && control.value.length === 0) {
+        control.setErrors({ 'required': true });
+      }
+    };
+  }
+
+  stablishRequest(): FormData {
+    const formData = new FormData();
+    formData.append('name', this.form.get('name')?.value);
+    formData.append('description', this.form.get('description')?.value);
+    formData.append('address', this.form.get('address')?.value);
     const file = this.form.get('profileImage')?.value;
     if (file) {
-      const formData = new FormData();
       formData.append('profileImage', file);
-      this.request.profileImage = formData;
     }
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+    
+    return formData;
   }
 
   areAllStepsValid(): boolean {
@@ -57,22 +73,21 @@ export class HousesAddComponent {
   }
 
   onSelectFile(event: any) {
-    if (event && event.target && event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.readAsDataURL(event.target.files[0]);
-
-      reader.onload = (eventLoad) => {
-        if (eventLoad && eventLoad.target) {
-          this.url = eventLoad.target.result;
-          console.log(this.url);
-        }
+    const file = event.target.files[0]; // Obtiene el archivo directamente
+    if (file) {
+      this.imageSelected = true; // Indica que se ha seleccionado una imagen
+      const reader = new FileReader(); // Crea un lector de archivos
+      reader.readAsDataURL(file); // Lee el archivo como una URL
+      reader.onload = () => {
+        this.url = reader.result; // Establece la URL de la imagen
       };
+      this.form.get('profileImage')?.setValue(file); // Establece el valor como el archivo
     }
   }
 
-  public delete() {
-    this.url = null;
+  delete() {
+    this.url = null; // Elimina la URL de la imagen
+    this.form.get('profileImage')?.setValue(null); // Limpia el campo de la imagen
   }
 
   submitForm() {
@@ -86,11 +101,12 @@ export class HousesAddComponent {
       return;
     }
 
-    this.stablishRequest();
+    const formData = this.stablishRequest(); 
+    
     console.log('Request stablished');
     console.log('Request object:', this.request);
     this.houseService
-      .createHouse(this.request)
+      .createHouse(formData)
       .pipe()
       .subscribe({
         next: (response) => {
@@ -101,6 +117,7 @@ export class HousesAddComponent {
         },
       });
 
+      console.log(formData);
     this.router.navigate(['/houses']);
   }
 }

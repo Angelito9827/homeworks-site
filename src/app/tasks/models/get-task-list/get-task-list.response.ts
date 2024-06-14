@@ -3,7 +3,7 @@ import { TaskState } from "../task-status.enum";
 
 
 export interface GetTaskListResponse {
-    tasks: GetTaskListItemResponse[];
+    elements: GetTaskListItemResponse[];
     totalElements: number;
     page: number;
     pageSize: number;
@@ -16,8 +16,8 @@ export interface GetTaskListItemResponse {
     description: string;
     category: CategoryState;
     state: TaskState;
-    createdAt: Date;
-    finishDate: Date;
+    creationDate: Date;
+    deadlineDate: Date;
 
     // TODO: Hablar con ángel si esto debería ser una FK de la tabla users o no vamos a necesitar navegar tanto
     assignedTo: string;

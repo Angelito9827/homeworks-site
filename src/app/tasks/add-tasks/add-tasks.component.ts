@@ -56,12 +56,15 @@ export class AddTasksComponent implements OnInit {
     });
   }
 
-  stablishRequest() {
-    this.request.name = this.form.get('name')?.value;
-    this.request.description = this.form.get('description')?.value;
-    this.request.assignedTo = this.form.get('assignedTo')?.value;
-    this.request.categoryId = this.form.get('category')?.value;
-    this.request.finishDate = this.form.get('finishDate')?.value;
+  stablishRequest(): FormData {
+    const formData = new FormData();
+    formData.append('name', this.form.get('name')?.value);
+    formData.append('description', this.form.get('description')?.value);
+    formData.append('assignedTo', this.form.get('assignedTo')?.value);
+    formData.append('category', this.form.get('category')?.value);
+    formData.append('finishDate', this.form.get('finishDate')?.value);
+
+    return formData;
   }
 
   areAllStepsValid(): boolean {
@@ -79,11 +82,9 @@ export class AddTasksComponent implements OnInit {
       return;
     }
 
-    this.stablishRequest();
-    console.log('Request stablished');
-    console.log('Request object:', this.request);
+    const formData = this.stablishRequest(); 
 
-    this.taskService.createTask(this.request)
+    this.taskService.createTask(formData)
     .pipe()
     .subscribe({
       next: (response) => {

@@ -18,20 +18,21 @@ import { TaskChangeStateRequest } from '../../models/task-change-state/task-chan
 export class TaskService {
 
   baseUrl = environment.baseUrlApi;
+  apiUrl = environment.api;
   constructor(private httpClient: HttpClient) { }
 
 
   public get(request: GetTaskListRequest): Observable<GetTaskListResponse> {
 
     let queryParams = new HttpParams();
-    queryParams.set("page",request.page)
-    queryParams.set("pageSize",request.pageSize)
+    queryParams = queryParams.set("page", request.page.toString())
+    .set("pageSize", request.pageSize.toString());
 
-    return this.httpClient.get<GetTaskListResponse>(`${this.baseUrl}tasks`, { params: queryParams })
+    return this.httpClient.get<GetTaskListResponse>(`${this.apiUrl}task`, { params: queryParams })
   }
 
-  public createTask(request:CreateTaskRequest) {
-    return this.httpClient.post(`${this.baseUrl}tasks`, request)
+  public createTask(request:FormData) {
+    return this.httpClient.post(`${this.apiUrl}task`, request)
   }
 
   public getAllTasks(request:GetAllTasksRequest): Observable<GetAllTasksResponse> {

@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let task of response?.tasks; let i = index">
+      <ng-container *ngFor="let task of (response?.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }) ; let i = index">
         <tr
           [ngClass]="{
             'table-secondary': i % 2 !== 0,
@@ -24,7 +24,7 @@
           <td>{{ task.assignedTo }}</td>
           <td>{{ task.category }}</td>
           <td>{{ task.name }}</td>
-          <td>{{ task.finishDate | date }}</td>
+          <td>{{ task.deadlineDate | date }}</td>
           <td>{{state[task.state]}}</td>
           <td>
             <button class="btn btn-link" (click)="toggleDetails(i)">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="finishDate">
                   <p>Fecha de finalización:</p>
-                  <p>{{task.finishDate | date }}</p>
+                  <p>{{task.deadlineDate | date }}</p>
                 </div>
               </div>
             </div>
@@ -59,4 +59,6 @@
       </ng-container>
     </tbody>
   </table>
+  <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" "
+        nextLabel=" "></pagination-controls>
 </div>
