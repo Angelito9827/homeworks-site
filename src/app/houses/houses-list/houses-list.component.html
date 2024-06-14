@@ -2,12 +2,12 @@
   <h1 class="title">mis casas</h1>
   <div><button type="button" class="btn btn-primary" [routerLink]="['./','new']">Añadir casas +</button></div>
     <div *ngIf="response">
-      <div class="card" [routerLink]="[house.id]" *ngFor="let house of (response.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }) ; let i = index" [ngClass]="{'card-admin': house.isHouseAdmin}"> 
+      <div class="card" [routerLink]="[house.id]" *ngFor="let house of (response.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }) ; let i = index" [ngClass]="{'card-admin': house.isAdmin}"> 
         <div>
           <img [src]="house.profileImage" class="img-fluid" alt="Imagen">
         </div>
         <div class="card-body">
-          @if (house.isHouseAdmin) {
+          @if (house.isAdmin) {
             <i class="bi bi-person-check admin"> Admin</i>
           }
           <h5 class="card-title house-name">{{ house.name }}</h5>

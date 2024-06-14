@@ -15,5 +15,5 @@ export interface GetHouseListItemResponse {
     houseMembers: number;
     activeTasks: number;
     profileImage: string;
-    isHouseAdmin: boolean;
+    isAdmin: boolean;
 }

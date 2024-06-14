@@ -31,7 +31,7 @@
                     <div class="accordion-right">
                         <div class="state">{{state[activeTask.state]}}</div>
                         <div>
-                            <button *ngIf="houseResponse?.isHouseAdmin" type="button" class="btn btn-primary"
+                            <button *ngIf="houseResponse?.isAdmin" type="button" class="btn btn-primary"
                                 [routerLink]="['/tasks', 'house', houseResponse?.id, 'category', activeTask.categoryId, 'edit-delete-tasks']">
                                 Editar
                             </button>

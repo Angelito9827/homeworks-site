@@ -2,7 +2,7 @@
   <h1 class="title">{{houseResponse.name}}</h1>
   <div>
     <button
-      *ngIf="houseResponse.isHouseAdmin"
+      *ngIf="houseResponse.isAdmin"
       id="add-task"
       type="button"
       class="btn btn-primary"
@@ -14,7 +14,7 @@
   </div>
   <div class="container">
     <div class="container-left">
-        <div class="card" id="edit" [routerLink]="houseResponse.isHouseAdmin ? ['edit-delete'] : null">
+        <div class="card" id="edit" [routerLink]="houseResponse.isAdmin ? ['edit-delete'] : null">
           <div class="image-picture">
             <img
             [src]="houseResponse.profileImage"
@@ -87,11 +87,11 @@
                 <div class="house-member">
                   <p>{{ houseMember.name }}</p>
                 </div>
-                    <button *ngIf="houseResponse.isHouseAdmin" id="delete-member-house" type="button" class="btn btn-primary" (click)="deleteMemberByHouseId()">Eliminar</button>
+                    <button *ngIf="houseResponse.isAdmin" id="delete-member-house" type="button" class="btn btn-primary" (click)="deleteMemberByHouseId()">Eliminar</button>
                   </div>
                 </div>
               </div>
-              <div *ngIf="houseResponse.isHouseAdmin" class="modal-footer" [formGroup]="form">
+              <div *ngIf="houseResponse.isAdmin" class="modal-footer" [formGroup]="form">
               <div class="validator">
                 <input
                 class="add-email"

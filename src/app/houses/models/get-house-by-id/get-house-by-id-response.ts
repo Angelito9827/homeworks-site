@@ -8,5 +8,5 @@ export interface GetHouseByIdResponse {
     houseMembers: number;
     activeTasks: number;
     profileImage: string;
-    isHouseAdmin: boolean;
+    isAdmin: boolean;
 }
