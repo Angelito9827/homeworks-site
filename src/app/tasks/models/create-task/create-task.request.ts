@@ -1,9 +1,13 @@
+import { CategoryState } from "../category-status.enum";
+
 export interface CreateTaskRequest {
-  
-    name: string;
-    description: string;
-    deadlineDate: string; // Asegúrate de que el formato sea el esperado por tu backend
-    assignedTo: string;
-    categoryId: number;
-    houseId: number;
+  name:string;
+  description: string;
+  creationDate: Date;
+  deadlineDate: Date;
+  assignedTo: string;
+  assignedBy: string;
+  houseId: number;
+  categoryId: CategoryState;
+
 }

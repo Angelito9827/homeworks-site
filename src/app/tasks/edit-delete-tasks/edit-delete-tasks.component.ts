@@ -30,6 +30,7 @@ export class EditDeleteTasksComponent {
   taskResponse?: GetTaskByIdResponse;
   selectedAssignedTo: string = '';
   activeTasksResponse?: GetAllTasksListItemResponse;
+  id!: number;
 
   constructor(private formBuilder: FormBuilder,
     private taskService: TaskService,
@@ -43,11 +44,14 @@ export class EditDeleteTasksComponent {
   ngOnInit(): void {
     this.user = this.authService.getRole();
     this.activatedRoute.params.subscribe(params => {
+      this.id=params['categoryId'];
       this.createForm();
-      this.getHouseMembersByHouseId(params['id']);
+      this.getHouseMembersByHouseId(this.id);
       this.getCategories();
-      this.getTaskById(params['id']);
-      this.getHouseById(params['id'])
+      this.getTaskById(this.id);
+      this.getHouseById(this.id);
+     
+
     });
   }
 
@@ -62,6 +66,7 @@ export class EditDeleteTasksComponent {
   }
 
   stablishRequest() {
+    this.request.id=this.id;
     this.request.name = this.form.get('name')?.value;
     this.request.description = this.form.get('description')?.value;
     this.request.assignedTo = this.form.get('assignedTo')?.value;

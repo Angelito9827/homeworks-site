@@ -31,7 +31,7 @@ export class TaskService {
     return this.httpClient.get<GetTaskListResponse>(`${this.apiUrl}task`, { params: queryParams })
   }
 
-  public createTask(request:FormData) {
+  public createTask(request:CreateTaskRequest) {
     return this.httpClient.post(`${this.apiUrl}task`, request)
   }
 
@@ -52,7 +52,7 @@ export class TaskService {
   }
 
   public editTask(request: EditTaskRequest): Observable<GetAllTasksResponse> {
-    return this.httpClient.put<GetAllTasksResponse>(`${this.baseUrl}tasks`, request); 
+    return this.httpClient.put<GetAllTasksResponse>(`${this.apiUrl}task`, request); 
   }
 
   public deleteTaskById(request:GetTaskByIdRequest): Observable<GetTaskByIdResponse> {

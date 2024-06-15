@@ -24,6 +24,7 @@ export class AddTasksComponent implements OnInit {
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
   houseResponse?: GetHouseByIdResponse;
   categories: { label: string, value: number }[] = [];
+  houseId!: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +39,7 @@ export class AddTasksComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getRole();
     this.activatedRoute.params.subscribe(params => {
+      this.houseId=params['houseId'];
       this.createForm();
       this.getHouseMembersByHouseId(params['houseId']);
       this.getHouseById(params['houseId']);
@@ -55,23 +57,17 @@ export class AddTasksComponent implements OnInit {
     });
   }
 
-  stablishRequest(): FormData {
-    const formData = new FormData();
-    formData.append('name', this.form.get('name')?.value);
-    formData.append('description', this.form.get('description')?.value);
-    formData.append('assignedTo', this.form.get('assignedTo')?.value);
-    formData.append('category', this.form.get('category')?.value);
-    formData.append('deadlineDate', this.form.get('deadlineDate')?.value);
-    if (this.houseResponse) {
-      formData.append('houseId', this.houseResponse.id.toString());
-    }
-    formData.append('assignedBy', 'angel'); // Valor fijo para assignedBy
-    // Asegúrate de que `category` en el formulario es el ID de la categoría seleccionada
-    formData.append('categoryId', this.form.get('category')?.value.toString());
-    const creationDate = new Date().toISOString().slice(0, 10); // Formato YYYY-MM-DD
-    formData.append('creationDate', creationDate);
+  stablishRequest(){
+   
+    this.request.name=this.form.get('name')?.value;
+    this.request.description=this.form.get('description')?.value;
+    this.request.creationDate=new Date();
+    this.request.deadlineDate=this.form.get('deadlineDate')?.value;
+    this.request.assignedTo=this.form.get('assignedTo')?.value;
+    this.request.assignedBy='Ángel';
+    this.request.categoryId=this.form.get('category')?.value;
+    this.request.houseId=this.houseId;
 
-    return formData;
   }
 
   areAllStepsValid(): boolean {
@@ -89,9 +85,9 @@ export class AddTasksComponent implements OnInit {
       return;
     }
 
-    const formData = this.stablishRequest(); 
+    this.stablishRequest(); 
 
-    this.taskService.createTask(formData)
+    this.taskService.createTask(this.request)
     .pipe()
     .subscribe({
       next: (response) => {
@@ -102,7 +98,6 @@ export class AddTasksComponent implements OnInit {
       }
     });
 
-    console.log(formData);
     this.router.navigate(['/houses']);
   }
 
