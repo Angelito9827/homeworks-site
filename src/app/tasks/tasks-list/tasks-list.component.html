@@ -20,12 +20,12 @@
             'table-white': i % 2 === 0
           }"
         >
-          <td>{{ task.house.name }}</td>
-          <td>{{ task.assignedTo }}</td>
-          <td>{{ task.category.name }}</td>
-          <td>{{ task.name }}</td>
-          <td>{{ task.deadlineDate | date }}</td>
-          <td>{{state[task.state]}}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.house.name }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.assignedTo }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.category.name }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.name }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.deadlineDate | date }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ state[task.state] }}</td>
           <td>
             <button class="btn btn-link" (click)="toggleDetails(i)">
               <span *ngIf="!isExpanded(i)" class="fa fa-chevron-down"></span>
@@ -35,7 +35,7 @@
         </tr>
         <tr *ngIf="isExpanded(i)">
           <td colspan="7">
-            <div class="details">
+            <div class="details"  [ngClass]="{ 'text-gray': task.state === 4 }">
               <div class="container-right">
                 <div class="createdAt">
                   <p>Creado por: <strong>{{task.assignedBy}}</strong></p>

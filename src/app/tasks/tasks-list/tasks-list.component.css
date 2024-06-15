@@ -19,6 +19,10 @@
   background-color: #f8f9fa; /* Gris claro */
 }
 
+.text-gray {
+  color: rgb(167, 164, 164);
+}
+
 .table-white {
   background-color: #ffffff; /* Blanco */
 }
