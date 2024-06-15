@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg"  *ngIf="(user === 'user')">
+  <div class="container-fluid d-flex align-items-center justify-content-center">
+
+    <a class="btn" [routerLink]="['houses']" role="button">
+      <img src="assets/img/logo.png" class="img">
+    </a>
+
+  </div>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse align-items-center" id="navbarNav">
+    <div class="col">
+      <a class="btn" [routerLink]="['profile']" role="button">
+        <i class="bi bi-person-fill"></i>
+      </a>
+    </div>
+
+    <div class="col">
+      <a class="btn" [routerLink]="['houses']" role="button">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </div>
+
+    <div class="col">
+      <a class="btn" [routerLink]="['tasks']" role="button">
+        <i class="fa-solid fa-list-ul"></i>
+      </a>
+    </div>
+
+    <div class="col">
+      <a class="btn" href="https://github.com/Angelito9827/homeworks-site" role="button">
+        <i class="bi bi-github"></i>
+      </a>
+    </div>
+  </div>
+</nav>

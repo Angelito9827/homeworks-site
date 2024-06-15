@@ -1,0 +1,137 @@
+<div class="container-fluid" *ngIf="user === 'user' && houseResponse" [formGroup]="form">
+  <h1 class="title">editar casa</h1>
+  <div class="container-top">
+    <div class="container-left">
+      <div class="component1-container">
+        <div class="upload-container">
+          <label class="hoverable" for="fileInput">
+            <div class="image-container">
+              <img [src]="url ? url: houseResponse.profileImage" />
+            </div>
+            <div class="background"></div>
+          </label>
+          <input
+            id="fileInput"
+            type="file"
+            class="select-profile-picture"
+            (change)="onSelectFile($event)"
+            accept="image/*"
+            formControlName="profileImage"
+          />
+          <span class="message"
+            >Haz click aquí para cambiar la imagen de perfil</span
+          >
+        </div>
+        <button
+          id="delete-img"
+          class="btn btn-primary"
+          (click)="delete()"
+        >
+          eliminar
+        </button>
+      </div>
+    </div>
+    <div class="container-right">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="House Name"
+          [(ngModel)]="houseResponse.name"
+          id="house-name"
+          formControlName="name"
+        />
+        <label class="letras" for="floatingInput">Nombre de la casa</label>
+        <div
+          *ngIf="
+            form.get('name')?.touched && form.get('name')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="form.get('name')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="Address"
+          [(ngModel)]="houseResponse.address"
+          id="address"
+          formControlName="address"
+        />
+        <label class="letras" for="floatingInput">Dirección</label>
+        <div
+        *ngIf="form.get('address')?.touched && form.get('address')?.invalid"
+        class="text-danger"
+      >
+        <div *ngIf="form.get('address')?.errors?.['required']">
+          Este es un campo obligatorio.
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-bottom">
+    <div class="form-floating">
+      <textarea
+        class="form-control"
+        placeholder=".form-control-lg"
+        aria-label=".form-control-lg example"
+        [(ngModel)]="houseResponse.description"
+        id="description"
+        formControlName="description"
+      ></textarea>
+      <label class="letras" for="floatingTextarea">Descripción</label>
+      <div
+        *ngIf="
+          form.get('description')?.touched && form.get('description')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="form.get('description')?.errors?.['required']">
+          Este es un campo obligatorio.
+        </div>
+      </div>
+    </div>
+    <div class="botones">
+      <button
+        id="save"
+        type="button"
+        class="btn btn-primary"
+        (click)="saveForm()"
+      >
+        Guardar
+      </button>
+      <button
+        id="delete-house"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal" 
+        data-bs-target="#staticBackdrop"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Eliminar casa</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="x"></button>
+          </div>
+          <div class="modal-body">
+              <p>¿Estás seguro que deseas eliminar esta casa?<b>{{houseResponse?.name}}</b></p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" (click)="deleteHouseById()">Eliminar</button>
+          </div>
+      </div>
+  </div>
+</div>

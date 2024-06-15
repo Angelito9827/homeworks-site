@@ -1,0 +1,47 @@
+.container-fluid {
+    margin-top: 108px;
+    margin-bottom: 108px;
+    padding: 90px;
+    border-radius: 22px;
+    background: #d9d9d9;
+    display: flex;
+    align-content: center;
+    width: 80%;
+    height: auto;
+}
+
+.container {
+    background-color: #6499e9;
+    border-radius:  50px;
+    padding: 80px;
+    max-width: 400px; 
+    height: max-content;
+}
+
+.account {
+    text-align: center;
+    color: #213555;
+    font-size: 11pt;
+
+}
+
+.account a {
+    color: #213555;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn{
+    text-align: center;
+    align-self: center;
+}
+
+
+
+
+@media (max-width: 768px) {
+
+    .login-form{
+        padding: 50px;
+    }
+}

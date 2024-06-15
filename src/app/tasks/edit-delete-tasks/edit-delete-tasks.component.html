@@ -1,0 +1,154 @@
+<div class="container-fluid" *ngIf="user === 'user' && taskResponse" [formGroup]="form">
+  <h1 class="title">editar tarea</h1>
+  <div class="container">
+    <div class="container-left">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Task Name"
+          [(ngModel)]="taskResponse.name"
+          id="task-name"
+          formControlName="name"
+        />
+        <label class="letras" for="floatingInput">Nombre de la tarea</label>
+        <div
+          *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('name')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating">
+        <select
+          class="form-select"
+          formControlName="assignedTo"
+          [(ngModel)]="taskResponse.assignedTo"
+        >
+          <option value="{{ selectedAssignedTo }}" selected>
+            {{ selectedAssignedTo }}
+          </option>
+          <option
+            *ngFor="let houseMember of houseMembersResponse?.houseMembers"
+            [value]="houseMember.id"
+          >
+            {{ houseMember.name }}
+          </option>
+        </select>
+        <label class="letras" for="assignedTo">Asignar a</label>
+        <div
+          *ngIf="
+            form.get('assignedTo')?.touched && form.get('assignedTo')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="form.get('assignedTo')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating">
+        <select
+          class="form-select"
+          formControlName="category"
+          [(ngModel)]="taskResponse.category"
+        >
+          <option *ngFor="let category of categories" [value]="category.value">
+            {{ category.label }}
+          </option>
+        </select>
+        <label class="letras" for="category">Categoría</label>
+        <div
+          *ngIf="form.get('category')?.touched && form.get('category')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="form.get('category')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="date"
+          class="form-control"
+          id="deadlineDate"
+          placeholder="deadlineDate"
+          formControlName="deadlineDate"
+          min="{{ getMinDate() }}"
+        />
+        <label for="deadlineDate">Fecha de realización</label>
+        <div
+          *ngIf="
+            form.get('deadlineDate')?.touched && form.get('deadlineDate')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="form.get('deadlineDate')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-right">
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          placeholder="Leave a comment here"
+          [(ngModel)]="taskResponse.description"
+          id="description"
+          formControlName="description"
+        ></textarea>
+        <label class="letras" for="floatingTextarea">Descripción</label>
+        <div
+          *ngIf="
+            form.get('description')?.touched && form.get('description')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="form.get('description')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
+      </div>
+      <div class="botones">
+        <button
+          id="save"
+          type="button"
+          class="btn btn-primary"
+          (click)="saveForm()"
+        >
+          Guardar
+        </button>
+        <button
+          id="delete-house"
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal" 
+          data-bs-target="#staticBackdrop"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Eliminar tarea</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="x"></button>
+          </div>
+          <div class="modal-body">
+              <p>¿Estás seguro que deseas eliminar esta tarea? {{taskResponse?.name}}</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" (click)="deleteTaskById()">Eliminar</button>
+          </div>
+      </div>
+  </div>
+</div>

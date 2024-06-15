@@ -1,0 +1,64 @@
+<div class="container-fluid" *ngIf="(user === 'user')">
+  <h1 class="title">lista de tareas</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>CASAS</th>
+        <th>ASIGNADO A</th>
+        <th>CATEGORÍA</th>
+        <th>TAREA</th>
+        <th>FECHA</th>
+        <th>ESTADO</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let task of (response?.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page+1, totalItems:request.totalCount}) ; let i = index">
+        <tr
+          [ngClass]="{
+            'table-secondary': i % 2 !== 0,
+            'table-white': i % 2 === 0
+          }"
+        >
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.house.name }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.assignedTo }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.category.name }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.name }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ task.deadlineDate | date }}</td>
+        <td [ngClass]="{ 'text-gray': task.state === 4 }">{{ state[task.state] }}</td>
+          <td>
+            <button class="btn btn-link" (click)="toggleDetails(i)">
+              <span *ngIf="!isExpanded(i)" class="fa fa-chevron-down"></span>
+              <span *ngIf="isExpanded(i)" class="fa fa-chevron-up"></span>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="isExpanded(i)">
+          <td colspan="7">
+            <div class="details"  [ngClass]="{ 'text-gray': task.state === 4 }">
+              <div class="container-right">
+                <div class="createdAt">
+                  <p>Creado por: <strong>{{task.assignedBy}}</strong></p>
+                </div>
+                <div class="description">
+                  <p>Descripción: {{ task.description }}</p>
+                </div>
+              </div>
+              <div class="container-left">
+                <div class="state">
+                  <button *ngIf="task.state!==4" id="change" type="button" class="btn btn-primary" (click)="changeStateOnClick(task)">{{state[task.state+1]}}</button>
+                </div>
+                <div class="finishDate">
+                  <p>Fecha de finalización:</p>
+                  <p>{{task.deadlineDate | date }}</p>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" "
+        nextLabel=" "></pagination-controls>
+</div>

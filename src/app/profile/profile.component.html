@@ -1,0 +1,107 @@
+<div
+  class="container-fluid"
+  *ngIf="user === 'user' && perfilResponse"
+>
+  <h1 class="title">perfil</h1>
+  <div class="container">
+    <div class="container-left">
+      <div class="upload-container">
+        <div class="image-container">
+          <img [src]="url ? url : perfilResponse.profilePicture" />
+        </div>
+        <div
+          id="file"
+          type="file"
+          class="select-profile-picture"
+          formControlName="profilePicture"
+        ></div>
+      </div>
+      <div
+        class="card"
+        id="nick-name"
+      ><h5 class="card-title mb-2 text-body-secondary">Nombre de usuario</h5>
+      {{perfilResponse.nickName}}
+      </div>
+    </div>
+    <div class="container-right">
+      <div class="card"
+          id="name">
+        <h5 class="card-title mb-2 text-body-secondary">Nombre</h5>
+        {{perfilResponse.name}}
+      </div>
+      <div class="card"
+          id="last-name"
+        >
+        <h5 class="card-title mb-2 text-body-secondary">Apellidos</h5>
+        {{perfilResponse.lastName}}
+      </div>
+      <div class="card"
+          id="email"
+        >
+        <h5 class="card-title mb-2 text-body-secondary">Email</h5>
+        {{perfilResponse.email}}
+      </div>
+      <div class="card"
+          id="tlf"
+        >
+        <h5 class="card-title mb-2 text-body-secondary">Numero de tlf.</h5>
+        {{perfilResponse.tlf}}
+      </div>
+    </div>
+  </div>
+  <div class="botones">
+    <button
+      id="editBt"
+      type="button"
+      class="btn btn-primary"
+      [routerLink]="['edit-delete-profile']"
+    >
+      Editar
+    </button>
+    <button
+      id="logOut"
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Cerrar Sesión
+    </button>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cerrar Sesión</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="x"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro que deseas cerrar sesión?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="logOut()">
+          Aceptar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
