@@ -21,10 +21,8 @@ export class EditDeleteTasksComponent {
   user: string = '';
   form!: FormGroup;
   url: any = '';
-  fieldErrors: { [key: string]: boolean } = {};
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
   houseResponse?:GetHouseByIdResponse;
-  attemptedSubmit: boolean = false;
   categories: { label: string, value: number }[] = [];
   request: EditTaskRequest = {} as EditTaskRequest;
   taskResponse?: GetTaskByIdResponse;
@@ -43,6 +41,7 @@ export class EditDeleteTasksComponent {
 
   ngOnInit(): void {
     this.user = this.authService.getRole();
+    
     this.activatedRoute.params.subscribe(params => {
       this.id=params['categoryId'];
       this.createForm();
@@ -50,8 +49,6 @@ export class EditDeleteTasksComponent {
       this.getCategories();
       this.getTaskById(this.id);
       this.getHouseById(this.id);
-     
-
     });
   }
 
@@ -63,6 +60,7 @@ export class EditDeleteTasksComponent {
       category: ['', [Validators.required]],
       deadlineDate: ['', [Validators.required]]
     });
+    this.form.get('deadlineDate')?.setValue(this.getMinDate());
   }
 
   stablishRequest() {
@@ -132,9 +130,12 @@ export class EditDeleteTasksComponent {
       next: (response: GetTaskByIdResponse) => {
         this.taskResponse = response;
         this.selectedAssignedTo = this.taskResponse.assignedTo;
+        console.log("deadline", this.taskResponse.deadlineDate);
       }
     })
    }
+
+  
 
   private getCategories() {
     this.categories = Object.keys(CategoryState)
