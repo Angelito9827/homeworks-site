@@ -2,13 +2,25 @@ import { TaskState } from "../task-status.enum";
 
 export interface GetTaskByIdResponse {
     id:number;
-    house: string;
     name: string;
     description: string;
-    category: number;
     state: TaskState;
+    creationDate: Date;
+    deadlineDate: Date;
     assignedTo: string;
     assignedBy: string;
-    createdAt: Date;
-    finishDate: Date;
+    category:{
+        id: number;
+        name: string;
+        description: string;
+        icon: string;
+    }
+    house:{
+        id: number;
+        name: string;
+        description: string;
+        address: string;
+        profileImage: string;
+    }
+   
 }

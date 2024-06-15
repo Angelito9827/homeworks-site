@@ -12,7 +12,8 @@ import { AuthService } from '../../auth/services/auth.service';
 export class HousesListComponent {
   user: string = '';
   response?: GetHouseListResponse;
-  request: GetHouseListRequest = { page: 0, pageSize: 5 };
+  request: GetHouseListRequest = { page: 0, pageSize: 5, totalCount: 40 };
+
 
   constructor(
     private houseService: HouseService,
@@ -32,12 +33,13 @@ export class HousesListComponent {
         next: (response: GetHouseListResponse) => {
           console.log(response);
           this.response = response;
+        
         },
       });
   }
 
   onPageChange(page: number) {
-    // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
-    this.request.page = page;
+    this.request.page = page - 1;
+    this.getHousesList();
   }
 }

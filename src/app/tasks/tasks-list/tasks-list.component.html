@@ -13,19 +13,19 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let task of (response?.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }) ; let i = index">
+      <ng-container *ngFor="let task of (response?.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page, totalItems:request.totalCount}) ; let i = index">
         <tr
           [ngClass]="{
             'table-secondary': i % 2 !== 0,
             'table-white': i % 2 === 0
           }"
         >
-          <td>{{ task.house }}</td>
+          <td>{{ task.house.name }}</td>
           <td>{{ task.assignedTo }}</td>
-          <td>{{ task.category }}</td>
+          <td>{{ task.category.name }}</td>
           <td>{{ task.name }}</td>
           <td>{{ task.deadlineDate | date }}</td>
-          <td>{{state[task.state]}}</td>
+          <td>{{task.state}}</td>
           <td>
             <button class="btn btn-link" (click)="toggleDetails(i)">
               <span *ngIf="!isExpanded(i)" class="fa fa-chevron-down"></span>
@@ -46,7 +46,7 @@
               </div>
               <div class="container-left">
                 <div class="state">
-                  <button *ngIf="task.state!==4" id="change" type="button" class="btn btn-primary" (click)="changeStateOnClick(task.state, task.id)">{{state[task.state]}}</button>
+                  <button *ngIf="task.state!==4" id="change" type="button" class="btn btn-primary" (click)="changeStateOnClick(task.state, task.id)">{{task.state}}</button>
                 </div>
                 <div class="finishDate">
                   <p>Fecha de finalización:</p>

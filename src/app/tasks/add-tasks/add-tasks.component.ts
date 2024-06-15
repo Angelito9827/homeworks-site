@@ -23,7 +23,6 @@ export class AddTasksComponent implements OnInit {
   request: CreateTaskRequest = {} as CreateTaskRequest;
   houseMembersResponse?: GetHouseMemberListByHouseIdResponse;
   houseResponse?: GetHouseByIdResponse;
-  attemptedSubmit: boolean = false;
   categories: { label: string, value: number }[] = [];
 
   constructor(
@@ -52,7 +51,7 @@ export class AddTasksComponent implements OnInit {
       description: ['', [Validators.required]],
       assignedTo: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      finishDate: ['', [Validators.required]]
+      deadlineDate: ['', [Validators.required]]
     });
   }
 
@@ -62,7 +61,15 @@ export class AddTasksComponent implements OnInit {
     formData.append('description', this.form.get('description')?.value);
     formData.append('assignedTo', this.form.get('assignedTo')?.value);
     formData.append('category', this.form.get('category')?.value);
-    formData.append('finishDate', this.form.get('finishDate')?.value);
+    formData.append('deadlineDate', this.form.get('deadlineDate')?.value);
+    if (this.houseResponse) {
+      formData.append('houseId', this.houseResponse.id.toString());
+    }
+    formData.append('assignedBy', 'angel'); // Valor fijo para assignedBy
+    // Asegúrate de que `category` en el formulario es el ID de la categoría seleccionada
+    formData.append('categoryId', this.form.get('category')?.value.toString());
+    const creationDate = new Date().toISOString().slice(0, 10); // Formato YYYY-MM-DD
+    formData.append('creationDate', creationDate);
 
     return formData;
   }
@@ -95,6 +102,7 @@ export class AddTasksComponent implements OnInit {
       }
     });
 
+    console.log(formData);
     this.router.navigate(['/houses']);
   }
 

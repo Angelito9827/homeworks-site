@@ -1,6 +1,6 @@
 export interface GetHouseListResponse {
     elements: GetHouseListItemResponse[];
-    totalElements: number;
+    totalCount: number;
     page: number;
     pageSize: number;
 }

@@ -57,7 +57,7 @@ export class EditDeleteTasksComponent {
       description: ['', [Validators.required]],
       assignedTo: ['', [Validators.required]],
       category: ['', [Validators.required]],
-      finishDate: ['', [Validators.required]]
+      deadlineDate: ['', [Validators.required]]
     });
   }
 
@@ -66,7 +66,7 @@ export class EditDeleteTasksComponent {
     this.request.description = this.form.get('description')?.value;
     this.request.assignedTo = this.form.get('assignedTo')?.value;
     this.request.categoryId = this.form.get('category')?.value;
-    this.request.finishDate = this.form.get('finishDate')?.value;
+    this.request.deadlineDate = this.form.get('deadlineDate')?.value;
   }
 
   areAllStepsValid(): boolean {

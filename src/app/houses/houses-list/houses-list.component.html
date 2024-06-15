@@ -2,7 +2,7 @@
   <h1 class="title">mis casas</h1>
   <div><button type="button" class="btn btn-primary" [routerLink]="['./','new']">Añadir casas +</button></div>
     <div *ngIf="response">
-      <div class="card" [routerLink]="[house.id]" *ngFor="let house of (response.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page }) ; let i = index" [ngClass]="{'card-admin': house.isAdmin}"> 
+      <div class="card" [routerLink]="[house.id]" *ngFor="let house of (response.elements  | paginate: { itemsPerPage: request.pageSize, currentPage: request.page, totalItems: request.totalCount}) ; let i = index" [ngClass]="{'card-admin': house.isAdmin}"> 
         <div>
           <img [src]="house.profileImage" class="img-fluid" alt="Imagen">
         </div>
@@ -17,5 +17,5 @@
       </div>
     </div>  
     <pagination-controls class="custom-pagination" (pageChange)="onPageChange($event)" previousLabel=" "
-        nextLabel=" "></pagination-controls>
+        nextLabel=" " ></pagination-controls>
 </div>

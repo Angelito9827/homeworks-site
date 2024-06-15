@@ -141,15 +141,15 @@
           'house',
           houseResponse.id,
           'category',
-          activeTask.categoryId
+          activeTask.category.id
         ]"
       >
         <div class="image-icon">
-          <img [src]="activeTask.icon" class="icon" alt="Imagen" />
+          <img [src]="activeTask.category.icon" class="icon" alt="Imagen" />
         </div>
         <div class="card-category">
           <div class="house-category">
-            <p>{{categories[activeTask.categoryId] }}</p>
+            <p>{{categories[activeTask.category.id] }}</p>
           </div>
           <div class="house-active-tasks">
             <span>{{ activeTask.totalActiveTasks }} tareas activas</span>

@@ -42,16 +42,16 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Perfil NickName"
+          placeholder="Perfil username"
           id="perfil-nick-name"
-          formControlName="nickName"
+          formControlName="username"
         />
         <label class="letras" for="floatingInput">Nick Name</label>
         <div
-          *ngIf="form.get('nickName')?.touched && form.get('nickName')?.invalid"
+          *ngIf="form.get('username')?.touched && form.get('username')?.invalid"
           class="text-danger"
         >
-          <div *ngIf="form.get('nickName')?.errors?.['required']">
+          <div *ngIf="form.get('username')?.errors?.['required']">
             Este es un campo obligatorio.
           </div>
         </div>

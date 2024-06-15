@@ -1,5 +1,5 @@
 <div class="container-fluid" *ngIf="(user === 'user')">
-    <h1 class="title" *ngFor="let activeTask of activeTasksResponse?.tasks">{{categories[this.activeTask.categoryId] }}</h1>
+    <h1 class="title">Tareas Activas</h1>
     <div class="accordion" id="accordionExample" *ngIf="activeTasksResponse">
         <div class="accordion-item" *ngFor="let activeTask of activeTasksResponse.tasks; let i = index">
             <h2 class="accordion-header">
@@ -14,7 +14,7 @@
                         <div class="data-container">
                             <div class="name">{{activeTask.name}}</div>
                             <div class="assignedTo-name">{{activeTask.assignedTo}}</div>
-                            <div class="date">{{activeTask.finishDate | date}}</div>
+                            <div class="date">{{activeTask.deadlineDate | date}}</div>
                         </div>
                     </div>
                 </button>
@@ -32,7 +32,7 @@
                         <div class="state">{{state[activeTask.state]}}</div>
                         <div>
                             <button *ngIf="houseResponse?.isAdmin" type="button" class="btn btn-primary"
-                                [routerLink]="['/tasks', 'house', houseResponse?.id, 'category', activeTask.categoryId, 'edit-delete-tasks']">
+                                [routerLink]="['/tasks', 'house', houseResponse?.id, 'category', activeTask.category.id, 'edit-delete-tasks']">
                                 Editar
                             </button>
                         </div>

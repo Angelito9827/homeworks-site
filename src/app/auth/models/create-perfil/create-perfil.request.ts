@@ -1,7 +1,7 @@
 export interface CreatePerfilRequest {
     name:string;
     lastName:string;
-    nickName:string;
+    userName:string;
     email:string;
     tlf:number;
     password:string;

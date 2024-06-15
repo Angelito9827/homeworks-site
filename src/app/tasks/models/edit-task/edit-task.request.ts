@@ -3,6 +3,6 @@ export interface EditTaskRequest {
     name: string;
     assignedTo: number;
     categoryId: number;
-    finishDate: Date;
+    deadlineDate: Date;
     description: string;
 }

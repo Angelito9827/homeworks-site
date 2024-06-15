@@ -128,7 +128,7 @@ export class HouseEditDeleteComponent {
     deleteHouseById() {
       console.log('Casa eliminada');
       this.houseService
-      .deleteHouseById(this.request)
+      .deleteHouseById({id:this.id!})
       .pipe()
       .subscribe({
         next: (houseResponse) => {

@@ -1,10 +1,9 @@
 export interface CreateTaskRequest {
-    house: string;
+  
     name: string;
-    description?: string;
-    finishDate: Date;
-    assignedTo: number;
-    //FKs
+    description: string;
+    deadlineDate: string; // Asegúrate de que el formato sea el esperado por tu backend
+    assignedTo: string;
     categoryId: number;
     houseId: number;
 }

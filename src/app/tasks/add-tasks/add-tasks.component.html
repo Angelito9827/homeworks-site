@@ -22,11 +22,12 @@
       </div>
       <div class="form-floating">
         <select class="form-select" formControlName="assignedTo">
+          <option value="" disabled>Selecciona un miembro de la casa</option>
           <option
             *ngFor="let houseMember of houseMembersResponse?.houseMembers"
             [value]="houseMember.id"
           >
-            {{ houseMember.lastName }}
+            {{ houseMember.name }}
           </option>
         </select>
         <label class="letras" for="assignedTo">Asignar a</label>
@@ -43,7 +44,7 @@
       </div>
       <div class="form-floating">
         <select class="form-select" formControlName="category">
-          <option value="" selected></option>
+          <option value="" disabled>Selecciona una categoría</option>
           <option *ngFor="let category of categories" [value]="category.value">
             {{ category.label }}
           </option>
@@ -64,17 +65,17 @@
           class="form-control"
           id="finishDate"
           placeholder="05/06/2023"
-          formControlName="finishDate"
+          formControlName="deadlineDate"
           min="{{ getMinDate() }}"
         />
-        <label for="finishDate">Fecha de realización</label>
+        <label for="deadlineDate">Fecha de realización</label>
         <div
           *ngIf="
-            form.get('finishDate')?.touched && form.get('finishDate')?.invalid
+            form.get('deadlineDate')?.touched && form.get('deadlineDate')?.invalid
           "
           class="text-danger"
         >
-          <div *ngIf="form.get('finishDate')?.errors?.['required']">
+          <div *ngIf="form.get('deadlineDate')?.errors?.['required']">
             Este es un campo obligatorio.
           </div>
         </div>

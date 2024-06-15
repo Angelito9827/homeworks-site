@@ -5,17 +5,30 @@ export interface GetAllTasksResponse {
 }
 
 export interface GetAllTasksListItemResponse {
+    totalActiveTasks: number;
+    assignedToImage: string;
     id:number;
-    house: string;
     name: string;
     description: string;
-    categoryId: number;
-    totalActiveTasks: number;
     state: TaskState;
+    creationDate: Date;
+    deadlineDate: Date;
+
     assignedTo: string;
-    assignedToImage: string;
     assignedBy: string;
-    createdAt: Date;
-    finishDate: Date;
-    icon: FormData;
+
+    category:{
+        id: number;
+        name: string;
+        description: string;
+        icon: FormData;
+    }
+  
+    house:{
+        id: number;
+        name: string;
+        description: string;
+        address: string;
+        profileImage: string;
+    }
 }

@@ -18,7 +18,7 @@ export class TasksListComponent {
   user: string = '';
   state = TaskState;
   response?: GetTaskListResponse;
-  request: GetTaskListRequest = { page: 0, pageSize: 12 };
+  request: GetTaskListRequest = { page: 0, pageSize: 12, totalCount:0 };
 
 
   constructor(private taskService: TaskService, private authService: AuthService) {}
@@ -36,6 +36,7 @@ export class TasksListComponent {
         next: (response: GetTaskListResponse) => {
           console.log(response);
           this.response = response;
+          this.request.totalCount = response.totalCount;
           //this.dataSource.data = this.response.tasks;
         },
       });

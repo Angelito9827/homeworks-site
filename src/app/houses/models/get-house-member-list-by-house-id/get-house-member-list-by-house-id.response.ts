@@ -5,6 +5,5 @@ export interface GetHouseMemberListByHouseIdResponse {
 export interface GetHouseMemberListItemByHouseIdResponse {
     id: number;
     name: string;
-    lastName: string;
     profileImage: string;
 }

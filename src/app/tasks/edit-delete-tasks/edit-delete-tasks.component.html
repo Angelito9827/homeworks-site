@@ -73,20 +73,20 @@
         <input
           type="date"
           class="form-control"
-          id="finishDate"
+          id="deadlineDate"
           placeholder="05/06/2023"
-          [(ngModel)]="taskResponse.finishDate"
-          formControlName="finishDate"
+          [(ngModel)]="taskResponse.deadlineDate"
+          formControlName="deadlineDate"
           min="{{ getMinDate() }}"
         />
-        <label for="finishDate">Fecha de realización</label>
+        <label for="deadlineDate">Fecha de realización</label>
         <div
           *ngIf="
-            form.get('finishDate')?.touched && form.get('finishDate')?.invalid
+            form.get('deadlineDate')?.touched && form.get('deadlineDate')?.invalid
           "
           class="text-danger"
         >
-          <div *ngIf="form.get('finishDate')?.errors?.['required']">
+          <div *ngIf="form.get('deadlineDate')?.errors?.['required']">
             Este es un campo obligatorio.
           </div>
         </div>

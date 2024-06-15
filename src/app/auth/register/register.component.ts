@@ -48,7 +48,7 @@ export class RegisterComponent {
   stablishRequest() {
     this.request.name = this.form.get('name')?.value;
     this.request.lastName = this.form.get('lastName')?.value;
-    this.request.nickName = this.form.get('nickName')?.value;
+    this.request.userName = this.form.get('nickName')?.value;
     this.request.email = this.form.get('email')?.value;
     this.request.tlf = this.form.get('tlf')?.value;
     this.request.password = this.form.get('password')?.value;
