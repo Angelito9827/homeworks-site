@@ -12,45 +12,53 @@ import { CategoryState } from '../models/category-status.enum';
 @Component({
   selector: 'app-active-tasks',
   templateUrl: './active-tasks.component.html',
-  styleUrl: './active-tasks.component.css'
+  styleUrls: ['./active-tasks.component.css']
 })
 export class ActiveTasksComponent {
-  user: string = '';
-  state = TaskState;
-  activeTasksResponse?: GetAllTasksResponse;
-  houseResponse?: GetHouseByIdResponse;
-  categories=CategoryState;
+  user: string = ''; // Variable para almacenar el rol del usuario
+  state = TaskState; // Enumeración para los estados de las tareas
+  activeTasksResponse?: GetAllTasksResponse; // Variable para almacenar la respuesta de tareas activas
+  houseResponse?: GetHouseByIdResponse; // Variable para almacenar la respuesta de la casa
+  categories = CategoryState; // Enumeración para los estados de las categorías de tareas
 
-  constructor(private activatedRoute: ActivatedRoute, private taskService: TaskService, private houseService:HouseService, private authService: AuthService) 
-  {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private taskService: TaskService,
+    private houseService: HouseService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.user = this.authService.getRole();
+    this.user = this.authService.getRole(); // Obtiene el rol del usuario del servicio de autenticación
     this.activatedRoute.params.subscribe(params => {
-      const houseId = params['houseId'];
-      const categoryId = params['categoryId'];
-      this.getHouseById(houseId);
-      this.getTasks(houseId, categoryId);
-    })
-  }
-
-  private getTasks (houseId:number, categoryId:number) {
-    let request: GetAllTasksRequest = {houseId:houseId, categoryId:categoryId, taskState:TaskState.IN_PROGRESS}
-    this.taskService.getAllTasks(request)
-    .pipe()
-    .subscribe({
-      next: (response: GetAllTasksResponse) => {
-        this.activeTasksResponse = response;
-      }
-    })
-  }
-
-  private getHouseById(houseId: number) {
-    this.houseService.getHouseById({ id: houseId }).subscribe({
-      next: (response: GetHouseByIdResponse) => {
-        this.houseResponse = response;
-      }
+      const houseId = params['houseId']; // Obtiene el ID de la casa de los parámetros de la ruta
+      const categoryId = params['categoryId']; // Obtiene el ID de la categoría de los parámetros de la ruta
+      this.getHouseById(houseId); // Obtiene los detalles de la casa por su ID
+      this.getTasks(houseId, categoryId); // Obtiene las tareas activas según el ID de la casa y la categoría
     });
   }
 
+  private getTasks(houseId: number, categoryId: number) {
+    let request: GetAllTasksRequest = {
+      houseId: houseId,
+      categoryId: categoryId,
+      taskState: TaskState.IN_PROGRESS // Filtra las tareas en estado "en progreso"
+    };
+    this.taskService.getAllTasks(request)
+      .pipe()
+      .subscribe({
+        next: (response: GetAllTasksResponse) => {
+          this.activeTasksResponse = response; // Almacena la respuesta de las tareas activas
+        }
+      });
+  }
+
+  private getHouseById(houseId: number) {
+    this.houseService.getHouseById({ id: houseId })
+      .subscribe({
+        next: (response: GetHouseByIdResponse) => {
+          this.houseResponse = response; // Almacena la respuesta de la casa
+        }
+      });
+  }
 }

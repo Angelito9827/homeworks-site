@@ -1,4 +1,4 @@
-export interface GetPerfilByIdResposne {
+export interface GetPerfilByIdResponse {
     id: number;
     nickName: string;
     profilePicture: string;
