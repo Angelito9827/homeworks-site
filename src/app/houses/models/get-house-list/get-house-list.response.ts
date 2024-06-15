@@ -1,6 +1,6 @@
 export interface GetHouseListResponse {
-    houses: GetHouseListItemResponse[];
-    totalElements: number;
+    elements: GetHouseListItemResponse[];
+    totalCount: number;
     page: number;
     pageSize: number;
 }
@@ -14,6 +14,6 @@ export interface GetHouseListItemResponse {
     createdAt: Date;
     houseMembers: number;
     activeTasks: number;
-    profilePicture: string;
-    isHouseAdmin: boolean;
+    profileImage: string;
+    isAdmin: boolean;
 }

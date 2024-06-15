@@ -1,0 +1,41 @@
+<main class="container-fluid">
+  <div class="container">
+    <form>
+      <div class="form-floating mb-3">
+        <input
+          type="email"
+          [(ngModel)]="email"
+          class="form-control"
+          name="username"
+          id="username"
+          placeholder="name@example.com"
+          required
+        />
+        <label for="floatingInput">Email</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          [(ngModel)]="password"
+          class="form-control"
+          name="password"
+          id="password"
+          placeholder="Password"
+          required
+        />
+        <label for="floatingPassword">Password</label>
+      </div>
+      <p class="account mt-3">
+        ¿No tienes cuenta? <a [routerLink]="['../register']">Regístrate</a>
+      </p>
+      <div class="d-grid gap-2">
+        <button type="submit" (click)="login()" class="btn btn-dark">
+          LOGIN
+        </button>
+      </div>
+      <div *ngIf="error" class="alert alert-danger mt-3" role="alert">
+        {{ error }}
+      </div>
+    </form>
+  </div>
+</main>

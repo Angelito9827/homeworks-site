@@ -7,6 +7,11 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { ActiveTasksComponent } from './active-tasks/active-tasks.component';
+import { AddTasksComponent } from './add-tasks/add-tasks.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditDeleteTasksComponent } from './edit-delete-tasks/edit-delete-tasks.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -14,6 +19,9 @@ import { MatCardModule } from '@angular/material/card';
   declarations: [
     TasksComponent,
     TasksListComponent,
+    ActiveTasksComponent,
+    AddTasksComponent,
+    EditDeleteTasksComponent,
 
   ],
   imports: [
@@ -21,7 +29,10 @@ import { MatCardModule } from '@angular/material/card';
     TasksRoutingModule,
     MatPaginatorModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    NgxPaginationModule,
+    ReactiveFormsModule
   ]
 })
 export class TasksModule { }

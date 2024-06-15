@@ -1,79 +1,137 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="user === 'user' && houseResponse" [formGroup]="form">
+  <h1 class="title">editar casa</h1>
+  <div class="container-top">
     <div class="container-left">
       <div class="component1-container">
         <div class="upload-container">
           <label class="hoverable" for="fileInput">
             <div class="image-container">
-              <img [src]="url ? url : 'assets/img/photo_camera.png'" />
+              <img [src]="url ? url: houseResponse.profileImage" />
             </div>
             <div class="background"></div>
           </label>
           <input
-          id="fileInput"
-          type="file"
-          [(ngModel)]="url"
-          class="select-profile-picture"
-          (change)="onSelectFile($event)"
-          accept="image/*"
+            id="fileInput"
+            type="file"
+            class="select-profile-picture"
+            (change)="onSelectFile($event)"
+            accept="image/*"
+            formControlName="profileImage"
           />
-          <span class="message">Haz click aquí para seleccionar una imagen</span>
+          <span class="message"
+            >Haz click aquí para cambiar la imagen de perfil</span
+          >
         </div>
-        <button id="delete-img" class="btn btn-primary" *ngIf="url" (click)="delete()">eliminar</button>
-      </div>
-      
-      <div class="component2-container">
-        <div class="upload-container" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <div class="image-container">
-            <img src="assets/img/person.png"/>
-          </div>
-          <span class="message">Haz click aquí para añadir un Participante</span>
-        </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="truepuedes ">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1>Invitar participantes</h1>
-                <button id="x" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body" [formGroup]="form">
-                <div class="validator">
-                  <input class="add-email" type="email" placeholder="Introduce un email válido" formControlName="email" required>
-                  <div *ngIf="shouldShowError()" class="text-danger">Este es un campo obligatorio</div>
-                  <div *ngIf="this.form.get('email')?.errors?.['email']" class="text-danger">El email introducido no es válido</div>
-                </div>
-                <select id="select" class="form-select" aria-label="Default select example">
-                  <option selected value="1">Participante</option>
-                  <option value="2">Administrador</option>
-                </select>
-                <button id="add" type="button" class="btn btn-primary" (click)="validateEmail()">invitar</button>
-              </div>
-              <div class="modal-footer">
-                <h1>Participantes</h1>
-                <div class="members-list"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <button
+          id="delete-img"
+          class="btn btn-primary"
+          (click)="delete()"
+        >
+          eliminar
+        </button>
       </div>
     </div>
-  
     <div class="container-right">
       <div class="form-floating">
-        <input type="text" class="form-control" placeholder="House Name" id="house-name">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="House Name"
+          [(ngModel)]="houseResponse.name"
+          id="house-name"
+          formControlName="name"
+        />
         <label class="letras" for="floatingInput">Nombre de la casa</label>
+        <div
+          *ngIf="
+            form.get('name')?.touched && form.get('name')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="form.get('name')?.errors?.['required']">
+            Este es un campo obligatorio.
+          </div>
+        </div>
       </div>
       <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="description"></textarea>
-        <label class="letras" for="floatingTextarea">Descripción</label>
-      </div>
-      <div class="form-floating">
-        <input type="text" class="form-control" placeholder="Address" id="direction">
+        <input
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="Address"
+          [(ngModel)]="houseResponse.address"
+          id="address"
+          formControlName="address"
+        />
         <label class="letras" for="floatingInput">Dirección</label>
+        <div
+        *ngIf="form.get('address')?.touched && form.get('address')?.invalid"
+        class="text-danger"
+      >
+        <div *ngIf="form.get('address')?.errors?.['required']">
+          Este es un campo obligatorio.
+        </div>
       </div>
-      <div class="botones">
-        <button id="save" type="button" class="btn btn-primary" (click)="validateFields()">Guardar</button>
-        <button id="delete-house" type="button" class="btn btn-primary" (click)="validateFields()">Eliminar</button>
       </div>
     </div>
+  </div>
+  <div class="container-bottom">
+    <div class="form-floating">
+      <textarea
+        class="form-control"
+        placeholder=".form-control-lg"
+        aria-label=".form-control-lg example"
+        [(ngModel)]="houseResponse.description"
+        id="description"
+        formControlName="description"
+      ></textarea>
+      <label class="letras" for="floatingTextarea">Descripción</label>
+      <div
+        *ngIf="
+          form.get('description')?.touched && form.get('description')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="form.get('description')?.errors?.['required']">
+          Este es un campo obligatorio.
+        </div>
+      </div>
     </div>
-    
+    <div class="botones">
+      <button
+        id="save"
+        type="button"
+        class="btn btn-primary"
+        (click)="saveForm()"
+      >
+        Guardar
+      </button>
+      <button
+        id="delete-house"
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal" 
+        data-bs-target="#staticBackdrop"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Eliminar casa</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="x"></button>
+          </div>
+          <div class="modal-body">
+              <p>¿Estás seguro que deseas eliminar esta casa?<b>{{houseResponse?.name}}</b></p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" (click)="deleteHouseById()">Eliminar</button>
+          </div>
+      </div>
+  </div>
+</div>

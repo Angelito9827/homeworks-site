@@ -1,14 +1,38 @@
 .container-fluid {
   margin-top: 108px;
   margin-bottom: 108px;
+  padding: 50px;
   border-radius: 22px;
   background: #d9d9d9;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 80%;
   height: auto;
-  padding-top: 50px;
-  padding-bottom: 50px;
+}
+
+.title {
+  padding-bottom: 30px;
+  color: #213555;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.container-top {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.container-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .container-left {
@@ -40,7 +64,7 @@
 
 .upload-container {
   height: auto;
-  width: 70%;
+  width: 100%;
   position: relative;
   text-align: center;
   background-color: white;
@@ -48,13 +72,13 @@
 }
 
 .image-container {
-  height: auto;
-  width: 100%;
+  height: 200px;
+  width: 200px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border-radius: 27px;
 }
 
-.upload-container:hover .image-container {
+.upload-container:hover {
   opacity: 0.5;
   background-color: #f6f7fa;
 }
@@ -63,7 +87,7 @@ img {
   height: 100%;
   width: 100%;
   border-radius: 27px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .select-profile-image {
@@ -82,7 +106,7 @@ img {
   width: auto;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 100%);
+  transform: translate(-50%, 50%);
   transition: all 1s;
   opacity: 0;
   font-weight: bold;
@@ -125,7 +149,7 @@ img {
   height: 100px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .message {
     font-size: 0.7em;
     line-height: 1em;
@@ -133,6 +157,21 @@ img {
 
   .letras {
     font-size: 0.9em;
+  }
+
+  .container-top {
+    display: flex;
+    flex-direction: column;
+    gap: 100PX;
+  }
+
+  .container-left, .container-right {
+    width: 100%;
+  }
+
+  .image-container {
+    width: 150px;
+    height: 150px;
   }
 }
 

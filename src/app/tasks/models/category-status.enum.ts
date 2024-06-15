@@ -1,10 +1,10 @@
 export enum CategoryState{
-    KITCHEN = 1,
-    BATHROON = 2,
-    LIVINGROOM = 3,
-    DINNINGROOM = 4,
-    GARDEN = 5,
-    BEDROOM = 6,
-    GARAGE = 7,
-    OFFICE = 8
+    BAÑO = 1,
+    HABITACIÓN = 2,
+    COMEDOR = 3,
+    GARAJE = 4,
+    JARDÍN = 5,
+    COCINA = 6,
+    SALÓN = 7,
+    OFICINA = 8
 }
