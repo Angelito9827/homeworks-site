@@ -56,24 +56,29 @@ export class TasksListComponent {
     return this.expandedIndex === index;
   }
   
-  changeStateOnClick(state: TaskState, id:number) {
-    switch (state) {
+  changeStateOnClick(task: GetTaskListItemResponse) {
+
+    switch (task.state) {
       case TaskState.DRAFT:
-        this.changeState(TaskState.NEW, id)
+        this.changeState(TaskState.NEW, task.id)
         break;
         case TaskState.NEW:
-          this.changeState(TaskState.IN_PROGRESS, id)
+          this.changeState(TaskState.IN_PROGRESS, task.id)
         break;
         case TaskState.IN_PROGRESS:
-          this.changeState(TaskState.FINISHED, id)
+          this.changeState(TaskState.FINISHED, task.id)
         break;
+        default:
+          console.error(`Unknown state: ${task.state}`);
     }
 
+   
     this.getTasksList()
   }
 
   changeState(state: TaskState, id:number) {
     const request: TaskChangeStateRequest = {state:state,id:id}
+    console.log(request);
 
     this.taskService
     .changeTaskState(request)

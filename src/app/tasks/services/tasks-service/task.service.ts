@@ -56,11 +56,11 @@ export class TaskService {
   }
 
   public deleteTaskById(request:GetTaskByIdRequest): Observable<GetTaskByIdResponse> {
-    return this.httpClient.delete<GetTaskByIdResponse>(`${this.baseUrl}tasks/${request.id}`)
+    return this.httpClient.delete<GetTaskByIdResponse>(`${this.apiUrl}task/${request.id}`)
   }
 
   public changeTaskState(request: TaskChangeStateRequest) {
-    return this.httpClient.put<GetTaskByIdResponse>(`${this.baseUrl}tasks/change-state`,request)
+    return this.httpClient.patch<GetTaskByIdResponse>(`${this.apiUrl}task`,request)
   }
 
 }

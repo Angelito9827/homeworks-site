@@ -161,7 +161,7 @@ export class EditDeleteTasksComponent {
   deleteTaskById() {
     console.log('Casa eliminada');
     this.taskService
-    .deleteTaskById(this.request)
+    .deleteTaskById({id:this.id})
     .pipe()
     .subscribe({
       next: (taskResponse) => {
