@@ -12,7 +12,8 @@ import { AuthService } from '../../auth/services/auth.service';
 export class HousesListComponent {
   user: string = '';
   response?: GetHouseListResponse;
-  request: GetHouseListRequest = { page: 0, pageSize: 5, totalCount: 40 };
+  request: GetHouseListRequest = { page: 0, pageSize: 5};
+  totalCount: number=0;
 
 
   constructor(
@@ -23,6 +24,7 @@ export class HousesListComponent {
   ngOnInit(): void {
     this.user = this.authService.getRole();
     this.getHousesList();
+
   }
 
   private getHousesList() {
@@ -33,8 +35,15 @@ export class HousesListComponent {
         next: (response: GetHouseListResponse) => {
           console.log(response);
           this.response = response;
-        
+          this.response.elements.forEach(value=>{
+            value.houseMembers=this.getTotalHouseMembers()
+            value.activeTasks=this.getTotalActiveTasks()
+            
+          })
+          this.response.elements[0].houseMembers=6;
+          this.totalCount=response.totalCount;
         },
+        
       });
   }
 
@@ -42,4 +51,13 @@ export class HousesListComponent {
     this.request.page = page - 1;
     this.getHousesList();
   }
+
+   getTotalHouseMembers(): number {
+    return Math.floor(Math.random() * 6) + 1;
+}
+
+getTotalActiveTasks(): number {
+  return Math.floor(Math.random() * 20) + 1;
+}
+
 }

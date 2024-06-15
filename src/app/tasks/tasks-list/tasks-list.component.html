@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let task of (response?.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page, totalItems:request.totalCount}) ; let i = index">
+      <ng-container *ngFor="let task of (response?.elements || [] | paginate: { itemsPerPage: request.pageSize, currentPage: request.page+1, totalItems:request.totalCount}) ; let i = index">
         <tr
           [ngClass]="{
             'table-secondary': i % 2 !== 0,

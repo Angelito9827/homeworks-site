@@ -88,7 +88,8 @@ export class TasksListComponent {
 
   onPageChange(page: number) {
     // Actualiza el número de página en la solicitud y vuelve a obtener la lista de "paticas"
-    this.request.page = page;
+    this.request.page = page - 1;
+    this.getTasksList()
   }
 
 }
