@@ -75,6 +75,7 @@
           class="form-control"
           id="deadlineDate"
           placeholder="deadlineDate"
+          [(ngModel)]="taskResponse.deadlineDate"
           formControlName="deadlineDate"
           min="{{ getMinDate() }}"
         />
