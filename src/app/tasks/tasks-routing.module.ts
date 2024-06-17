@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: TasksListComponent },
   { path: 'house/:houseId/category/:categoryId', component: ActiveTasksComponent },
   { path: 'house/:houseId/newTask', component: AddTasksComponent },
-  { path: 'house/:houseId/category/:categoryId/edit-delete-tasks', component: EditDeleteTasksComponent },
+  { path: 'house/:houseId/category/:categoryId/edit-delete-tasks/:taskId', component: EditDeleteTasksComponent },
 ];
 
 @NgModule({

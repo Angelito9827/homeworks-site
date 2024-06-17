@@ -32,7 +32,7 @@
           </option>
           <option
             *ngFor="let houseMember of houseMembersResponse?.houseMembers"
-            [value]="houseMember.id"
+            [value]="houseMember.name"
           >
             {{ houseMember.name }}
           </option>
